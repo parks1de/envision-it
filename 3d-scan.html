@@ -273,6 +273,83 @@ body { padding-top: var(--nav-h); }
   min-height: 900px;
 }
 
+/* ── PRICING TABLE ───────────────────────────────────────────── */
+.pricing-table-section { background: var(--cream-dark); border-top: 1px solid var(--sage-bg); }
+
+.pricing-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 2rem;
+  font-size: 0.85rem;
+}
+
+.pricing-table th {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--sage-light);
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--sage-bg);
+}
+
+.pricing-table td {
+  padding: 1rem;
+  color: var(--mid);
+  border-bottom: 1px solid var(--sage-bg);
+  vertical-align: top;
+  line-height: 1.5;
+}
+
+.pricing-table tr:last-child td { border-bottom: none; }
+
+.pricing-table td:first-child {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--dark);
+  white-space: nowrap;
+}
+
+.pricing-table td.price-cell {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  font-weight: 300;
+  color: var(--dark);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.pricing-table tr:hover td { background: rgba(107,117,98,0.04); }
+
+.surcharges {
+  margin-top: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+.surcharge-item {
+  background: var(--white);
+  border: 1px solid var(--sage-bg);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.surcharge-item__label { font-size: 0.82rem; color: var(--mid); }
+.surcharge-item__value { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--dark); }
+
+@media (max-width: 640px) {
+  .pricing-table { font-size: 0.78rem; }
+  .pricing-table th, .pricing-table td { padding: 0.75rem 0.5rem; }
+  .surcharges { grid-template-columns: 1fr; }
+}
+
 /* ── TECH SECTION ─────────────────────────────────────────────── */
 .tech-section { background: var(--dark); }
 
@@ -351,7 +428,7 @@ body { padding-top: var(--nav-h); }
       </div>
       <a href="/#mitt-prosjekt" class="site-nav__link" data-nav-link>Mitt Prosjekt</a>
       <a href="/3d-scan.html" class="site-nav__link nav-active" data-nav-link>3D-Scan</a>
-      <a href="/priser.html"  class="site-nav__link" data-nav-link>Priser</a>
+      <a href="/3d-scan.html"  class="site-nav__link" data-nav-link>Priser</a>
       <a href="/om-oss.html"  class="site-nav__link" data-nav-link>Om oss</a>
       <a href="/kontakt.html" class="site-nav__link site-nav__link--cta btn-outline" data-nav-link>Kontakt oss</a>
     </div>
@@ -372,7 +449,7 @@ body { padding-top: var(--nav-h); }
       <a href="/#mitt-prosjekt" class="site-nav__drawer-link" data-nav-link>Mitt Prosjekt</a>
       <span class="site-nav__drawer-section" style="margin-top:1rem">Verktøy</span>
       <a href="/3d-scan.html"  class="site-nav__drawer-link nav-active" data-nav-link>3D-Scan</a>
-      <a href="/priser.html"   class="site-nav__drawer-link" data-nav-link>Priser</a>
+      <a href="/3d-scan.html"   class="site-nav__drawer-link" data-nav-link>Priser</a>
       <span class="site-nav__drawer-section" style="margin-top:1rem">Selskapet</span>
       <a href="/om-oss.html"  class="site-nav__drawer-link" data-nav-link>Om oss</a>
       <a href="/kontakt.html" class="site-nav__drawer-link site-nav__drawer-link--cta" data-nav-link>Kontakt oss</a>
@@ -436,7 +513,7 @@ body { padding-top: var(--nav-h); }
             <p class="morph-body">Med en komplett digital kopi av bygget ditt er du alltid forberedt – enten det gjelder neste rehabiliteringsprosjekt, forsikringssak eller videresalg.</p>
             <div style="margin-top:2rem;display:flex;gap:0.75rem;flex-wrap:wrap">
               <a href="/kontakt.html" class="btn-solid">Ta kontakt</a>
-              <a href="/priser.html" class="btn-outline">Beregn pris</a>
+              <a href="/3d-scan.html" class="btn-outline">Beregn pris</a>
             </div>
           </div>
 
@@ -576,13 +653,13 @@ body { padding-top: var(--nav-h); }
       </div>
       <div style="margin-top:2rem;font-size:0.75rem;color:var(--muted)">
         Alle priser er eks. mva og veiledende. Tillegg for skråtak (+1 500 kr), kjeller (+50% areal til halv sats), fasade (+2 000 kr) og hastelevering under 5 dager (+25%).
-        <a href="/priser.html" style="color:var(--sage);text-decoration:none;margin-left:0.4rem">Bruk kalkulatoren for nøyaktig estimat →</a>
+        <a href="/3d-scan.html" style="color:var(--sage);text-decoration:none;margin-left:0.4rem">Bruk kalkulatoren for nøyaktig estimat →</a>
       </div>
     </div>
   </section>
 
   <!-- ── CALCULATOR EMBED ─────────────────────────────────────── -->
-  <section class="calc-section" aria-label="Priskalkulator">
+  <section class="calc-section" id="kalkulator" aria-label="Priskalkulator">
     <iframe
       id="calcFrame"
       class="calc-embed"
@@ -591,6 +668,84 @@ body { padding-top: var(--nav-h); }
       loading="eager"
       scrolling="no">
     </iframe>
+  </section>
+
+  <!-- ── PRICING TABLE ────────────────────────────────────────── -->
+  <section class="pricing-table-section section" aria-label="Prisliste">
+    <div class="container">
+      <div class="reveal">
+        <span class="eyebrow">Prisliste</span>
+        <h2>Alle produkter<br>og <em>priser</em></h2>
+        <p style="margin-top:0.75rem;max-width:560px">Prisene under er minsteprisene per produkt. Kalkulatoren over beregner din estimerte totalpris basert på areal og etasjer.</p>
+      </div>
+
+      <div style="overflow-x:auto;margin-top:2rem" class="reveal reveal-delay-1">
+        <table class="pricing-table">
+          <thead>
+            <tr>
+              <th>Produkt</th>
+              <th>Beskrivelse</th>
+              <th style="text-align:right">Minstepris</th>
+              <th style="text-align:right">Pris/m²</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Skann til visning</td>
+              <td>Interaktiv digital tvilling, navigerbar og delbar som nettlenke</td>
+              <td class="price-cell">3 000 kr</td>
+              <td class="price-cell">20 kr/m²</td>
+            </tr>
+            <tr>
+              <td>Skann til tegning 2D</td>
+              <td>Nøyaktige plantegninger og fasadetegninger i DWG/PDF. Min. 500 m²</td>
+              <td class="price-cell">—</td>
+              <td class="price-cell">25 kr/m²</td>
+            </tr>
+            <tr>
+              <td>Skann til tegning 3D<br><span style="font-size:0.72rem;color:var(--muted);font-family:'Jost',sans-serif">Enebolig</span></td>
+              <td>Full BIM-modell inkl. 2D-tegninger. Leveres i IFC, RVT eller Archicad</td>
+              <td class="price-cell">6 000 kr</td>
+              <td class="price-cell">30 kr/m²</td>
+            </tr>
+            <tr>
+              <td>Skann til tegning 3D<br><span style="font-size:0.72rem;color:var(--muted);font-family:'Jost',sans-serif">Leilighet / Kontor / Industri</span></td>
+              <td>Full BIM-modell inkl. 2D-tegninger. Leveres i IFC, RVT eller Archicad</td>
+              <td class="price-cell">4 000 kr</td>
+              <td class="price-cell">30 kr/m²</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="margin-top:2.5rem" class="reveal reveal-delay-2">
+        <h3 style="font-size:1.15rem;margin-bottom:0.5rem">Tillegg</h3>
+        <p style="font-size:0.82rem;color:var(--muted);margin-bottom:1rem">Følgende tillegg beregnes på toppen av grunnprisen:</p>
+        <div class="surcharges">
+          <div class="surcharge-item">
+            <span class="surcharge-item__label">Skråtak / kaldt loft</span>
+            <span class="surcharge-item__value">+1 500 kr</span>
+          </div>
+          <div class="surcharge-item">
+            <span class="surcharge-item__label">Kjeller / underetasje</span>
+            <span class="surcharge-item__value">+50% av areal til halv sats</span>
+          </div>
+          <div class="surcharge-item">
+            <span class="surcharge-item__label">Utvendig fasade</span>
+            <span class="surcharge-item__value">+2 000 kr</span>
+          </div>
+          <div class="surcharge-item">
+            <span class="surcharge-item__label">Hastelevering (&lt;5 dager)</span>
+            <span class="surcharge-item__value">+25%</span>
+          </div>
+        </div>
+      </div>
+
+      <p style="font-size:0.72rem;color:var(--muted);margin-top:1.5rem;font-style:italic" class="reveal">
+        * For bygg over 1 500 m² (Skann til visning) tilbys abonnementsmodell fra 0,4 kr/m²/mnd.
+        Alle priser er eks. mva og kan variere basert på byggets kompleksitet, tilgjengelighet og geografisk lokasjon.
+      </p>
+    </div>
   </section>
 
   <!-- ── TECHNOLOGY ─────────────────────────────────────────────── -->
@@ -706,7 +861,7 @@ body { padding-top: var(--nav-h); }
       <h2 class="reveal reveal-delay-1">Klar for å<br><em style="color:var(--sage-pale)">scanne bygget</em> ditt?</h2>
       <p class="reveal reveal-delay-2">Bruk kalkulatoren for å estimere prisen — eller ta kontakt direkte for en uforpliktende prat om ditt prosjekt.</p>
       <div class="flex flex-center gap-sm flex-wrap reveal reveal-delay-3">
-        <a href="/priser.html"  class="btn-solid" style="background:var(--white);color:var(--sage);border-color:var(--white)">Beregn pris nå</a>
+        <a href="#kalkulator"  class="btn-solid" style="background:var(--white);color:var(--sage);border-color:var(--white)">Beregn pris nå</a>
         <a href="/kontakt.html" class="btn-light">Ta kontakt</a>
       </div>
     </div>
@@ -722,7 +877,7 @@ body { padding-top: var(--nav-h); }
         <a href="/" class="site-footer__brand"><span class="site-footer__brand-name">ENVISION-IT</span><span class="site-footer__brand-tagline">Vi bryr oss om bygg – fordi vi bryr oss om folk</span></a>
         <nav class="site-footer__nav">
           <a href="/mitt-hjem.html">Mitt Hjem</a><a href="/mitt-boliglag.html">Mitt Boliglag</a><a href="/mitt-bygg.html">Mitt Bygg</a>
-          <a href="/3d-scan.html">3D-Scan</a><a href="/priser.html">Priser</a><a href="/om-oss.html">Om oss</a><a href="/kontakt.html">Kontakt</a>
+          <a href="/3d-scan.html">3D-Scan</a><a href="/3d-scan.html">Priser</a><a href="/om-oss.html">Om oss</a><a href="/kontakt.html">Kontakt</a>
         </nav>
       </div>
       <div class="site-footer__col"><h4 class="site-footer__col-title">Selskapet</h4><ul class="site-footer__list"><li>Envision-IT AS</li><li>Org.nr. 826 455 152</li><li><a href="tel:97107972">971 07 972</a></li><li><a href="mailto:hei@envision-it.no">hei@envision-it.no</a></li></ul></div>

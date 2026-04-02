@@ -231,6 +231,7 @@ p { color: var(--mid); line-height: 1.75; }
 .segment-card__body {
   padding: 1.25rem 1.75rem 1.5rem;
   color: var(--dark);
+  height: auto;
 }
 
 .segment-card__kicker {

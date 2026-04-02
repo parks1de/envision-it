@@ -65,6 +65,82 @@ body { padding-top: var(--nav-h); }
   .segment-card { min-height: 340px; }
 }
 
+/* ── MITT PROSJEKT FEATURE ──────────────────────────────────── */
+.mp-feature {
+  background: #1e1f1a;
+  color: var(--white);
+  padding-block: clamp(5rem, 10vw, 8rem);
+}
+
+.mp-feature__visual {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+.mp-feature__display {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3.5rem, 8vw, 8rem);
+  font-weight: 300;
+  letter-spacing: 0.3em;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.mp-feature__sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(1.1rem, 2vw, 1.55rem);
+  color: rgba(255,255,255,0.5);
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.mp-feature__cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+  margin-bottom: 3.5rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 3rem;
+}
+
+.mp-feature__col-num {
+  font-size: 0.58rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.28);
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.mp-feature__col h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.35rem, 2.2vw, 1.85rem);
+  font-weight: 300;
+  color: var(--white);
+  margin-bottom: 0.85rem;
+}
+
+.mp-feature__col p {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.58);
+  line-height: 1.8;
+}
+
+.mp-feature__cta-row {
+  text-align: center;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 3rem;
+}
+
+@media (max-width: 720px) {
+  .mp-feature__cols { grid-template-columns: 1fr; gap: 2rem; }
+  .mp-feature__display { letter-spacing: 0.12em; }
+}
+
 /* ── WHY SECTION ─────────────────────────────────────────────── */
 .why-section {
   background: var(--cream-dark);
@@ -281,6 +357,7 @@ body { padding-top: var(--nav-h); }
           <a href="/mitt-bygg.html"     class="site-nav__dropdown-item" data-nav-link role="menuitem"><span class="site-nav__dropdown-title">Mitt Bygg</span><span class="site-nav__dropdown-sub">Bedrifter og offentlig</span></a>
         </div>
       </div>
+      <a href="/mitt-prosjekt.html" class="site-nav__link" data-nav-link>Mitt Prosjekt</a>
       <a href="/3d-scan.html" class="site-nav__link" data-nav-link>3D-Scan</a>
       <a href="/priser.html"  class="site-nav__link" data-nav-link>Priser</a>
       <a href="/om-oss.html"  class="site-nav__link" data-nav-link>Om oss</a>
@@ -302,6 +379,7 @@ body { padding-top: var(--nav-h); }
       <a href="/mitt-hjem.html"     class="site-nav__drawer-link" data-nav-link>Mitt Hjem</a>
       <a href="/mitt-boliglag.html" class="site-nav__drawer-link" data-nav-link>Mitt Boliglag</a>
       <a href="/mitt-bygg.html"     class="site-nav__drawer-link" data-nav-link>Mitt Bygg</a>
+      <a href="/mitt-prosjekt.html" class="site-nav__drawer-link" data-nav-link>Mitt Prosjekt</a>
       <span class="site-nav__drawer-section" style="margin-top:1rem">Verktøy</span>
       <a href="/3d-scan.html"  class="site-nav__drawer-link" data-nav-link>3D-Scan</a>
       <a href="/priser.html"   class="site-nav__drawer-link" data-nav-link>Priser</a>
@@ -563,6 +641,62 @@ body { padding-top: var(--nav-h); }
         </div>
 
       </div>
+    </div>
+  </section>
+
+  <!-- ── MITT PROSJEKT FEATURE ────────────────────────────────── -->
+  <section class="mp-feature" aria-label="Mitt Prosjekt">
+    <div class="container">
+
+      <!-- Playing cards illustration -->
+      <div class="mp-feature__visual reveal">
+        <svg width="260" height="200" viewBox="0 0 260 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- Card 1 – left, rotated –18° -->
+          <g transform="translate(20,30) rotate(-18,55,80)">
+            <rect width="90" height="130" rx="8" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+            <text x="10" y="26" fill="rgba(255,255,255,0.65)" font-size="18" font-family="Georgia,serif" font-weight="bold">A</text>
+            <text x="45" y="84" fill="rgba(255,255,255,0.45)" font-size="36" font-family="Georgia,serif" text-anchor="middle">♣</text>
+          </g>
+          <!-- Card 2 – right, rotated +18° -->
+          <g transform="translate(150,30) rotate(18,55,80)">
+            <rect width="90" height="130" rx="8" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+            <text x="10" y="26" fill="rgba(255,255,255,0.65)" font-size="18" font-family="Georgia,serif" font-weight="bold">A</text>
+            <text x="45" y="84" fill="rgba(185,74,74,0.7)" font-size="36" font-family="Georgia,serif" text-anchor="middle">♦</text>
+          </g>
+          <!-- Card 3 – centre, front -->
+          <g transform="translate(85,10)">
+            <rect width="90" height="130" rx="8" fill="rgba(255,255,255,0.13)" stroke="rgba(255,255,255,0.35)" stroke-width="1.5"/>
+            <text x="10" y="26" fill="rgba(255,255,255,0.9)" font-size="18" font-family="Georgia,serif" font-weight="bold">A</text>
+            <text x="45" y="84" fill="rgba(185,74,74,0.85)" font-size="38" font-family="Georgia,serif" text-anchor="middle">♥</text>
+          </g>
+        </svg>
+      </div>
+
+      <p class="mp-feature__display reveal">MITT PROSJEKT</p>
+      <p class="mp-feature__sub reveal reveal-delay-1">— verktøykassen for alle</p>
+
+      <div class="mp-feature__cols">
+        <div class="reveal reveal-delay-1">
+          <span class="mp-feature__col-num">01</span>
+          <h3>Åpne kort</h3>
+          <p>Full transparens gjennom hele prosjektet. Du vet alltid hva som skjer, hva det koster og hva vi mener — vi holder ingenting tilbake.</p>
+        </div>
+        <div class="reveal reveal-delay-2">
+          <span class="mp-feature__col-num">02</span>
+          <h3>2+2=5</h3>
+          <p>Når alle jobber mot samme mål med samme informasjon, blir summen alltid større enn delene. Godt samarbeid er den mest lønnsomme investeringen i et byggeprosjekt.</p>
+        </div>
+        <div class="reveal reveal-delay-3">
+          <span class="mp-feature__col-num">03</span>
+          <h3>Satt i system</h3>
+          <p>Gode intensjoner er ikke nok. Vi setter struktur, dokumentasjon og oppfølging i system — slik at ingenting faller mellom to stoler.</p>
+        </div>
+      </div>
+
+      <div class="mp-feature__cta-row reveal">
+        <a href="/mitt-prosjekt.html" class="btn-outline" style="border-color:rgba(255,255,255,0.38);color:var(--white)">Les mer om Mitt Prosjekt →</a>
+      </div>
+
     </div>
   </section>
 

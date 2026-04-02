@@ -193,16 +193,13 @@ p { color: var(--mid); line-height: 1.75; }
 
 /* Segment cards (full-panel clickable) */
 .segment-card {
-  position: relative;
-  overflow: hidden;
   cursor: pointer;
   background: var(--cream-dark);
   border: 1px solid var(--sage-bg);
   border-radius: var(--radius-lg);
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  min-height: 520px;
+  overflow: hidden;
   transition: box-shadow var(--transition);
   text-decoration: none;
   color: inherit;
@@ -211,56 +208,53 @@ p { color: var(--mid); line-height: 1.75; }
 .segment-card:hover { box-shadow: 0 16px 48px rgba(30,31,26,0.14); }
 
 .segment-card__bg {
-  position: absolute;
-  inset: 0;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
   background: var(--sage);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: opacity var(--transition);
+  flex-shrink: 0;
 }
 
-.segment-card__bg svg { opacity: 0.18; width: 60%; height: 60%; }
-
-.segment-card__overlay {
+.segment-card__bg::after {
+  content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(30,31,26,0.72) 0%, rgba(30,31,26,0) 60%);
-  opacity: 0.7;
+  background: linear-gradient(to top, rgba(30,31,26,0.35) 0%, transparent 55%);
   transition: opacity var(--transition);
 }
 
-.segment-card:hover .segment-card__overlay { opacity: 0.88; }
+.segment-card:hover .segment-card__bg::after { opacity: 0.7; }
+
+.segment-card__overlay { display: none; }
 
 .segment-card__body {
-  position: relative;
-  z-index: 2;
-  padding: 2rem 2.25rem;
-  color: var(--white);
+  padding: 1.5rem 1.75rem 2rem;
+  color: var(--dark);
 }
 
 .segment-card__kicker {
   font-size: 0.6rem;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.65);
+  color: var(--sage-light);
   margin-bottom: 0.5rem;
   display: block;
 }
 
 .segment-card__heading {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  font-size: clamp(1.6rem, 2.5vw, 2.4rem);
   font-weight: 300;
   font-style: italic;
-  color: var(--white);
+  color: var(--dark);
   line-height: 1.05;
   margin-bottom: 0.5rem;
 }
 
 .segment-card__sub {
   font-size: 0.82rem;
-  color: rgba(255,255,255,0.75);
+  color: var(--muted);
   line-height: 1.5;
   margin-bottom: 1rem;
 }
@@ -272,7 +266,7 @@ p { color: var(--mid); line-height: 1.75; }
   font-size: 0.7rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.6);
+  color: var(--sage);
   opacity: 0;
   transform: translateX(-8px);
   transition: all var(--transition);

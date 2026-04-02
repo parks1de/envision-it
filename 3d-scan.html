@@ -263,6 +263,16 @@ body { padding-top: var(--nav-h); }
   .product-row__price { text-align: left; }
 }
 
+/* ── CALCULATOR EMBED ────────────────────────────────────────── */
+.calc-section { background: var(--cream); }
+
+.calc-embed {
+  width: 100%;
+  border: none;
+  display: block;
+  min-height: 900px;
+}
+
 /* ── TECH SECTION ─────────────────────────────────────────────── */
 .tech-section { background: var(--dark); }
 
@@ -571,6 +581,18 @@ body { padding-top: var(--nav-h); }
     </div>
   </section>
 
+  <!-- ── CALCULATOR EMBED ─────────────────────────────────────── -->
+  <section class="calc-section" aria-label="Priskalkulator">
+    <iframe
+      id="calcFrame"
+      class="calc-embed"
+      src="functions/priskalkulatorscan.html"
+      title="Priskalkulator for 3D-scanning"
+      loading="eager"
+      scrolling="no">
+    </iframe>
+  </section>
+
   <!-- ── TECHNOLOGY ─────────────────────────────────────────────── -->
   <section class="tech-section section" aria-label="Teknologi">
     <div class="container">
@@ -717,6 +739,20 @@ body { padding-top: var(--nav-h); }
 </style>
 
 <script src="js/global.js"></script>
+<script>
+/* ── CALCULATOR IFRAME RESIZE ────────────────────────────────── */
+(function() {
+  const frame = document.getElementById('calcFrame');
+  if (!frame) return;
+  function resize() {
+    try {
+      const h = frame.contentDocument?.body?.scrollHeight;
+      if (h && h > 400) frame.style.height = h + 'px';
+    } catch(e) {}
+  }
+  frame.addEventListener('load', () => { resize(); setInterval(resize, 500); });
+})();
+</script>
 <script>
 /* ── SCROLL MORPH ─────────────────────────────────────────────── */
 (function initMorph() {

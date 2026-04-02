@@ -113,11 +113,23 @@ document.querySelectorAll('[data-year]').forEach((el) => {
 /* ── SANITY CMS ─────────────────────────────────────────────── */
 const SANITY_PROJECT = 'u535idy2';
 const SANITY_DATASET = 'production';
-const sanityFetch = (query) =>
-  fetch(`https://${SANITY_PROJECT}.api.sanity.io/v2024-01-01/data/query/${SANITY_DATASET}?query=${encodeURIComponent(query)}`)
-  .then(r => r.json()).then(r => r.result);
 
-// Load testimonials into index.html .testimonials-grid
+async function sanityFetch(query) {
+  const url = `https://${SANITY_PROJECT}.api.sanity.io/v2024-01-01/data/query/${SANITY_DATASET}?query=${encodeURIComponent(query)}`;
+  console.log('[Sanity] fetch →', url);
+  try {
+    const res = await fetch(url);
+    console.log('[Sanity] status:', res.status, res.statusText);
+    const json = await res.json();
+    console.log('[Sanity] result:', json);
+    return json.result;
+  } catch (err) {
+    console.error('[Sanity] fetch error:', err);
+    return null;
+  }
+}
+
+// Load testimonials into .testimonials-grid
 async function loadTestimonials(segment = null) {
   const filter = segment ? `&& segment == "${segment}"` : '';
   const data = await sanityFetch(`*[_type=="testimonial" && active==true ${filter}]{name,role,company,quote}`);
@@ -133,14 +145,17 @@ async function loadTestimonials(segment = null) {
 
 // Load team into om-oss.html .team-grid
 async function loadTeam() {
-  const data = await sanityFetch(`*[_type=="teamMember"] | order(order asc) {name,title,"photo":photo.asset->url}`);
   const grid = document.querySelector('.team-grid');
-  if (!grid || !data?.length) return;
+  console.log('[Sanity] .team-grid element:', grid);
+  if (!grid) { console.warn('[Sanity] .team-grid not found in DOM'); return; }
+  const data = await sanityFetch(`*[_type=="teamMember"] | order(order asc) {name,title,"photo":photo.asset->url}`);
+  console.log('[Sanity] team data:', data);
+  if (!data?.length) { console.warn('[Sanity] no teamMember docs returned'); return; }
   grid.innerHTML = data.map(m => `
     <div class="team-card">
-      <img src="${m.photo}?w=400&h=400&fit=crop" alt="${m.name}" loading="lazy">
+      ${m.photo ? `<img src="${m.photo}?w=400&h=400&fit=crop" alt="${m.name}" loading="lazy">` : ''}
       <div class="team-name">${m.name}</div>
-      <div class="team-role">${m.title}</div>
+      <div class="team-role">${m.title || ''}</div>
     </div>`).join('');
 }
 

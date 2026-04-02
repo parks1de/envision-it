@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Envision-IT — 3D Scan</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@200;300;400;500&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Mono:ital,wght@0,400;0,500&family=Jost:wght@200;300;400;500&display=swap');
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -25,7 +25,9 @@
     font-weight: 300;
     color: var(--dark);
     overflow-x: hidden;
+    transition: background 0.8s ease;
   }
+  body.morph-dark { background: #0d0e0b; }
 
   /* NAV */
   nav {
@@ -117,12 +119,15 @@
   .scroll-section {
     position: relative;
     height: 400vh;
+    transition: background 0.8s ease;
   }
 
   .scroll-sticky {
     position: sticky;
     top: 0;
     height: 100vh;
+    max-width: 900px;
+    margin-inline: auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
     overflow: hidden;
@@ -267,18 +272,18 @@
     transition: opacity 0.05s linear;
   }
 
-  /* scan line overlay that appears during transition */
+  /* scan line overlay that sweeps top-to-bottom during transition */
   .scan-line {
     position: absolute;
-    left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, rgba(100,180,255,0.8), transparent);
+    left: -10%; right: -10%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent 0%, rgba(100,180,255,0.95) 40%, rgba(180,230,255,1) 50%, rgba(100,180,255,0.95) 60%, transparent 100%);
     z-index: 3;
     opacity: 0;
     pointer-events: none;
-    box-shadow: 0 0 12px rgba(100,180,255,0.6);
+    box-shadow: 0 0 20px 4px rgba(100,180,255,0.7), 0 0 60px 8px rgba(100,180,255,0.3);
     transition: opacity 0.3s;
-    top: 50%;
+    top: 0;
   }
 
   /* progress bar */
@@ -311,9 +316,9 @@
   }
   .progress-label {
     font-size: 0.6rem;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.12em;
     color: var(--sage);
-    text-transform: uppercase;
+    font-family: 'DM Mono', monospace;
   }
 
   /* grain overlay */
@@ -382,8 +387,8 @@
   .stat-label { font-size: 0.75rem; opacity: 0.7; letter-spacing: 0.05em; }
 
 @keyframes cloudGlow {
-  0%,100% { filter: drop-shadow(0 0 8px rgba(100,180,255,0.3)); }
-  50%      { filter: drop-shadow(0 0 24px rgba(100,180,255,0.7)); }
+  0%,100% { filter: drop-shadow(0 0 12px rgba(100,180,255,0.5)); }
+  50%      { filter: drop-shadow(0 0 40px rgba(100,180,255,0.9)); }
 }
 .img-cloud.active { animation: cloudGlow 3s ease infinite; }
 </style>
@@ -519,56 +524,68 @@
 </section>
 
 <script>
-const section = document.getElementById('scanSection');
-const panels = document.querySelectorAll('.text-panel');
-const imgSolid = document.querySelector('.img-solid');
-const imgCloud = document.querySelector('.img-cloud');
-const scanLine = document.getElementById('scanLine');
+const section     = document.getElementById('scanSection');
+const stickyEl    = document.querySelector('.scroll-sticky');
+const panels      = document.querySelectorAll('.text-panel');
+const imgSolid    = document.querySelector('.img-solid');
+const imgCloud    = document.querySelector('.img-cloud');
+const scanLine    = document.getElementById('scanLine');
 const scanProgress = document.getElementById('scanProgress');
-const scanStage = document.getElementById('scanStage');
 const progressFill = document.getElementById('progressFill');
 const progressLabel = document.getElementById('progressLabel');
 
-const PANELS = panels.length; // 4
-
-function lerp(a, b, t) { return a + (b - a) * t; }
-function clamp(v, min, max) { return Math.min(Math.max(v, min), max); }
-
-// Morph happens in middle 50% of scroll (panel 1 → panel 2 transition)
+const PANELS     = panels.length;
 const MORPH_START = 0.25;
-const MORPH_END = 0.75;
+const MORPH_END   = 0.75;
+
+let sectionActive = false;
+
+function clamp(v, lo, hi) { return Math.min(Math.max(v, lo), hi); }
+
+/* Only activate when sticky panel is ≥50% visible in viewport */
+const io = new IntersectionObserver(
+  (entries) => {
+    const entry = entries[0];
+    sectionActive = entry.intersectionRatio >= 0.5;
+    if (!sectionActive) {
+      document.body.classList.remove('morph-dark');
+    }
+  },
+  { threshold: [0, 0.5, 1] }
+);
+if (stickyEl) io.observe(stickyEl);
 
 window.addEventListener('scroll', () => {
-  const rect = section.getBoundingClientRect();
+  if (!sectionActive) return;
+
+  const rect     = section.getBoundingClientRect();
   const sectionH = section.offsetHeight - window.innerHeight;
   const scrolled = clamp(-rect.top / sectionH, 0, 1);
 
-  // Which panel
+  // Active panel
   const panelIndex = clamp(Math.floor(scrolled * PANELS), 0, PANELS - 1);
-  panels.forEach((p, i) => {
-    p.classList.toggle('active', i === panelIndex);
-  });
+  panels.forEach((p, i) => p.classList.toggle('active', i === panelIndex));
 
   // Image morph
   const morphT = clamp((scrolled - MORPH_START) / (MORPH_END - MORPH_START), 0, 1);
-  
+
   imgSolid.style.opacity = 1 - morphT;
   imgCloud.style.opacity = morphT;
 
-  // bg transition
-  if (scanStage) {
-    if (morphT < 0.1) scanStage.dataset.bg = 'sage';
-    else if (morphT < 0.5) scanStage.dataset.bg = 'dark';
-    else scanStage.dataset.bg = 'dark';
+  // Background drama
+  if (morphT > 0.1) {
+    document.body.classList.add('morph-dark');
+  } else {
+    document.body.classList.remove('morph-dark');
   }
 
-  // cloud glow
+  // Cloud glow
   if (morphT >= 0.98) imgCloud.classList.add('active');
   else imgCloud.classList.remove('active');
 
-  // Scan line
+  // Scan line sweeps top-to-bottom
   const scanning = morphT > 0 && morphT < 1;
-  scanLine.style.opacity = scanning ? 0.9 : 0;
+  scanLine.style.opacity = scanning ? 1 : 0;
   if (scanning) {
     scanLine.style.top = (morphT * 100) + '%';
   }
@@ -585,7 +602,7 @@ window.addEventListener('scroll', () => {
   } else {
     scanProgress.classList.remove('visible');
   }
-});
+}, { passive: true });
 </script>
 </body>
 </html>

@@ -17,6 +17,23 @@
 <style>
 body { padding-top: var(--nav-h); }
 
+/* ── PAGE HEADER ─────────────────────────────────────────────── */
+.scan-page-header {
+  background: var(--cream-dark);
+  border-bottom: 1px solid var(--sage-bg);
+  padding: clamp(3rem, 6vw, 5rem) var(--gutter) clamp(2rem, 4vw, 3.5rem);
+  text-align: center;
+}
+
+.scan-page-header h1 { margin-bottom: 0.75rem; }
+
+.scan-page-header p {
+  max-width: 560px;
+  margin-inline: auto;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
 /* ── MORPH / SCROLL SECTION ──────────────────────────────────── */
 .morph-section {
   position: relative;
@@ -303,7 +320,7 @@ body { padding-top: var(--nav-h); }
 
 <!-- NAV (inline) -->
 <nav class="site-nav" role="navigation" aria-label="Hovedmeny">
-  <div class="site-nav__inner">
+  <div class="site-nav__inner" style="max-width:1200px;margin:0 auto;padding:0 2.5rem">
     <a href="/" class="site-nav__brand" aria-label="Envision-IT – hjem">
       <span class="site-nav__brand-name">ENVISION-IT</span>
       <span class="site-nav__brand-tagline">Vi bryr oss om bygg</span>
@@ -355,6 +372,13 @@ body { padding-top: var(--nav-h); }
 
 <!-- ═══════════════ MAIN CONTENT ══════════════════════════════ -->
 <main id="main-content">
+
+  <!-- ── PAGE HEADER ───────────────────────────────────────────── -->
+  <header class="scan-page-header">
+    <span class="eyebrow reveal">NAVVIS VLX · 3D-Skanning</span>
+    <h1 class="reveal reveal-delay-1">3D-Scan — se bygget slik<br>det <em>faktisk</em> er</h1>
+    <p class="reveal reveal-delay-2">Med millimeterpresise digitale tvillinger får du et fullstendig bilde av bygget — grunnlaget for bedre beslutninger, nøyaktige tegninger og sømløs BIM-modellering.</p>
+  </header>
 
   <!-- ── SCROLL MORPH SECTION ──────────────────────────────────── -->
   <section class="morph-section" id="scanSection" aria-label="Se bygget slik det faktisk er">

@@ -229,7 +229,7 @@ p { color: var(--mid); line-height: 1.75; }
 .segment-card__overlay { display: none; }
 
 .segment-card__body {
-  padding: 1.5rem 1.75rem 2rem;
+  padding: 1.25rem 1.75rem 1.5rem;
   color: var(--dark);
 }
 
@@ -256,7 +256,7 @@ p { color: var(--mid); line-height: 1.75; }
   font-size: 0.82rem;
   color: var(--muted);
   line-height: 1.5;
-  margin-bottom: 1rem;
+  margin-bottom: 0;
 }
 
 .segment-card__arrow {
@@ -268,13 +268,15 @@ p { color: var(--mid); line-height: 1.75; }
   text-transform: uppercase;
   color: var(--sage);
   opacity: 0;
-  transform: translateX(-8px);
+  height: 0;
+  overflow: hidden;
   transition: all var(--transition);
 }
 
 .segment-card:hover .segment-card__arrow {
   opacity: 1;
-  transform: translateX(0);
+  height: auto;
+  overflow: visible;
 }
 
 /* ── CHIPS ──────────────────────────────────────────────────── */

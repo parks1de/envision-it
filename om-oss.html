@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Om oss — Envision-IT</title>
+  <meta name="description" content="Envision-IT ble startet av folk med lang erfaring — fra tømrerhåndverket til prosjektledelse, forvaltning og jus. Vi kjenner byggebransjen fra innsiden.">
+  <link rel="canonical" href="https://envision-it.no/om-oss">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://envision-it.no/om-oss">
+  <meta property="og:title" content="Om oss — Envision-IT">
+  <meta property="og:description" content="Envision-IT ble startet av folk med lang erfaring — fra tømrerhåndverket til prosjektledelse, forvaltning og jus. Vi kjenner byggebransjen fra innsiden.">
+  <meta property="og:image" content="https://envision-it.no/assets/og-image.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="css/global.css">
+  <style>
+    body { padding-top: var(--nav-h); }
+
+    /* ── HERO ─────────────────────────────────────────────────── */
+    .om-hero {
+      background: var(--cream-dark);
+      min-height: 50vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-top: var(--nav-h);
+      padding-bottom: 4rem;
+      text-align: center;
+    }
+
+    .om-hero__inner {
+      max-width: 700px;
+      margin-inline: auto;
+      padding-inline: var(--gutter);
+    }
+
+    .om-hero__subtitle {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--sage);
+      margin-top: 0.5rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .om-hero__intro {
+      max-width: 600px;
+      margin-inline: auto;
+      font-size: 1rem;
+      color: var(--mid);
+      line-height: 1.8;
+    }
+
+    /* ── THREE COLUMN SECTION ─────────────────────────────────── */
+    .om-cols {
+      background: var(--cream);
+      padding: 5rem 0;
+    }
+
+    .om-cols__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    @media (max-width: 720px) {
+      .om-cols__grid { grid-template-columns: 1fr; }
+    }
+
+    .om-card {
+      background: var(--white);
+      border: 1px solid var(--sage-bg);
+      border-radius: 12px;
+      padding: 2.5rem;
+    }
+
+    .om-card__heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.3rem, 2vw, 1.8rem);
+      font-weight: 300;
+      color: var(--dark);
+      margin-bottom: 1.75rem;
+    }
+
+    .om-card__item {
+      margin-bottom: 1.5rem;
+    }
+
+    .om-card__item:last-child { margin-bottom: 0; }
+
+    .om-card__item h4 {
+      font-family: 'Jost', sans-serif;
+      font-weight: 400;
+      font-size: 0.82rem;
+      letter-spacing: 0.05em;
+      color: var(--dark);
+      margin-bottom: 0.4rem;
+    }
+
+    .om-card__item p {
+      font-size: 0.9rem;
+      color: var(--mid);
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .om-card__quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1.2rem, 2vw, 1.6rem);
+      color: var(--sage);
+      line-height: 1.3;
+      margin-bottom: 2rem;
+    }
+
+    /* ── FULL-WIDTH SECTION ───────────────────────────────────── */
+    .om-network {
+      background: var(--cream-dark);
+      padding: 5rem 0;
+      text-align: center;
+    }
+
+    .om-network__inner {
+      max-width: 760px;
+      margin-inline: auto;
+      padding-inline: var(--gutter);
+    }
+
+    .om-network__inner h2 {
+      font-style: italic;
+      margin-bottom: 2rem;
+    }
+
+    .om-network__inner p {
+      font-size: 1rem;
+      color: var(--mid);
+      line-height: 1.8;
+      margin-bottom: 1.25rem;
+    }
+
+    .om-network__closing {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1.8rem, 3vw, 3rem);
+      color: var(--sage);
+      line-height: 1.25;
+      margin-top: 3rem;
+      display: block;
+    }
+
+    /* ── TEAM SECTION ─────────────────────────────────────────── */
+    .om-team {
+      background: var(--cream);
+      padding: 5rem 0;
+    }
+
+    .om-team__header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .om-team__header h2 {
+      margin-bottom: 0.75rem;
+    }
+
+    .om-team__header p {
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .om-team__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    @media (max-width: 720px) {
+      .om-team__grid { grid-template-columns: 1fr; }
+    }
+
+    .team-card {
+      background: var(--white);
+      border: 1px solid var(--sage-bg);
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .team-card__avatar {
+      width: 80px;
+      height: 80px;
+      background: var(--sage-pale);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.25rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      color: var(--sage);
+    }
+
+    .team-card__name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 300;
+      color: var(--dark);
+      display: block;
+      margin-bottom: 0.35rem;
+    }
+
+    .team-card__role {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 300;
+      color: var(--muted);
+      display: block;
+    }
+
+    /* ── BOTTOM CTA ───────────────────────────────────────────── */
+    .om-cta {
+      background: var(--sage);
+      padding: 5rem 0;
+      text-align: center;
+    }
+
+    .om-cta h2 {
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+
+    .om-cta p {
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 2rem;
+    }
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Hopp til innhold</a>
+
+  <!-- ═══ NAV ═══════════════════════════════════════════════════ -->
+  <nav class="site-nav" role="navigation" aria-label="Hovedmeny">
+    <div class="site-nav__inner">
+      <a href="/" class="site-nav__brand" aria-label="Envision-IT – hjem">
+        <span class="site-nav__brand-name">ENVISION-IT</span>
+        <span class="site-nav__brand-tagline">Vi bryr oss om bygg</span>
+      </a>
+      <div class="site-nav__links" role="list">
+        <div class="site-nav__dropdown" role="listitem">
+          <button class="site-nav__link site-nav__link--dropdown" aria-haspopup="true" aria-expanded="false">
+            Tjenester
+            <svg width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true">
+              <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div class="site-nav__dropdown-panel" role="menu">
+            <a href="/mitt-hjem.html" class="site-nav__dropdown-item" data-nav-link role="menuitem">
+              <span class="site-nav__dropdown-title">Mitt Hjem</span>
+              <span class="site-nav__dropdown-sub">Privatpersoner</span>
+            </a>
+            <a href="/mitt-boliglag.html" class="site-nav__dropdown-item" data-nav-link role="menuitem">
+              <span class="site-nav__dropdown-title">Mitt Boliglag</span>
+              <span class="site-nav__dropdown-sub">Borettslag og sameier</span>
+            </a>
+            <a href="/mitt-bygg.html" class="site-nav__dropdown-item" data-nav-link role="menuitem">
+              <span class="site-nav__dropdown-title">Mitt Bygg</span>
+              <span class="site-nav__dropdown-sub">Bedrifter og offentlig</span>
+            </a>
+            <hr class="site-nav__dropdown-divider">
+            <a href="/3d-scan.html" class="site-nav__dropdown-item" data-nav-link role="menuitem">
+              <span class="site-nav__dropdown-title">3D-Scan</span>
+              <span class="site-nav__dropdown-sub">NAVVIS VLX – digital tvilling</span>
+            </a>
+            <a href="/priser.html" class="site-nav__dropdown-item" data-nav-link role="menuitem">
+              <span class="site-nav__dropdown-title">Priser</span>
+              <span class="site-nav__dropdown-sub">Kalkulator og prisliste</span>
+            </a>
+          </div>
+        </div>
+        <a href="/om-oss.html" class="site-nav__link nav-active" data-nav-link role="listitem">Om oss</a>
+        <a href="/kontakt.html" class="site-nav__link site-nav__link--cta btn-outline" data-nav-link role="listitem">Kontakt oss</a>
+      </div>
+      <button class="site-nav__hamburger" id="nav-toggle" aria-label="Åpne meny" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile drawer -->
+  <div class="site-nav__drawer" id="nav-drawer" role="dialog" aria-modal="true" aria-label="Mobilmeny">
+    <div class="site-nav__drawer-inner">
+      <div class="site-nav__drawer-header">
+        <span class="site-nav__brand-name" style="color:var(--white)">ENVISION-IT</span>
+        <button class="site-nav__drawer-close" id="nav-drawer-close" aria-label="Lukk meny">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M4 4l12 12M16 4L4 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+      <nav class="site-nav__drawer-links">
+        <span class="site-nav__drawer-section">Tjenester</span>
+        <a href="/mitt-hjem.html" class="site-nav__drawer-link" data-nav-link>Mitt Hjem</a>
+        <a href="/mitt-boliglag.html" class="site-nav__drawer-link" data-nav-link>Mitt Boliglag</a>
+        <a href="/mitt-bygg.html" class="site-nav__drawer-link" data-nav-link>Mitt Bygg</a>
+        <a href="/3d-scan.html" class="site-nav__drawer-link" data-nav-link>3D-Scan</a>
+        <a href="/priser.html" class="site-nav__drawer-link" data-nav-link>Priser</a>
+        <span class="site-nav__drawer-section" style="margin-top:1rem">Selskapet</span>
+        <a href="/om-oss.html" class="site-nav__drawer-link nav-active" data-nav-link>Om oss</a>
+        <a href="/kontakt.html" class="site-nav__drawer-link site-nav__drawer-link--cta" data-nav-link>Kontakt oss</a>
+      </nav>
+      <div class="site-nav__drawer-contact">
+        <a href="tel:97107972">971 07 972</a>
+        <a href="mailto:hei@envision-it.no">hei@envision-it.no</a>
+      </div>
+    </div>
+  </div>
+
+  <style>
+  /* ── NAV STYLES ─────────────────────────────────────────────── */
+  .site-nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 200;
+    background: var(--sage);
+    transition: box-shadow 0.3s ease;
+  }
+  .site-nav.scrolled { box-shadow: 0 4px 24px rgba(30,31,26,0.18); }
+  .site-nav__inner {
+    max-width: var(--max-w);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+    height: var(--nav-h);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .site-nav__brand { display: flex; flex-direction: column; gap: 0.1rem; text-decoration: none; }
+  .site-nav__brand-name { font-family: 'Jost', sans-serif; font-weight: 500; font-size: 0.82rem; letter-spacing: 0.2em; color: var(--white); }
+  .site-nav__brand-tagline { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.7rem; color: rgba(255,255,255,0.62); letter-spacing: 0.04em; }
+  .site-nav__links { display: flex; align-items: center; gap: 0.25rem; }
+  .site-nav__link { background: none; border: none; font-family: 'Jost', sans-serif; font-size: 0.78rem; font-weight: 300; letter-spacing: 0.08em; color: rgba(255,255,255,0.82); padding: 0.5rem 0.85rem; border-radius: var(--radius); transition: color var(--transition), background var(--transition); cursor: pointer; text-decoration: none; display: flex; align-items: center; gap: 0.35rem; }
+  .site-nav__link:hover { color: var(--white); background: rgba(255,255,255,0.1); }
+  .site-nav__link.nav-active { color: var(--white); }
+  .site-nav__link--cta { border-color: rgba(255,255,255,0.45) !important; color: var(--white) !important; margin-left: 0.5rem; }
+  .site-nav__link--cta:hover { background: rgba(255,255,255,0.15) !important; }
+  .site-nav__dropdown { position: relative; }
+  .site-nav__link--dropdown svg { transition: transform 0.2s ease; }
+  .site-nav__dropdown:hover .site-nav__link--dropdown svg,
+  .site-nav__dropdown:focus-within .site-nav__link--dropdown svg { transform: rotate(180deg); }
+  .site-nav__dropdown-panel { position: absolute; top: calc(100% + 0.75rem); left: 50%; transform: translateX(-50%); background: var(--white); border: 1px solid var(--sage-bg); border-radius: var(--radius-lg); padding: 0.75rem; min-width: 240px; box-shadow: 0 12px 40px rgba(30,31,26,0.12); opacity: 0; pointer-events: none; transform: translateX(-50%) translateY(8px); transition: opacity 0.2s ease, transform 0.2s ease; }
+  .site-nav__dropdown:hover .site-nav__dropdown-panel,
+  .site-nav__dropdown:focus-within .site-nav__dropdown-panel { opacity: 1; pointer-events: all; transform: translateX(-50%) translateY(0); }
+  .site-nav__dropdown-item { display: flex; flex-direction: column; gap: 0.15rem; padding: 0.7rem 0.9rem; border-radius: var(--radius); text-decoration: none; transition: background var(--transition); }
+  .site-nav__dropdown-item:hover { background: var(--cream); }
+  .site-nav__dropdown-item.nav-active { background: var(--cream-dark); }
+  .site-nav__dropdown-title { font-size: 0.82rem; font-weight: 400; color: var(--dark); }
+  .site-nav__dropdown-sub { font-size: 0.68rem; color: var(--muted); }
+  .site-nav__dropdown-divider { border: none; border-top: 1px solid var(--sage-bg); margin: 0.4rem 0; }
+  .site-nav__hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; padding: 0.5rem; cursor: pointer; }
+  .site-nav__hamburger span { display: block; width: 22px; height: 1.5px; background: var(--white); border-radius: 2px; transition: all 0.25s ease; }
+  .site-nav__drawer { position: fixed; inset: 0; z-index: 300; background: rgba(30,31,26,0.55); backdrop-filter: blur(4px); opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+  .site-nav__drawer.open { opacity: 1; pointer-events: all; }
+  .site-nav__drawer-inner { position: absolute; top: 0; right: 0; bottom: 0; width: min(320px, 90vw); background: var(--dark); padding: 0; display: flex; flex-direction: column; transform: translateX(100%); transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1); }
+  .site-nav__drawer.open .site-nav__drawer-inner { transform: translateX(0); }
+  .site-nav__drawer-header { display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .site-nav__drawer-close { background: none; border: none; color: rgba(255,255,255,0.6); cursor: pointer; padding: 0.25rem; transition: color var(--transition); }
+  .site-nav__drawer-close:hover { color: var(--white); }
+  .site-nav__drawer-links { flex: 1; overflow-y: auto; padding: 1.25rem 1.5rem; display: flex; flex-direction: column; gap: 0.15rem; }
+  .site-nav__drawer-section { font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 0.4rem; display: block; }
+  .site-nav__drawer-link { font-size: 0.95rem; color: rgba(255,255,255,0.78); text-decoration: none; padding: 0.65rem 0.75rem; border-radius: var(--radius); transition: background var(--transition), color var(--transition); }
+  .site-nav__drawer-link:hover,
+  .site-nav__drawer-link.nav-active { background: rgba(255,255,255,0.08); color: var(--white); }
+  .site-nav__drawer-link--cta { margin-top: 1rem; border: 1px solid rgba(255,255,255,0.3); text-align: center; }
+  .site-nav__drawer-contact { padding: 1.25rem 1.5rem; border-top: 1px solid rgba(255,255,255,0.08); display: flex; flex-direction: column; gap: 0.35rem; }
+  .site-nav__drawer-contact a { font-size: 0.78rem; color: rgba(255,255,255,0.5); text-decoration: none; transition: color var(--transition); }
+  .site-nav__drawer-contact a:hover { color: var(--white); }
+  @media (max-width: 860px) {
+    .site-nav__links { display: none; }
+    .site-nav__hamburger { display: flex; }
+  }
+  </style>
+
+  <!-- ═══ HERO ═══════════════════════════════════════════════════ -->
+  <section id="main-content" class="om-hero">
+    <div class="om-hero__inner reveal">
+      <span class="eyebrow">Om oss</span>
+      <h1><em>Vi bryr oss om bygg</em></h1>
+      <p class="om-hero__subtitle">– fordi vi bryr oss om folk</p>
+      <p class="om-hero__intro reveal reveal-delay-1">Envision-IT ble startet av folk med lang erfaring fra byggebransjen – fra tømrerhåndverket til prosjektledelse, forvaltning og jus. Vi kjenner bransjen fra innsiden, og det gjør oss til en bedre partner for deg.</p>
+    </div>
+  </section>
+
+  <!-- ═══ THREE COLUMNS ══════════════════════════════════════════ -->
+  <section class="om-cols">
+    <div class="container">
+      <div class="om-cols__grid">
+
+        <!-- Col 1: Bakgrunn og erfaring -->
+        <div class="om-card reveal">
+          <div class="accent-line"></div>
+          <h3 class="om-card__heading">Bakgrunn og erfaring</h3>
+
+          <div class="om-card__item">
+            <h4>Godt håndverk</h4>
+            <p>Vi startet i tømrerfaget. Det betyr at vi forstår konstruksjoner, materialer og byggeteknikk på et dypt nivå – ikke bare fra tegninger, men fra praksis.</p>
+          </div>
+          <div class="om-card__item">
+            <h4>God forvaltning</h4>
+            <p>Mange år i forvaltning av boligmasse og næringsbygg har gitt oss forståelse for hva som faktisk koster, hva som kan vente, og hva som aldri bør vente.</p>
+          </div>
+          <div class="om-card__item">
+            <h4>Riktig juss</h4>
+            <p>Byggejuss er komplisert og kan ha store konsekvenser. Vi har juridisk kompetanse som gjør at vi forstår kontrakter, ansvar og rettigheter – og hjelper deg å navigere dem.</p>
+          </div>
+          <div class="om-card__item">
+            <h4>Menneske</h4>
+            <p>Bak alt arbeidet er vi mennesker med et genuint engasjement for bygg og folk. Vi bryr oss om at det vi leverer faktisk hjelper – ikke bare at det er teknisk korrekt.</p>
+          </div>
+        </div>
+
+        <!-- Col 2: Forretningsfilosofi -->
+        <div class="om-card reveal reveal-delay-1">
+          <div class="accent-line"></div>
+          <h3 class="om-card__heading">Forretningsfilosofi</h3>
+          <p class="om-card__quote">"Så lenge vi har et valg, velger vi samarbeid."</p>
+
+          <div class="om-card__item">
+            <h4>Vår plass</h4>
+            <p>Vi er ikke en leverandør – vi er en rådgiver. Det betyr at vi jobber for deg, ikke for å selge flest mulig timer. Vår interesse er sammenfallende med din: at bygget ditt er i best mulig stand til lavest mulig kostnad.</p>
+          </div>
+          <div class="om-card__item">
+            <h4>Ærlighet varer lengst</h4>
+            <p>Vi forteller deg det du trenger å høre, ikke det du vil høre. Hvis noe er dyrt, sier vi det. Hvis noe ikke haster, sier vi det. Ærlighet skaper tillit, og tillit skaper gode relasjoner.</p>
+          </div>
+          <div class="om-card__item">
+            <h4>Tid og kostnad henger sammen</h4>
+            <p>Frem og tilbake er ikke like langt – det er dobbelt så langt. Riktig beslutning første gang sparer tid og penger. Vi hjelper deg å treffe riktige beslutninger.</p>
+          </div>
+          <div class="om-card__item">
+            <h4>Det er lov å tjene penger</h4>
+            <p>Leverandørene dine skal tjene penger – det er en forutsetning for at de skal gjøre godt arbeid. Vi hjelper deg å finne riktig pris, ikke bare lavest mulig pris.</p>
+          </div>
+        </div>
+
+        <!-- Col 3: Verdisyn -->
+        <div class="om-card reveal reveal-delay-2">
+          <div class="accent-line"></div>
+          <h3 class="om-card__heading">Verdisyn</h3>
+          <p class="om-card__quote">"Arbeidet vårt blir mer meningsfylt når det har som mål å hjelpe folk og øke livskvaliteten i et fellesskap."</p>
+
+          <div class="om-card__item">
+            <h4>Folk og følelser</h4>
+            <p>Et bygg er ikke bare betong og stål – det er hjemmene og arbeidsplassene til virkelige mennesker. Vi tar den dimensjonen på alvor i alt vi gjør.</p>
+          </div>
+          <div class="om-card__item">
+            <h4>Respekt og redelighet</h4>
+            <p>Vi behandler alle – kunder, leverandører, samarbeidspartnere – med respekt. Vi er redelige i alt vi gjør, også når det er ubehagelig.</p>
+          </div>
+          <div class="om-card__item">
+            <h4>Tillit og trygghet</h4>
+            <p>Tillit bygges over tid og brytes på et sekund. Vi er klar over det, og vi jobber bevisst for å fortjene tilliten vi får.</p>
+          </div>
+          <div class="om-card__item">
+            <h4>Mangfold og muligheter</h4>
+            <p>Ulike bakgrunner og perspektiver gir bedre løsninger. Vi verdsetter mangfold og ser det som en styrke, ikke en utfordring.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FULL-WIDTH NETWORK SECTION ════════════════════════════ -->
+  <section class="om-network">
+    <div class="om-network__inner reveal">
+      <h2>– og om alle de andre</h2>
+      <p>Bak ethvert godt prosjekt finnes det dyktige håndverkere, rørleggere, elektrikere og andre fagfolk som gjør det faktiske arbeidet. Vi har gjennom mange år bygget opp et nettverk av gode samarbeidspartnere som vi stoler på – og som stoler på oss.</p>
+      <p>Vi bruker ikke de billigste leverandørene. Vi bruker de vi vet leverer god kvalitet til en rettferdig pris. Det er den eneste måten vi kan stå inne for arbeidet som utføres på vegne av kundene våre.</p>
+      <em class="om-network__closing reveal reveal-delay-1">"De eneste som tjener på å holde kortene tett til brystet, er de som har noe å skjule"</em>
+    </div>
+  </section>
+
+  <!-- ═══ TEAM SECTION ══════════════════════════════════════════ -->
+  <section class="om-team">
+    <div class="container">
+      <div class="om-team__header reveal">
+        <h2>Menneskene bak</h2>
+        <p>Vi er et lite og dedikert team med lang og bred erfaring fra byggebransjen.</p>
+      </div>
+      <!-- [REPLACE WITH REAL PHOTOS AND BIOS] -->
+      <div class="om-team__grid">
+        <div class="team-card reveal">
+          <img src="./assets/bjarte.jpg" alt="Bjarte Nysæter Svensen" loading="lazy">
+          <div class="team-name">Bjarte Nysæter Svensen</div>
+          <div class="team-role">Daglig leder</div>
+        </div>
+        <div class="team-card reveal reveal-delay-1">
+          <img src="./assets/endre.jpg" alt="Endre [LAST NAME]" loading="lazy">
+          <div class="team-name">Endre [LAST NAME]</div>
+          <div class="team-role">Daglig Markedsansvarlig</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ BOTTOM CTA ════════════════════════════════════════════ -->
+  <section class="om-cta reveal">
+    <div class="container">
+      <h2>Vil du vite mer om oss?</h2>
+      <p>Ta kontakt – vi setter pris på en god samtale.</p>
+      <a href="/kontakt.html" class="btn-light">Ta kontakt</a>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ════════════════════════════════════════════════ -->
+  <footer class="site-footer">
+    <div class="site-footer__inner container">
+      <div class="site-footer__grid">
+        <div class="site-footer__col site-footer__col--brand">
+          <a href="/" class="site-footer__brand">
+            <span class="site-footer__brand-name">ENVISION-IT</span>
+            <span class="site-footer__brand-tagline">Vi bryr oss om bygg – fordi vi bryr oss om folk</span>
+          </a>
+          <nav class="site-footer__nav" aria-label="Sidefot navigasjon">
+            <a href="/mitt-hjem.html">Mitt Hjem</a>
+            <a href="/mitt-boliglag.html">Mitt Boliglag</a>
+            <a href="/mitt-bygg.html">Mitt Bygg</a>
+            <a href="/3d-scan.html">3D-Scan</a>
+            <a href="/priser.html">Priser</a>
+            <a href="/om-oss.html">Om oss</a>
+            <a href="/kontakt.html">Kontakt</a>
+          </nav>
+        </div>
+        <div class="site-footer__col">
+          <h4 class="site-footer__col-title">Selskapet</h4>
+          <ul class="site-footer__list">
+            <li>Envision-IT AS</li>
+            <li>Org.nr. 826 455 152</li>
+            <li><a href="tel:97107972">971 07 972</a></li>
+            <li><a href="mailto:hei@envision-it.no">hei@envision-it.no</a></li>
+          </ul>
+        </div>
+        <div class="site-footer__col">
+          <h4 class="site-footer__col-title">Oslo</h4>
+          <address class="site-footer__address">Gjerdrums vei 5<br>0484 Oslo</address>
+        </div>
+        <div class="site-footer__col">
+          <h4 class="site-footer__col-title">Sogndal</h4>
+          <address class="site-footer__address">Kvernhusbakken 7<br>6854 Kaupanger</address>
+        </div>
+      </div>
+      <div class="site-footer__bottom">
+        <span>© <span data-year></span> Envision-IT AS</span>
+        <span class="site-footer__bottom-tagline">Alle priser eks. mva.</span>
+      </div>
+    </div>
+  </footer>
+
+  <style>
+  /* ── FOOTER STYLES ──────────────────────────────────────────── */
+  .site-footer { background: var(--sage); color: rgba(255,255,255,0.82); padding-top: clamp(3rem, 6vw, 5rem); }
+  .site-footer__grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,0.12); }
+  .site-footer__brand { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.75rem; text-decoration: none; }
+  .site-footer__brand-name { font-family: 'Jost', sans-serif; font-weight: 500; font-size: 0.85rem; letter-spacing: 0.22em; color: var(--white); }
+  .site-footer__brand-tagline { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.88rem; color: rgba(255,255,255,0.55); line-height: 1.4; max-width: 240px; }
+  .site-footer__nav { display: flex; flex-direction: column; gap: 0.4rem; }
+  .site-footer__nav a { font-size: 0.8rem; color: rgba(255,255,255,0.6); text-decoration: none; transition: color var(--transition); }
+  .site-footer__nav a:hover { color: var(--white); }
+  .site-footer__col-title { font-family: 'Jost', sans-serif; font-weight: 400; font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 1rem; }
+  .site-footer__list { display: flex; flex-direction: column; gap: 0.45rem; }
+  .site-footer__list li { font-size: 0.82rem; color: rgba(255,255,255,0.7); }
+  .site-footer__list a { color: rgba(255,255,255,0.7); text-decoration: none; transition: color var(--transition); }
+  .site-footer__list a:hover { color: var(--white); }
+  .site-footer__address { font-style: normal; font-size: 0.82rem; color: rgba(255,255,255,0.7); line-height: 1.75; }
+  .site-footer__bottom { display: flex; align-items: center; justify-content: space-between; padding-block: 1.25rem; font-size: 0.72rem; color: rgba(255,255,255,0.38); }
+  .site-footer__bottom-tagline { font-style: italic; }
+  @media (max-width: 900px) {
+    .site-footer__grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .site-footer__col--brand { grid-column: 1 / -1; }
+  }
+  @media (max-width: 480px) {
+    .site-footer__grid { grid-template-columns: 1fr; }
+    .site-footer__bottom { flex-direction: column; gap: 0.4rem; text-align: center; }
+  }
+  </style>
+
+  <script src="js/global.js"></script>
+</body>
+</html>

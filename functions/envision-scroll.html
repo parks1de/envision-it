@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Envision-IT — 3D Scan</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@200;300;400;500&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --sage: #6b7562;
+    --sage-light: #8d9680;
+    --cream: #f4f2ed;
+    --dark: #1e1f1a;
+    --mid: #3a3c35;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    color: var(--dark);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 3rem;
+    background: var(--sage);
+  }
+  .nav-brand {
+    font-family: 'Jost', sans-serif;
+    font-weight: 500;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    color: white;
+    text-transform: uppercase;
+  }
+  .nav-sub {
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 0.08em;
+    font-style: italic;
+  }
+
+  /* HERO */
+  .hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 0 2rem;
+    padding-top: 60px;
+    background: var(--cream);
+  }
+  .hero-tag {
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 300;
+    line-height: 1;
+    color: var(--dark);
+    margin-bottom: 1rem;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--sage);
+  }
+  .hero-desc {
+    font-size: 1rem;
+    color: var(--mid);
+    max-width: 480px;
+    line-height: 1.7;
+    margin-bottom: 3rem;
+  }
+  .scroll-hint {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--sage);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    animation: bounce 2s infinite;
+  }
+  .scroll-hint::after {
+    content: '';
+    width: 1px;
+    height: 40px;
+    background: var(--sage-light);
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(6px); }
+  }
+
+  /* SCROLL SECTION */
+  .scroll-section {
+    position: relative;
+    height: 400vh;
+  }
+
+  .scroll-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+  }
+
+  /* LEFT: scrolling text panels */
+  .text-side {
+    display: flex;
+    align-items: center;
+    padding: 5rem 4rem 5rem 5rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .text-panels {
+    position: relative;
+    width: 100%;
+  }
+
+  .text-panel {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    pointer-events: none;
+  }
+  .text-panel.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .panel-step {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--sage-light);
+    margin-bottom: 1.2rem;
+  }
+
+  .panel-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--dark);
+    margin-bottom: 1.5rem;
+  }
+
+  .panel-body {
+    font-size: 0.95rem;
+    color: var(--mid);
+    line-height: 1.8;
+    max-width: 380px;
+    margin-bottom: 2rem;
+  }
+
+  .panel-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .panel-list li {
+    font-size: 0.85rem;
+    color: var(--mid);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    line-height: 1.5;
+  }
+  .panel-list li::before {
+    content: '→';
+    color: var(--sage);
+    font-size: 0.8rem;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  .cta-btn {
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 0.9rem 2.2rem;
+    border: 1px solid var(--sage);
+    color: var(--sage);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    background: transparent;
+    transition: background 0.3s, color 0.3s;
+  }
+  .cta-btn:hover {
+    background: var(--sage);
+    color: white;
+  }
+
+  /* RIGHT: image morphing */
+  .image-side {
+    position: relative;
+    background: #e8e5df;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .image-side::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 40%, rgba(107,117,98,0.15) 100%);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .img-wrap {
+    position: relative;
+    width: 85%;
+    max-width: 520px;
+    aspect-ratio: 4/3;
+  }
+
+  .img-solid, .img-cloud {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 4px;
+  }
+
+  .img-solid {
+    opacity: 1;
+    transition: opacity 0.05s linear;
+  }
+  .img-cloud {
+    opacity: 0;
+    transition: opacity 0.05s linear;
+  }
+
+  /* scan line overlay that appears during transition */
+  .scan-line {
+    position: absolute;
+    left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(100,180,255,0.8), transparent);
+    z-index: 3;
+    opacity: 0;
+    pointer-events: none;
+    box-shadow: 0 0 12px rgba(100,180,255,0.6);
+    transition: opacity 0.3s;
+    top: 50%;
+  }
+
+  /* progress bar */
+  .scan-progress {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+  .scan-progress.visible { opacity: 1; }
+  .progress-track {
+    width: 120px;
+    height: 1px;
+    background: rgba(107,117,98,0.3);
+    position: relative;
+  }
+  .progress-fill {
+    height: 100%;
+    background: rgba(100,180,255,0.7);
+    width: 0%;
+    transition: width 0.05s linear;
+    box-shadow: 0 0 6px rgba(100,180,255,0.5);
+  }
+  .progress-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--sage);
+    text-transform: uppercase;
+  }
+
+  /* grain overlay */
+  .grain {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 200;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 128px;
+  }
+
+  /* AFTER section */
+  .after-section {
+    background: var(--sage);
+    color: white;
+    padding: 6rem 5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+  .after-section h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+  .after-section p {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    opacity: 0.85;
+  }
+  .after-btn {
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 1rem 2.5rem;
+    border: 1px solid rgba(255,255,255,0.6);
+    color: white;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    background: transparent;
+    transition: background 0.3s;
+    text-decoration: none;
+    font-family: 'Jost', sans-serif;
+  }
+  .after-btn:hover { background: rgba(255,255,255,0.15); }
+  .after-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  .stat { border-top: 1px solid rgba(255,255,255,0.25); padding-top: 1.5rem; }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 300;
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+  .stat-label { font-size: 0.75rem; opacity: 0.7; letter-spacing: 0.05em; }
+
+@keyframes cloudGlow {
+  0%,100% { filter: drop-shadow(0 0 8px rgba(100,180,255,0.3)); }
+  50%      { filter: drop-shadow(0 0 24px rgba(100,180,255,0.7)); }
+}
+.img-cloud.active { animation: cloudGlow 3s ease infinite; }
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+
+<nav>
+  <div>
+    <div class="nav-brand">ENVISION-IT</div>
+    <div class="nav-sub">Vi bryr oss om bygg – fordi vi bryr oss om folk</div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag">3D-Scan teknologi</div>
+  <h1>Se bygget<br><em>som det er</em></h1>
+  <p class="hero-desc">
+    Med NAVVIS VLX 3D-skannere innhenter vi nøyaktig og detaljert 
+    informasjon om ditt bygg – slik det faktisk er.
+  </p>
+  <div class="scroll-hint">Scroll</div>
+</section>
+
+<!-- SCROLL MORPH SECTION -->
+<section class="scroll-section" id="scanSection">
+  <div class="scroll-sticky">
+
+    <!-- LEFT TEXT -->
+    <div class="text-side">
+      <div class="text-panels">
+
+        <div class="text-panel active" data-panel="0">
+          <div class="panel-step">01 / Utgangspunkt</div>
+          <h2 class="panel-title">Bygget du ser<br>hver dag</h2>
+          <p class="panel-body">
+            Du kjenner bygget ditt – men vet du virkelig hva som skjuler seg 
+            bak fasaden? Nøyaktige mål, konstruksjonsdetaljer og tilstand 
+            er sjelden tilgjengelig i ett og samme dokument.
+          </p>
+        </div>
+
+        <div class="text-panel" data-panel="1">
+          <div class="panel-step">02 / Scanning</div>
+          <h2 class="panel-title">Vi skanner<br><em>alt</em></h2>
+          <p class="panel-body">
+            Vår NAVVIS VLX 3D-skanner fanger millioner av punkter per sekund. 
+            Vegger, tak, gulv, rør og konstruksjoner – ingenting går ubemerket.
+          </p>
+          <ul class="panel-list">
+            <li>Millimeterpresisjon i alle dimensjoner</li>
+            <li>Innvendig og utvendig dokumentasjon</li>
+            <li>Digital tvilling av hele bygget</li>
+          </ul>
+        </div>
+
+        <div class="text-panel" data-panel="2">
+          <div class="panel-step">03 / Innsikt</div>
+          <h2 class="panel-title">Fra punktsky<br>til beslutning</h2>
+          <p class="panel-body">
+            Punktskyen blir grunnlag for tegninger, vedlikeholdsplan og 
+            prosjektgjennomføring. Du får et objektivt og sporbart bilde 
+            av byggets faktiske tilstand.
+          </p>
+          <ul class="panel-list">
+            <li>Kvalitetssikring av eksisterende tegninger</li>
+            <li>Avdekker skjevheter og høydeforskjeller</li>
+            <li>«Som bygget»-dokumentasjon</li>
+          </ul>
+        </div>
+
+        <div class="text-panel" data-panel="3">
+          <div class="panel-step">04 / Resultatet</div>
+          <h2 class="panel-title">Full oversikt.<br><em>Alltid.</em></h2>
+          <p class="panel-body">
+            Med en komplett digital kopi av bygget ditt er du alltid 
+            forberedt – enten det gjelder neste rehabiliteringsprosjekt, 
+            forsikringssak eller videresalg.
+          </p>
+          <a class="cta-btn" href="#">Ta kontakt</a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RIGHT IMAGE -->
+    <div class="image-side pointcloud-stage" data-bg="sage" id="scanStage">
+      <div class="img-wrap">
+        <img class="img-solid" src="./assets/ENVISION-IT_HUS.png" alt="Bygg solid" />
+        <img class="img-cloud" src="./assets/pointcloud001.png" alt="Bygg punktsky" />
+        <div class="scan-line" id="scanLine"></div>
+      </div>
+      <div class="scan-progress" id="scanProgress">
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+        <div class="progress-label" id="progressLabel">Scanning…</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- AFTER -->
+<section class="after-section">
+  <div>
+    <h2>Hva kan du bruke det til?</h2>
+    <p>
+      3D-skanningen er ikke bare et teknisk verktøy – det er grunnlaget 
+      for bedre beslutninger i planlegging, prosjektering og forvaltning 
+      av din bygningsmasse.
+    </p>
+    <a class="after-btn" href="#">Les mer om 3D-scan</a>
+  </div>
+  <div class="after-stats">
+    <div class="stat">
+      <div class="stat-num">mm</div>
+      <div class="stat-label">Presisjon i alle mål</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">Objektiv dokumentasjon</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">↓</div>
+      <div class="stat-label">Redusert risiko i prosjekt</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">∞</div>
+      <div class="stat-label">Gjenbrukbar informasjon</div>
+    </div>
+  </div>
+</section>
+
+<script>
+const section = document.getElementById('scanSection');
+const panels = document.querySelectorAll('.text-panel');
+const imgSolid = document.querySelector('.img-solid');
+const imgCloud = document.querySelector('.img-cloud');
+const scanLine = document.getElementById('scanLine');
+const scanProgress = document.getElementById('scanProgress');
+const scanStage = document.getElementById('scanStage');
+const progressFill = document.getElementById('progressFill');
+const progressLabel = document.getElementById('progressLabel');
+
+const PANELS = panels.length; // 4
+
+function lerp(a, b, t) { return a + (b - a) * t; }
+function clamp(v, min, max) { return Math.min(Math.max(v, min), max); }
+
+// Morph happens in middle 50% of scroll (panel 1 → panel 2 transition)
+const MORPH_START = 0.25;
+const MORPH_END = 0.75;
+
+window.addEventListener('scroll', () => {
+  const rect = section.getBoundingClientRect();
+  const sectionH = section.offsetHeight - window.innerHeight;
+  const scrolled = clamp(-rect.top / sectionH, 0, 1);
+
+  // Which panel
+  const panelIndex = clamp(Math.floor(scrolled * PANELS), 0, PANELS - 1);
+  panels.forEach((p, i) => {
+    p.classList.toggle('active', i === panelIndex);
+  });
+
+  // Image morph
+  const morphT = clamp((scrolled - MORPH_START) / (MORPH_END - MORPH_START), 0, 1);
+  
+  imgSolid.style.opacity = 1 - morphT;
+  imgCloud.style.opacity = morphT;
+
+  // bg transition
+  if (scanStage) {
+    if (morphT < 0.1) scanStage.dataset.bg = 'sage';
+    else if (morphT < 0.5) scanStage.dataset.bg = 'dark';
+    else scanStage.dataset.bg = 'dark';
+  }
+
+  // cloud glow
+  if (morphT >= 0.98) imgCloud.classList.add('active');
+  else imgCloud.classList.remove('active');
+
+  // Scan line
+  const scanning = morphT > 0 && morphT < 1;
+  scanLine.style.opacity = scanning ? 0.9 : 0;
+  if (scanning) {
+    scanLine.style.top = (morphT * 100) + '%';
+  }
+
+  // Progress bar
+  if (morphT > 0 && morphT < 1) {
+    scanProgress.classList.add('visible');
+    progressFill.style.width = (morphT * 100) + '%';
+    progressLabel.textContent = Math.round(morphT * 100) + '% skannet';
+  } else if (morphT >= 1) {
+    scanProgress.classList.add('visible');
+    progressFill.style.width = '100%';
+    progressLabel.textContent = 'Skannet ✓';
+  } else {
+    scanProgress.classList.remove('visible');
+  }
+});
+</script>
+</body>
+</html>

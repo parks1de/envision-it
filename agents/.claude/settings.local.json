@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/bness/OneDrive/02_PARKSIDE/01_RELASJONER/ENVISION-IT/04_PROSJEKT/NETTSIDE/V2/**)",
+      "Read(//c/Users/bness/OneDrive/02_PARKSIDE/01_RELASJONER/ENVISION-IT/04_PROSJEKT/NETTSIDE/V2/assets/**)",
+      "Read(//c/Users/bness/OneDrive/02_PARKSIDE/01_RELASJONER/ENVISION-IT/04_PROSJEKT/NETTSIDE/V2/functions/**)"
+    ]
+  }
+}

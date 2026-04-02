@@ -1,0 +1,23 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/mitt-hjem",    "destination": "/mitt-hjem.html" },
+    { "source": "/mitt-boliglag","destination": "/mitt-boliglag.html" },
+    { "source": "/mitt-bygg",    "destination": "/mitt-bygg.html" },
+    { "source": "/3d-scan",      "destination": "/3d-scan.html" },
+    { "source": "/om-oss",       "destination": "/om-oss.html" },
+    { "source": "/kontakt",      "destination": "/kontakt.html" },
+    { "source": "/priser",       "destination": "/priser.html" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options",        "value": "SAMEORIGIN" },
+        { "key": "Referrer-Policy",        "value": "strict-origin-when-cross-origin" }
+      ]
+    }
+  ]
+}

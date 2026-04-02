@@ -1,0 +1,182 @@
+You are an expert full-stack web developer and brand designer.  
+Your task: generate a complete, production-ready, push-ready Git repository for a Norwegian company.
+
+## Company to model
+
+- Name: Envision-IT AS
+- Type: Aksjeselskap (AS)
+- Sector: Digital solutions for the property, building and construction sector (eiendoms- og byggebransjen)
+- Core purpose: 
+  - Develop digital solutions for the property and construction industry
+  - Invest in digital solutions and real estate, including property development
+- Tagline direction (Norwegian): 
+  - “Vi bryr oss om bygg – fordi vi bryr oss om folk”
+  - “Envision-IT gir deg oversikten du trenger for å ta riktig valg til riktig tid.”
+- Example offerings (Norwegian, building-related):
+  - Dynamiske vedlikeholdsplaner og tilstandsanalyser
+  - Digitale tvilling-/3D-modeller basert på 3D-scanning
+  - Systemer for oversikt over byggportefølje, tilstand og tiltak
+  - Faglig støtte og kontroll i prosjektgjennomføring
+- Target customers:
+  - Privatpersoner med leilighet, hus eller hytte
+  - Styre i borettslag, sameie og aksjeandelslag
+  - Bedrifter og offentlig virksomhet som forvalter bygg
+- Locations:
+  - Oslo-kontor: Gjerdrums vei 5, 0484 Oslo
+  - Hovedenhet: Vangsnesvegen 902, 6894 Vangsnes
+- Language: Primary Norwegian (Bokmål), with clean, professional tone
+
+Use this info as brand and content foundation. You may refine wording, but keep it realistic for a Norwegian proptech/bygg company.
+
+---
+
+## Tech stack and project requirements
+
+**Overall goal:**  
+Create a modern marketing/landing site + minimal “product” pages for Envision-IT AS, as if this is their main public website. The output must be a complete codebase that I can `git init`, commit, and push immediately.
+
+### Stack
+
+- **Framework:** Next.js 15 (App Router) or latest stable Next.js version
+- **Language:** TypeScript everywhere
+- **Styling:** Tailwind CSS (with sensible config and a small design system)
+- **Package manager:** npm (assume `npm install`)
+- **Build target:** Static-friendly, but can use server components where natural
+
+### Pages and structure
+
+Create at least the following routes:
+
+1. `/` – **Landing page**
+   - Hero section with strong value proposition for digital bygg- og eiendomsløsninger
+   - Short explanation of how Envision-IT helps:
+     - Vedlikeholdsplaner
+     - Tilstandsanalyser
+     - 3D-scanning og digitale tegninger
+     - Prosjektstøtte
+   - Clear CTAs: “Kontakt oss”, “Book en demo”, etc.
+   - Logos/section for typical customer types (borettslag, sameie, bedrifter, offentlig sektor)
+
+2. `/tjenester` – **Services**
+   - Sections for:
+     - Vedlikeholdsplaner og tilstandsanalyser
+     - 3D-scanning og digitale tvillinger
+     - Prosjektstøtte og kvalitetssikring
+     - Digitale dashboards for porteføljestyring
+   - Each with problem → solution → benefits, in Norwegian.
+
+3. `/bransjer` – **Industries / segments**
+   - Separate blocks for:
+     - Privat (bolig, hytte)
+     - Borettslag og sameier
+     - Næringsbygg og offentlig sektor
+   - Explain how the same platform tilpasses ulike behov.
+
+4. `/om-oss` – **About**
+   - Short company story
+   - Mission/vision around smarter, data-drevet forvaltning av bygg
+   - Mention Oslo og Vangsnes as locations.
+   - Space for team section (dummy data ok, but realistic Norwegian names).
+
+5. `/kontakt` – **Contact**
+   - Contact form (front-end only, no backend wiring, but with validation)
+   - Show:
+     - E-post: `hei@envision-it.no` (as clickable mailto)
+     - Telefon: `+47 971 07 972` (dummy but realistic)
+     - Adresse Oslo: Gjerdrums vei 5, 0484 Oslo
+   - Map placeholder section (no real embed needed, just design).
+
+6. Optional but recommended:
+   - `/blogg` or `/innsikt` with 2–3 example posts as static content about:
+     - Vedlikehold i borettslag
+     - Bruk av 3D-scanning i eksisterende bygg
+   - Detail pages under `/blogg/[slug]`.
+
+### Layout and components
+
+Create a small, reusable component library:
+
+- `Header` with logo (simple text logo is fine) and navigation
+- `Footer` with:
+  - Org info (Envision-IT AS, org.nr. 826 455 152)
+  - Locations
+  - Simple copyright
+- `Button`, `Section`, `Card`, `Badge` components
+- Responsive layout with good spacing and typography
+- Dark-on-light, clean, modern color palette (in Tailwind config, e.g. `brand` colors)
+
+### Content and language
+
+- All user-facing copy in **Norwegian Bokmål**.
+- Tone: professional, clear, but not stiff. Aim at decision makers in boards and property management.
+- Avoid over-the-top marketing fluff; sound like a serious, competent bygg/proptech partner.
+- Use realistic headings and paragraphs, not lorem ipsum.
+
+---
+
+## Repo and code quality requirements
+
+1. **Project setup**
+   - Include `package.json` with all required dependencies and scripts:
+     - `dev`, `build`, `start`, `lint`
+   - Include `tsconfig.json`, `next.config.mjs` (or equivalent), `postcss.config.mjs`, `tailwind.config.ts`, and `globals.css`.
+   - Configure Tailwind with:
+     - Custom `brand` color scale
+     - Basic typography defaults
+
+2. **File structure (example)**  
+   Adapt as needed, but keep it clean and idiomatic for Next.js App Router:
+
+   - `app/`
+     - `layout.tsx`
+     - `page.tsx` (landing)
+     - `tjenester/page.tsx`
+     - `bransjer/page.tsx`
+     - `om-oss/page.tsx`
+     - `kontakt/page.tsx`
+     - `blogg/page.tsx`
+     - `blogg/[slug]/page.tsx`
+   - `components/`
+     - `Header.tsx`
+     - `Footer.tsx`
+     - `Button.tsx`
+     - `Section.tsx`
+     - `Card.tsx`
+     - `Badge.tsx`
+     - any other small UI pieces
+   - `lib/`
+     - `content.ts` or similar for blog posts / service definitions
+   - `public/`
+     - Placeholder images or simple SVGs if needed
+
+3. **Implementation details**
+   - Use functional React components with TypeScript types.
+   - Use semantic HTML and accessible components (proper headings, alt text, labels).
+   - Navigation should be fully wired between pages.
+   - Contact form:
+     - Client-side validation (required fields, email format).
+     - No backend submission—just a `console.log` or success message state.
+
+4. **No placeholders like “TODO” in visible UI.**  
+   All visible text should look like a finished site for Envision-IT AS.
+
+---
+
+## Output format
+
+Return **only** the complete project as if it were the contents of a Git repository, including:
+
+- All source files with correct paths
+- `package.json`, config files, and any other necessary files
+
+You may present it as a structured tree with code blocks per file, but ensure every file needed to run `npm install && npm run dev` is fully specified.
+
+Do **not** include any explanation outside of code and file structure.  
+Do **not** run commands; just provide the files.
+
+At the very end of your answer, leave a clearly marked section where I will later fill in my own values:
+
+`# LOCAL SETUP (to be filled in by user)`
+
+- `GitHub repo URL: ____________________________`
+- `Local folder path: __________________________`

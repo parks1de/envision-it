@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mitt Bygg — Envision-IT</title>
+  <meta name="description" content="Faglig rådgivning for bedrifter og offentlig virksomhet. Envision-IT leverer vedlikeholdsplan, prosjektstyring, tegninger og 3D-dokumentasjon.">
+  <link rel="canonical" href="https://envision-it.no/mitt-bygg">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://envision-it.no/mitt-bygg">
+  <meta property="og:title" content="Mitt Bygg — Envision-IT">
+  <meta property="og:description" content="Faglig rådgivning for bedrifter og offentlig virksomhet. Envision-IT leverer vedlikeholdsplan, prosjektstyring, tegninger og 3D-dokumentasjon.">
+  <meta property="og:image" content="https://envision-it.no/assets/og-image.jpg">
+  <link rel="stylesheet" href="css/global.css">
+  <style>
+    body { padding-top: var(--nav-h); }
+
+    /* ── HERO ─────────────────────────────────────────────────── */
+    .hero {
+      background: var(--cream-dark);
+      padding-top: clamp(3.5rem, 7vw, 6rem);
+      padding-bottom: clamp(3.5rem, 7vw, 6rem);
+    }
+
+    .hero__grid {
+      display: grid;
+      grid-template-columns: 60fr 40fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .hero__h1 {
+      font-style: italic;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero__subtitle {
+      font-family: 'Jost', sans-serif;
+      font-size: clamp(1rem, 1.8vw, 1.2rem);
+      font-weight: 300;
+      color: var(--sage);
+      letter-spacing: 0.04em;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero__body {
+      max-width: 54ch;
+    }
+
+    .hero__highlight {
+      background: var(--sage);
+      color: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+    }
+
+    .hero__highlight h3 {
+      font-style: italic;
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+
+    .hero__highlight p {
+      color: rgba(255,255,255,0.82);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 900px) {
+      .hero__grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── FEATURE LIST ─────────────────────────────────────────── */
+    .feature-section {
+      background: var(--cream);
+    }
+
+    .feature-layout {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .feature-heading-col { position: sticky; top: calc(var(--nav-h) + 2rem); }
+
+    .feature-heading-col h2 { line-height: 1.15; }
+
+    .feature-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+    }
+
+    .feature-item {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .feature-item__icon {
+      flex-shrink: 0;
+      margin-top: 0.2rem;
+    }
+
+    .feature-item__title {
+      font-family: 'Jost', sans-serif;
+      font-weight: 500;
+      font-size: 0.92rem;
+      color: var(--dark);
+      margin-bottom: 0.3rem;
+    }
+
+    .feature-item__desc {
+      font-size: 0.88rem;
+      color: var(--mid);
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .feature-quote-box {
+      background: var(--cream-dark);
+      border-left: 3px solid var(--sage);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.75rem;
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .feature-quote-box blockquote {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+      color: var(--dark);
+      line-height: 1.3;
+    }
+
+    .feature-right {
+      display: flex;
+      flex-direction: column;
+    }
+
+    @media (max-width: 900px) {
+      .feature-layout { grid-template-columns: 1fr; gap: 2rem; }
+      .feature-heading-col { position: static; }
+    }
+
+    /* ── SERVICE CARDS ─────────────────────────────────────────── */
+    .cards-section {
+      background: var(--cream-dark);
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .service-card {
+      background: var(--white);
+      border-left: 4px solid var(--sage);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      cursor: pointer;
+      transition: box-shadow var(--transition), transform var(--transition);
+    }
+
+    .service-card:hover {
+      box-shadow: 0 8px 32px rgba(30,31,26,0.10);
+      transform: translateY(-3px);
+    }
+
+    .service-card__label {
+      display: block;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.58rem;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--sage-light);
+      margin-bottom: 0.6rem;
+    }
+
+    .service-card__title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.45rem;
+      font-weight: 400;
+      color: var(--dark);
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+    }
+
+    .service-card__teaser {
+      font-size: 0.85rem;
+      color: var(--mid);
+      line-height: 1.7;
+      margin-bottom: 1.25rem;
+    }
+
+    .service-card__cta {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--sage);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .service-card__cta svg {
+      transition: transform var(--transition);
+    }
+
+    .service-card:hover .service-card__cta svg {
+      transform: translateX(4px);
+    }
+
+    @media (max-width: 720px) {
+      .cards-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 480px) {
+      .cards-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── MITT PROSJEKT TOOLBOX ─────────────────────────────────── */
+    .toolbox {
+      background: var(--dark);
+      color: var(--white);
+    }
+
+    .toolbox__display {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(3rem, 6vw, 6rem);
+      letter-spacing: 0.3em;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .toolbox__sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1rem, 1.6vw, 1.35rem);
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 3rem;
+    }
+
+    .toolbox__cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .toolbox__col h3 {
+      color: var(--white);
+      margin-bottom: 1rem;
+      font-size: clamp(1.1rem, 1.8vw, 1.5rem);
+    }
+
+    .toolbox__col p {
+      color: rgba(255,255,255,0.72);
+      font-size: 0.92rem;
+      line-height: 1.8;
+    }
+
+    .toolbox__quote {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 2.5rem;
+      text-align: center;
+    }
+
+    .toolbox__quote blockquote {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1.25rem, 2.2vw, 1.85rem);
+      color: rgba(255,255,255,0.72);
+      line-height: 1.4;
+      max-width: 70ch;
+      margin-inline: auto;
+    }
+
+    @media (max-width: 720px) {
+      .toolbox__cols { grid-template-columns: 1fr; gap: 2rem; }
+      .toolbox__display { letter-spacing: 0.15em; }
+    }
+
+    /* ── BOTTOM CTA ────────────────────────────────────────────── */
+    .bottom-cta {
+      background: var(--sage);
+      text-align: center;
+      padding-block: clamp(4rem, 8vw, 6rem);
+    }
+
+    .bottom-cta h2 {
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+
+    .bottom-cta p {
+      color: rgba(255,255,255,0.78);
+      font-size: 1rem;
+      max-width: 48ch;
+      margin-inline: auto;
+      margin-bottom: 2rem;
+    }
+
+    /* ── MODAL CONTENT ─────────────────────────────────────────── */
+    .modal-label {
+      display: block;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--sage-light);
+      margin-bottom: 0.75rem;
+    }
+
+    .modal-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      color: var(--dark);
+      line-height: 1.1;
+      margin-bottom: 1.25rem;
+    }
+
+    .modal-body {
+      font-size: 0.9rem;
+      color: var(--mid);
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    .modal-divider {
+      height: 1px;
+      background: var(--sage-bg);
+      border: none;
+      margin: 1.5rem 0;
+    }
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Hopp til innhold</a>
+
+  <!-- ═══ NAV ═══════════════════════════════════════════════════ -->
+  <nav class="site-nav" role="navigation" aria-label="Hovedmeny">
+    <div class="site-nav__inner">
+
+      <a href="/" class="site-nav__brand" aria-label="Envision-IT – hjem">
+        <span class="site-nav__brand-name">ENVISION-IT</span>
+        <span class="site-nav__brand-tagline">Vi bryr oss om bygg</span>
+      </a>
+
+      <div class="site-nav__links" role="list">
+        <div class="site-nav__dropdown" role="listitem">
+          <button class="site-nav__link site-nav__link--dropdown" aria-haspopup="true" aria-expanded="false">
+            Tjenester
+            <svg width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true">
+              <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div class="site-nav__dropdown-panel" role="menu">
+            <a href="/mitt-hjem.html" class="site-nav__dropdown-item" data-nav-link role="menuitem">
+              <span class="site-nav__dropdown-title">Mitt Hjem</span>
+              <span class="site-nav__dropdown-sub">Privatpersoner</span>
+            </a>
+            <a href="/mitt-boliglag.html" class="site-nav__dropdown-item" data-nav-link role="menuitem">
+              <span class="site-nav__dropdown-title">Mitt Boliglag</span>
+              <span class="site-nav__dropdown-sub">Borettslag og sameier</span>
+            </a>
+            <a href="/mitt-bygg.html" class="site-nav__dropdown-item nav-active" data-nav-link role="menuitem">
+              <span class="site-nav__dropdown-title">Mitt Bygg</span>
+              <span class="site-nav__dropdown-sub">Bedrifter og offentlig</span>
+            </a>
+            <hr class="site-nav__dropdown-divider">
+            <a href="/3d-scan.html" class="site-nav__dropdown-item" data-nav-link role="menuitem">
+              <span class="site-nav__dropdown-title">3D-Scan</span>
+              <span class="site-nav__dropdown-sub">NAVVIS VLX – digital tvilling</span>
+            </a>
+            <a href="/priser.html" class="site-nav__dropdown-item" data-nav-link role="menuitem">
+              <span class="site-nav__dropdown-title">Priser</span>
+              <span class="site-nav__dropdown-sub">Kalkulator og prisliste</span>
+            </a>
+          </div>
+        </div>
+        <a href="/om-oss.html" class="site-nav__link" data-nav-link role="listitem">Om oss</a>
+        <a href="/kontakt.html" class="site-nav__link site-nav__link--cta btn-outline" data-nav-link role="listitem">Kontakt oss</a>
+      </div>
+
+      <button class="site-nav__hamburger" id="nav-toggle" aria-label="Åpne meny" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+    </div>
+  </nav>
+
+  <!-- Mobile drawer -->
+  <div class="site-nav__drawer" id="nav-drawer" role="dialog" aria-modal="true" aria-label="Mobilmeny">
+    <div class="site-nav__drawer-inner">
+      <div class="site-nav__drawer-header">
+        <span class="site-nav__brand-name" style="color:var(--white)">ENVISION-IT</span>
+        <button class="site-nav__drawer-close" id="nav-drawer-close" aria-label="Lukk meny">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M4 4l12 12M16 4L4 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+      <nav class="site-nav__drawer-links">
+        <span class="site-nav__drawer-section">Tjenester</span>
+        <a href="/mitt-hjem.html" class="site-nav__drawer-link" data-nav-link>Mitt Hjem</a>
+        <a href="/mitt-boliglag.html" class="site-nav__drawer-link" data-nav-link>Mitt Boliglag</a>
+        <a href="/mitt-bygg.html" class="site-nav__drawer-link nav-active" data-nav-link>Mitt Bygg</a>
+        <a href="/3d-scan.html" class="site-nav__drawer-link" data-nav-link>3D-Scan</a>
+        <a href="/priser.html" class="site-nav__drawer-link" data-nav-link>Priser</a>
+        <span class="site-nav__drawer-section" style="margin-top:1rem">Selskapet</span>
+        <a href="/om-oss.html" class="site-nav__drawer-link" data-nav-link>Om oss</a>
+        <a href="/kontakt.html" class="site-nav__drawer-link site-nav__drawer-link--cta" data-nav-link>Kontakt oss</a>
+      </nav>
+      <div class="site-nav__drawer-contact">
+        <a href="tel:97107972">971 07 972</a>
+        <a href="mailto:hei@envision-it.no">hei@envision-it.no</a>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    /* Nav styles inlined from components/nav.html */
+    .site-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      background: var(--sage);
+      transition: box-shadow 0.3s ease;
+    }
+    .site-nav.scrolled { box-shadow: 0 4px 24px rgba(30,31,26,0.18); }
+    .site-nav__inner {
+      max-width: var(--max-w);
+      margin-inline: auto;
+      padding-inline: var(--gutter);
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .site-nav__brand { display: flex; flex-direction: column; gap: 0.1rem; text-decoration: none; }
+    .site-nav__brand-name { font-family: 'Jost', sans-serif; font-weight: 500; font-size: 0.82rem; letter-spacing: 0.2em; color: var(--white); }
+    .site-nav__brand-tagline { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.7rem; color: rgba(255,255,255,0.62); letter-spacing: 0.04em; }
+    .site-nav__links { display: flex; align-items: center; gap: 0.25rem; }
+    .site-nav__link { background: none; border: none; font-family: 'Jost', sans-serif; font-size: 0.78rem; font-weight: 300; letter-spacing: 0.08em; color: rgba(255,255,255,0.82); padding: 0.5rem 0.85rem; border-radius: var(--radius); transition: color var(--transition), background var(--transition); cursor: pointer; text-decoration: none; display: flex; align-items: center; gap: 0.35rem; }
+    .site-nav__link:hover { color: var(--white); background: rgba(255,255,255,0.1); }
+    .site-nav__link.nav-active { color: var(--white); }
+    .site-nav__link--cta { border-color: rgba(255,255,255,0.45) !important; color: var(--white) !important; margin-left: 0.5rem; }
+    .site-nav__link--cta:hover { background: rgba(255,255,255,0.15) !important; }
+    .site-nav__dropdown { position: relative; }
+    .site-nav__link--dropdown svg { transition: transform 0.2s ease; }
+    .site-nav__dropdown:hover .site-nav__link--dropdown svg,
+    .site-nav__dropdown:focus-within .site-nav__link--dropdown svg { transform: rotate(180deg); }
+    .site-nav__dropdown-panel { position: absolute; top: calc(100% + 0.75rem); left: 50%; transform: translateX(-50%); background: var(--white); border: 1px solid var(--sage-bg); border-radius: var(--radius-lg); padding: 0.75rem; min-width: 240px; box-shadow: 0 12px 40px rgba(30,31,26,0.12); opacity: 0; pointer-events: none; transform: translateX(-50%) translateY(8px); transition: opacity 0.2s ease, transform 0.2s ease; }
+    .site-nav__dropdown:hover .site-nav__dropdown-panel,
+    .site-nav__dropdown:focus-within .site-nav__dropdown-panel { opacity: 1; pointer-events: all; transform: translateX(-50%) translateY(0); }
+    .site-nav__dropdown-item { display: flex; flex-direction: column; gap: 0.15rem; padding: 0.7rem 0.9rem; border-radius: var(--radius); text-decoration: none; transition: background var(--transition); }
+    .site-nav__dropdown-item:hover { background: var(--cream); }
+    .site-nav__dropdown-item.nav-active { background: var(--cream-dark); }
+    .site-nav__dropdown-title { font-size: 0.82rem; font-weight: 400; color: var(--dark); }
+    .site-nav__dropdown-sub { font-size: 0.68rem; color: var(--muted); }
+    .site-nav__dropdown-divider { border: none; border-top: 1px solid var(--sage-bg); margin: 0.4rem 0; }
+    .site-nav__hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; padding: 0.5rem; cursor: pointer; }
+    .site-nav__hamburger span { display: block; width: 22px; height: 1.5px; background: var(--white); border-radius: 2px; transition: all 0.25s ease; }
+    .site-nav__drawer { position: fixed; inset: 0; z-index: 300; background: rgba(30,31,26,0.55); backdrop-filter: blur(4px); opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+    .site-nav__drawer.open { opacity: 1; pointer-events: all; }
+    .site-nav__drawer-inner { position: absolute; top: 0; right: 0; bottom: 0; width: min(320px, 90vw); background: var(--dark); padding: 0; display: flex; flex-direction: column; transform: translateX(100%); transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1); }
+    .site-nav__drawer.open .site-nav__drawer-inner { transform: translateX(0); }
+    .site-nav__drawer-header { display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .site-nav__drawer-close { background: none; border: none; color: rgba(255,255,255,0.6); cursor: pointer; padding: 0.25rem; transition: color var(--transition); }
+    .site-nav__drawer-close:hover { color: var(--white); }
+    .site-nav__drawer-links { flex: 1; overflow-y: auto; padding: 1.25rem 1.5rem; display: flex; flex-direction: column; gap: 0.15rem; }
+    .site-nav__drawer-section { font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 0.4rem; display: block; }
+    .site-nav__drawer-link { font-size: 0.95rem; color: rgba(255,255,255,0.78); text-decoration: none; padding: 0.65rem 0.75rem; border-radius: var(--radius); transition: background var(--transition), color var(--transition); }
+    .site-nav__drawer-link:hover,
+    .site-nav__drawer-link.nav-active { background: rgba(255,255,255,0.08); color: var(--white); }
+    .site-nav__drawer-link--cta { margin-top: 1rem; border: 1px solid rgba(255,255,255,0.3); text-align: center; }
+    .site-nav__drawer-contact { padding: 1.25rem 1.5rem; border-top: 1px solid rgba(255,255,255,0.08); display: flex; flex-direction: column; gap: 0.35rem; }
+    .site-nav__drawer-contact a { font-size: 0.78rem; color: rgba(255,255,255,0.5); text-decoration: none; transition: color var(--transition); }
+    .site-nav__drawer-contact a:hover { color: var(--white); }
+    @media (max-width: 860px) {
+      .site-nav__links { display: none; }
+      .site-nav__hamburger { display: flex; }
+    }
+  </style>
+
+  <!-- ═══ HERO ═══════════════════════════════════════════════════ -->
+  <section id="main-content" class="hero">
+    <div class="container">
+      <div class="hero__grid">
+
+        <div class="hero__left">
+          <span class="eyebrow reveal">Bedrifter og offentlig virksomhet</span>
+          <h1 class="hero__h1 reveal reveal-delay-1">Mitt Bygg</h1>
+          <p class="hero__subtitle reveal reveal-delay-2">Forvalte bygningsmasse rasjonelt</p>
+          <p class="hero__body reveal reveal-delay-3">Enten du forvalter ett bygg eller en hel portefølje, trenger du systemer som gir oversikt, sporbarhet og kontroll. Vi leverer faglig rådgivning og digitale verktøy som hjelper deg å ta riktige beslutninger – basert på fakta, ikke magefølelse.</p>
+        </div>
+
+        <div class="reveal reveal-delay-2">
+          <div class="hero__highlight">
+            <h3>En helhetlig løsning for din bygningsmasse</h3>
+            <p>Fra vedlikeholdsplan og faglige tegninger til prosjektstyring og 3D-dokumentasjon – vi leverer tjenestene du trenger, integrert i ett system.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FEATURE LIST ═══════════════════════════════════════════ -->
+  <section class="feature-section section">
+    <div class="container">
+      <div class="feature-layout">
+
+        <div class="feature-heading-col reveal">
+          <div class="accent-line"></div>
+          <h2>Hva vi leverer til din virksomhet</h2>
+          <div class="feature-quote-box">
+            <blockquote>Det blir ikke dyrere av å vite at det blir dyrt</blockquote>
+            <hr class="modal-divider" style="margin:0">
+            <blockquote>Riktig første gang</blockquote>
+          </div>
+        </div>
+
+        <div class="feature-right">
+          <ul class="feature-list">
+
+            <li class="feature-item reveal">
+              <div class="feature-item__icon">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <circle cx="9" cy="9" r="8.5" stroke="#6b7562"/>
+                  <path d="M5 9l3 3 5-5" stroke="#6b7562" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div>
+                <p class="feature-item__title">Ett system for din bygningsmasse</p>
+                <p class="feature-item__desc">Samle all informasjon om bygget på ett sted – tegninger, planer, historikk og kontrakter</p>
+              </div>
+            </li>
+
+            <li class="feature-item reveal reveal-delay-1">
+              <div class="feature-item__icon">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <circle cx="9" cy="9" r="8.5" stroke="#6b7562"/>
+                  <path d="M5 9l3 3 5-5" stroke="#6b7562" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div>
+                <p class="feature-item__title">Vedlikeholdsplan</p>
+                <p class="feature-item__desc">Dynamisk 10-årsplan med kostnadsberegninger for langsiktig budsjettering</p>
+              </div>
+            </li>
+
+            <li class="feature-item reveal reveal-delay-1">
+              <div class="feature-item__icon">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <circle cx="9" cy="9" r="8.5" stroke="#6b7562"/>
+                  <path d="M5 9l3 3 5-5" stroke="#6b7562" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div>
+                <p class="feature-item__title">Dynamiske tegninger</p>
+                <p class="feature-item__desc">Komplette tegningssett i CAD som reflekterer byggets faktiske tilstand</p>
+              </div>
+            </li>
+
+            <li class="feature-item reveal reveal-delay-2">
+              <div class="feature-item__icon">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <circle cx="9" cy="9" r="8.5" stroke="#6b7562"/>
+                  <path d="M5 9l3 3 5-5" stroke="#6b7562" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div>
+                <p class="feature-item__title">Prosjektstyring</p>
+                <p class="feature-item__desc">Byggherrerepresentasjon og faglig rådgivning ved rehabilitering og nybygg</p>
+              </div>
+            </li>
+
+            <li class="feature-item reveal reveal-delay-2">
+              <div class="feature-item__icon">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <circle cx="9" cy="9" r="8.5" stroke="#6b7562"/>
+                  <path d="M5 9l3 3 5-5" stroke="#6b7562" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div>
+                <p class="feature-item__title">Oppgavestyring</p>
+                <p class="feature-item__desc">Strukturert system for driftsoppgaver, inspeksjoner og vedlikeholdsarbeid</p>
+              </div>
+            </li>
+
+            <li class="feature-item reveal reveal-delay-3">
+              <div class="feature-item__icon">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <circle cx="9" cy="9" r="8.5" stroke="#6b7562"/>
+                  <path d="M5 9l3 3 5-5" stroke="#6b7562" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div>
+                <p class="feature-item__title">Sporbar kommunikasjon</p>
+                <p class="feature-item__desc">Dokumentert dialog med leverandører og fagfolk, tilgjengelig for alle parter</p>
+              </div>
+            </li>
+
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SERVICE CARDS ══════════════════════════════════════════ -->
+  <section class="cards-section section">
+    <div class="container">
+
+      <div class="reveal">
+        <span class="eyebrow">Tjenester</span>
+        <h2>Faglig rådgivning og digitale verktøy</h2>
+      </div>
+
+      <div class="cards-grid">
+
+        <!-- Card 1: Vedlikeholdsplan -->
+        <div class="service-card reveal" onclick="openModal('modal-vedlikeholdsplan')" role="button" tabindex="0" aria-haspopup="dialog" onkeydown="if(event.key==='Enter'||event.key===' ')openModal('modal-vedlikeholdsplan')">
+          <span class="service-card__label">Forvaltning</span>
+          <h3 class="service-card__title">Vedlikeholdsplan</h3>
+          <p class="service-card__teaser">Dynamisk 10-årsplan med kostnadsberegning for hele bygningsmassen.</p>
+          <span class="service-card__cta">
+            Les mer
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </div>
+
+        <!-- Card 2: Prosjekt -->
+        <div class="service-card reveal reveal-delay-1" onclick="openModal('modal-prosjekt')" role="button" tabindex="0" aria-haspopup="dialog" onkeydown="if(event.key==='Enter'||event.key===' ')openModal('modal-prosjekt')">
+          <span class="service-card__label">Prosjektstyring</span>
+          <h3 class="service-card__title">Prosjekt</h3>
+          <p class="service-card__teaser">Profesjonell prosjektstyring og byggherrerepresentasjon fra A til Å.</p>
+          <span class="service-card__cta">
+            Les mer
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </div>
+
+        <!-- Card 3: Tegning -->
+        <div class="service-card reveal reveal-delay-2" onclick="openModal('modal-tegning')" role="button" tabindex="0" aria-haspopup="dialog" onkeydown="if(event.key==='Enter'||event.key===' ')openModal('modal-tegning')">
+          <span class="service-card__label">Dokumentasjon</span>
+          <h3 class="service-card__title">Tegning</h3>
+          <p class="service-card__teaser">Komplette CAD-tegningssett som alltid reflekterer byggets faktiske tilstand.</p>
+          <span class="service-card__cta">
+            Les mer
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </div>
+
+        <!-- Card 4: Vedlikeholdskalender -->
+        <div class="service-card reveal" onclick="openModal('modal-kalender')" role="button" tabindex="0" aria-haspopup="dialog" onkeydown="if(event.key==='Enter'||event.key===' ')openModal('modal-kalender')">
+          <span class="service-card__label">Drift</span>
+          <h3 class="service-card__title">Vedlikeholdskalender</h3>
+          <p class="service-card__teaser">Strukturert driftskalender med full historikk for hele bygget.</p>
+          <span class="service-card__cta">
+            Les mer
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </div>
+
+        <!-- Card 5: Serviceavtaler -->
+        <div class="service-card reveal reveal-delay-1" onclick="openModal('modal-service')" role="button" tabindex="0" aria-haspopup="dialog" onkeydown="if(event.key==='Enter'||event.key===' ')openModal('modal-service')">
+          <span class="service-card__label">Oppfølging</span>
+          <h3 class="service-card__title">Serviceavtaler</h3>
+          <p class="service-card__teaser">Fast faglig oppfølging som holder driften oppe og kostnadene nede.</p>
+          <span class="service-card__cta">
+            Les mer
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </div>
+
+        <!-- Card 6: 3D-Scan -->
+        <div class="service-card reveal reveal-delay-2" onclick="openModal('modal-scan')" role="button" tabindex="0" aria-haspopup="dialog" onkeydown="if(event.key==='Enter'||event.key===' ')openModal('modal-scan')">
+          <span class="service-card__label">Digital dokumentasjon</span>
+          <h3 class="service-card__title">3D-Scan</h3>
+          <p class="service-card__teaser">Millimeterpresist digitalt tvillingbilde – grunnlag for all god forvaltning.</p>
+          <span class="service-card__cta">
+            Les mer
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ MITT PROSJEKT TOOLBOX ══════════════════════════════════ -->
+  <section class="toolbox section">
+    <div class="container">
+
+      <div class="reveal">
+        <p class="toolbox__display">MITT PROSJEKT</p>
+        <p class="toolbox__sub">– åpenhet og ærlighet satt i system</p>
+      </div>
+
+      <div class="toolbox__cols">
+        <div class="reveal">
+          <h3>Å spille med åpne kort</h3>
+          <p>Transparens er det viktigste verktøyet i et vellykket byggeprosjekt. Alle parter – oppdragsgiver, leverandør og faglig rådgiver – jobber bedre når informasjonen er åpen og tilgjengelig. Vi sikrer at beslutningsgrunnlaget alltid er komplett, ryddig og sporbart.</p>
+        </div>
+        <div class="reveal reveal-delay-1">
+          <h3>Effektivitet gjennom samarbeid</h3>
+          <p>Det beste resultatet oppnås alltid når alle trekker i samme retning. Leverandørene skal tjene penger – det er rett og rimelig og en forutsetning for god kvalitet. Men samarbeid betyr at alle jobber mot samme mål, med samme informasjon. Da blir prosjektet bedre, raskere og billigere.</p>
+        </div>
+      </div>
+
+      <div class="toolbox__quote reveal">
+        <blockquote>De eneste som tjener på å holde kortene tett til brystet, er de som har noe å skjule</blockquote>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══ BOTTOM CTA ══════════════════════════════════════════════ -->
+  <section class="bottom-cta">
+    <div class="container">
+      <h2 class="reveal">Vil du ha bedre kontroll på bygningsmassen?</h2>
+      <p class="reveal reveal-delay-1">Ta kontakt for en uforpliktende samtale – vi finner riktig løsning for din virksomhet.</p>
+      <a href="/kontakt.html" class="btn-light reveal reveal-delay-2">Ta kontakt</a>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ══════════════════════════════════════════════════ -->
+  <footer class="site-footer">
+    <div class="site-footer__inner container">
+
+      <div class="site-footer__grid">
+
+        <div class="site-footer__col site-footer__col--brand">
+          <a href="/" class="site-footer__brand">
+            <span class="site-footer__brand-name">ENVISION-IT</span>
+            <span class="site-footer__brand-tagline">Vi bryr oss om bygg – fordi vi bryr oss om folk</span>
+          </a>
+          <nav class="site-footer__nav" aria-label="Sidefot navigasjon">
+            <a href="/mitt-hjem.html">Mitt Hjem</a>
+            <a href="/mitt-boliglag.html">Mitt Boliglag</a>
+            <a href="/mitt-bygg.html">Mitt Bygg</a>
+            <a href="/3d-scan.html">3D-Scan</a>
+            <a href="/priser.html">Priser</a>
+            <a href="/om-oss.html">Om oss</a>
+            <a href="/kontakt.html">Kontakt</a>
+          </nav>
+        </div>
+
+        <div class="site-footer__col">
+          <h4 class="site-footer__col-title">Selskapet</h4>
+          <ul class="site-footer__list">
+            <li>Envision-IT AS</li>
+            <li>Org.nr. 826 455 152</li>
+            <li><a href="tel:97107972">971 07 972</a></li>
+            <li><a href="mailto:hei@envision-it.no">hei@envision-it.no</a></li>
+          </ul>
+        </div>
+
+        <div class="site-footer__col">
+          <h4 class="site-footer__col-title">Oslo</h4>
+          <address class="site-footer__address">
+            Gjerdrums vei 5<br>
+            0484 Oslo
+          </address>
+        </div>
+
+        <div class="site-footer__col">
+          <h4 class="site-footer__col-title">Sogndal</h4>
+          <address class="site-footer__address">
+            Kvernhusbakken 7<br>
+            6854 Kaupanger
+          </address>
+        </div>
+
+      </div>
+
+      <div class="site-footer__bottom">
+        <span>© <span data-year></span> Envision-IT AS</span>
+        <span class="site-footer__bottom-tagline">Alle priser eks. mva.</span>
+      </div>
+
+    </div>
+  </footer>
+
+  <style>
+    /* Footer styles inlined from components/footer.html */
+    .site-footer { background: var(--sage); color: rgba(255,255,255,0.82); padding-top: clamp(3rem, 6vw, 5rem); }
+    .site-footer__grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,0.12); }
+    .site-footer__brand { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.75rem; text-decoration: none; }
+    .site-footer__brand-name { font-family: 'Jost', sans-serif; font-weight: 500; font-size: 0.85rem; letter-spacing: 0.22em; color: var(--white); }
+    .site-footer__brand-tagline { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.88rem; color: rgba(255,255,255,0.55); line-height: 1.4; max-width: 240px; }
+    .site-footer__nav { display: flex; flex-direction: column; gap: 0.4rem; }
+    .site-footer__nav a { font-size: 0.8rem; color: rgba(255,255,255,0.6); text-decoration: none; transition: color var(--transition); }
+    .site-footer__nav a:hover { color: var(--white); }
+    .site-footer__col-title { font-family: 'Jost', sans-serif; font-weight: 400; font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 1rem; }
+    .site-footer__list { display: flex; flex-direction: column; gap: 0.45rem; }
+    .site-footer__list li { font-size: 0.82rem; color: rgba(255,255,255,0.7); }
+    .site-footer__list a { color: rgba(255,255,255,0.7); text-decoration: none; transition: color var(--transition); }
+    .site-footer__list a:hover { color: var(--white); }
+    .site-footer__address { font-style: normal; font-size: 0.82rem; color: rgba(255,255,255,0.7); line-height: 1.75; }
+    .site-footer__bottom { display: flex; align-items: center; justify-content: space-between; padding-block: 1.25rem; font-size: 0.72rem; color: rgba(255,255,255,0.38); }
+    .site-footer__bottom-tagline { font-style: italic; }
+    @media (max-width: 900px) {
+      .site-footer__grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .site-footer__col--brand { grid-column: 1 / -1; }
+    }
+    @media (max-width: 480px) {
+      .site-footer__grid { grid-template-columns: 1fr; }
+      .site-footer__bottom { flex-direction: column; gap: 0.4rem; text-align: center; }
+    }
+  </style>
+
+  <!-- ═══ MODALS ══════════════════════════════════════════════════ -->
+
+  <!-- Modal: Vedlikeholdsplan -->
+  <div class="modal-overlay" id="modal-vedlikeholdsplan" role="dialog" aria-modal="true" aria-labelledby="modal-vedlikeholdsplan-title">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal()" aria-label="Lukk">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <path d="M3 3l12 12M15 3L3 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <span class="modal-label">Forvaltning</span>
+      <h2 class="modal-title" id="modal-vedlikeholdsplan-title">Vedlikeholdsplan</h2>
+      <p class="modal-body">For en bedrift eller offentlig virksomhet er vedlikeholdsplanen et strategisk verktøy – ikke bare et vedlikeholdsregister. En god plan gir deg grunnlag for langsiktig budsjettering, kapitalplaner og forsvarlige beslutninger overfor styre og eiere. Vi kartlegger hele bygningsmassens tilstand, vurderer levetid på alle komponenter og beregner fremtidige kostnader med presisjon. Planen er dynamisk: den oppdateres etter hvert som arbeid utføres, og gir deg alltid et oppdatert bilde av porteføljens tilstand og restverdi. Med en god vedlikeholdsplan unngår du kostbare akuttutbedringer og sikrer at bygget holder sin verdi over tid.</p>
+      <hr class="modal-divider">
+      <a href="/kontakt.html" class="btn-solid">Ta kontakt</a>
+    </div>
+  </div>
+
+  <!-- Modal: Prosjekt -->
+  <div class="modal-overlay" id="modal-prosjekt" role="dialog" aria-modal="true" aria-labelledby="modal-prosjekt-title">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal()" aria-label="Lukk">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <path d="M3 3l12 12M15 3L3 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <span class="modal-label">Prosjektstyring</span>
+      <h2 class="modal-title" id="modal-prosjekt-title">Prosjekt</h2>
+      <p class="modal-body">Store rehabiliteringsprosjekter, energioppgraderinger, utvidelser – alle krever profesjonell styring. Vi fungerer som din byggherrerepresentant: vi skriver konkurransegrunnlag, innhenter tilbud, evaluerer leverandørene og styrer framdrift og kvalitet gjennom hele prosjektet. Gjennom «Mitt Prosjekt» har alle relevante parter – ledelse, driftsansvarlig, styre – full oversikt over hva som skjer, hva det koster og hva som er besluttet. Vi har lang erfaring fra byggebransjen og kjenner dynamikken fra innsiden, noe som gir deg et avgjørende fortrinn i forhandlinger og oppfølging.</p>
+      <hr class="modal-divider">
+      <a href="/kontakt.html" class="btn-solid">Ta kontakt</a>
+    </div>
+  </div>
+
+  <!-- Modal: Tegning -->
+  <div class="modal-overlay" id="modal-tegning" role="dialog" aria-modal="true" aria-labelledby="modal-tegning-title">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal()" aria-label="Lukk">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <path d="M3 3l12 12M15 3L3 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <span class="modal-label">Dokumentasjon</span>
+      <h2 class="modal-title" id="modal-tegning-title">Tegning</h2>
+      <p class="modal-body">Nøyaktige tegninger er grunnmuren for all god bygningsforvaltning. Vi leverer komplette tegningssett i profesjonelt CAD-format: plantegninger, fasadetegninger, seksjonstegninger og situasjonsplan. Tegningene leveres i DWG og PDF og kan brukes av alle fagdisipliner. Vi benytter gjerne 3D-scanning som grunnlag, noe som sikrer at tegningene faktisk stemmer med byggets nåværende tilstand – ikke med slik det ble bygget for 30 år siden. Oppdaterte tegninger reduserer feil, sparer tid og sikrer at alle jobber ut fra det samme grunnlaget.</p>
+      <hr class="modal-divider">
+      <a href="/kontakt.html" class="btn-solid">Ta kontakt</a>
+    </div>
+  </div>
+
+  <!-- Modal: Vedlikeholdskalender -->
+  <div class="modal-overlay" id="modal-kalender" role="dialog" aria-modal="true" aria-labelledby="modal-kalender-title">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal()" aria-label="Lukk">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <path d="M3 3l12 12M15 3L3 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <span class="modal-label">Drift</span>
+      <h2 class="modal-title" id="modal-kalender-title">Vedlikeholdskalender</h2>
+      <p class="modal-body">En vedlikeholdskalender for din virksomhet samler alle driftsoppgaver, inspeksjoner og vedlikeholdsarbeid i ett strukturert system. Kalenderen er digital og tilgjengelig for alle relevante parter – driftsansvarlig, teknisk leder, ledelse. Alle utførte oppgaver dokumenteres med tid, utfører og resultat, og bygger over tid opp en verdifull historikk. Denne historikken er uvurderlig ved tekniske revisjoner, forsikringskrav, eiendomstransaksjoner og ved skifte av driftsansvarlig – ingen informasjon går tapt.</p>
+      <hr class="modal-divider">
+      <a href="/kontakt.html" class="btn-solid">Ta kontakt</a>
+    </div>
+  </div>
+
+  <!-- Modal: Serviceavtaler -->
+  <div class="modal-overlay" id="modal-service" role="dialog" aria-modal="true" aria-labelledby="modal-service-title">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal()" aria-label="Lukk">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <path d="M3 3l12 12M15 3L3 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <span class="modal-label">Oppfølging</span>
+      <h2 class="modal-title" id="modal-service-title">Serviceavtaler</h2>
+      <p class="modal-body">Med en serviceavtale fra Envision-IT får du en fast faglig kontakt som kjenner bygget ditt over tid. Vi gjennomfører regelmessige inspeksjoner, følger opp driftsavtaler og gir deg tidlig varsling om forhold som bør utbedres. Problemer løses tidlig – før de blir dyre og forstyrrende for driften. En serviceavtale passer godt for bedrifter og offentlige virksomheter som ikke har dedikert teknisk driftspersonell, eller som ønsker en uavhengig faglig vurdering av byggets tilstand.</p>
+      <hr class="modal-divider">
+      <a href="/kontakt.html" class="btn-solid">Ta kontakt</a>
+    </div>
+  </div>
+
+  <!-- Modal: 3D-Scan -->
+  <div class="modal-overlay" id="modal-scan" role="dialog" aria-modal="true" aria-labelledby="modal-scan-title">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal()" aria-label="Lukk">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <path d="M3 3l12 12M15 3L3 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <span class="modal-label">Digital dokumentasjon</span>
+      <h2 class="modal-title" id="modal-scan-title">3D-Scan</h2>
+      <p class="modal-body">En 3D-scan med NAVVIS VLX gir deg det mest komplette bildet av bygget ditt som finnes. Vi scanner hele bygget – fasade, fellesarealer, tekniske rom og individuelle etasjer – og leverer et millimeterpresist digitalt tvillingbilde. For næringseiendom og offentlige bygg er dette særlig verdifullt som grunnlag for rehabiliteringsprosjekter, for energikartlegging, og for dokumentasjon ved overdragelse eller refinansiering. Scannede bygg har bedre underlag for alle beslutninger – fra driftsoptimalisering til total renovering.</p>
+      <hr class="modal-divider">
+      <a href="/3d-scan.html" class="btn-solid">Les mer om 3D-Scan</a>
+    </div>
+  </div>
+
+  <script src="js/global.js"></script>
+
+</body>
+</html>

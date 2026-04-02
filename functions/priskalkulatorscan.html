@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Priskalkulator — 3D-Scan · Envision-IT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --sage:        #6b7562;
+  --sage-light:  #8d9680;
+  --sage-pale:   #c8ccbf;
+  --sage-bg:     #e4e6e0;
+  --cream:       #f4f2ed;
+  --cream-dark:  #eae7e0;
+  --dark:        #1e1f1a;
+  --mid:         #3a3c35;
+  --muted:       #7a7c73;
+  --white:       #ffffff;
+  --price-glow:  rgba(107,117,98,0.18);
+  --radius:      6px;
+  --transition:  0.25s ease;
+}
+
+body {
+  background: var(--cream);
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  color: var(--dark);
+  min-height: 100vh;
+  padding: 0;
+}
+
+/* ── TOP BAR ── */
+.topbar {
+  background: var(--sage);
+  padding: 0.9rem 2.5rem;
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+}
+.topbar-brand { color: #fff; font-weight: 500; font-size: 0.8rem; letter-spacing: 0.18em; text-transform: uppercase; }
+.topbar-sub   { color: rgba(255,255,255,0.6); font-size: 0.68rem; font-style: italic; letter-spacing: 0.06em; }
+
+/* ── HERO ── */
+.hero {
+  background: var(--cream-dark);
+  border-bottom: 1px solid var(--sage-bg);
+  padding: 3rem 2.5rem 2.5rem;
+  text-align: center;
+}
+.hero-eyebrow {
+  font-size: 0.62rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--sage-light);
+  margin-bottom: 0.8rem;
+}
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  color: var(--dark);
+  line-height: 1.08;
+  margin-bottom: 0.8rem;
+}
+.hero h1 em { font-style: italic; color: var(--sage); }
+.hero-desc {
+  font-size: 0.88rem;
+  color: var(--muted);
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* ── LAYOUT ── */
+.calc-wrap {
+  max-width: 960px;
+  margin: 2.5rem auto;
+  padding: 0 1.5rem 4rem;
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 2rem;
+  align-items: start;
+}
+@media(max-width:720px){
+  .calc-wrap { grid-template-columns: 1fr; }
+}
+
+/* ── CARD ── */
+.card {
+  background: var(--white);
+  border: 1px solid var(--sage-bg);
+  border-radius: var(--radius);
+  padding: 2rem;
+}
+.card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.35rem;
+  font-weight: 400;
+  color: var(--dark);
+  margin-bottom: 1.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.card-title::before {
+  content: '';
+  display: inline-block;
+  width: 3px;
+  height: 1.3em;
+  background: var(--sage);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* ── FORM ROWS ── */
+.form-group { margin-bottom: 1.8rem; }
+.form-group:last-child { margin-bottom: 0; }
+.form-label {
+  display: block;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--sage-light);
+  margin-bottom: 0.75rem;
+}
+
+/* ── PRODUCT TABS ── */
+.product-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+.prod-tab {
+  border: 1px solid var(--sage-pale);
+  background: transparent;
+  border-radius: var(--radius);
+  padding: 0.75rem 0.5rem;
+  cursor: pointer;
+  text-align: center;
+  transition: var(--transition);
+}
+.prod-tab:hover { border-color: var(--sage); background: var(--cream); }
+.prod-tab.active {
+  border-color: var(--sage);
+  background: var(--sage);
+  color: white;
+}
+.prod-tab .tab-name {
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  display: block;
+  margin-bottom: 0.2rem;
+}
+.prod-tab .tab-note {
+  font-size: 0.6rem;
+  opacity: 0.6;
+  display: block;
+}
+.prod-tab.active .tab-note { opacity: 0.8; }
+
+/* ── BUILDING TYPE CHIPS ── */
+.chips { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+.chip {
+  border: 1px solid var(--sage-pale);
+  background: transparent;
+  border-radius: 100px;
+  padding: 0.45rem 1rem;
+  font-size: 0.75rem;
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  cursor: pointer;
+  transition: var(--transition);
+  color: var(--mid);
+}
+.chip:hover { border-color: var(--sage); color: var(--sage); }
+.chip.active {
+  border-color: var(--sage);
+  background: var(--sage);
+  color: white;
+}
+.chip.hidden { display: none; }
+
+/* ── SLIDER ── */
+.slider-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+.slider-val {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem;
+  font-weight: 300;
+  color: var(--dark);
+  min-width: 80px;
+  text-align: right;
+  line-height: 1;
+}
+.slider-unit {
+  font-size: 0.65rem;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+}
+input[type=range] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 2px;
+  background: var(--sage-pale);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: var(--sage);
+  border: 2px solid white;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.18);
+  transition: transform 0.15s;
+}
+input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.2); }
+.slider-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.6rem;
+  color: var(--muted);
+  margin-top: 0.4rem;
+}
+
+/* ── FLOORS ── */
+.floors-row { display: flex; gap: 0.4rem; margin-top: 0.5rem; }
+.floor-btn {
+  width: 44px; height: 44px;
+  border: 1px solid var(--sage-pale);
+  background: transparent;
+  border-radius: var(--radius);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  color: var(--mid);
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex; align-items: center; justify-content: center;
+}
+.floor-btn:hover { border-color: var(--sage); color: var(--sage); }
+.floor-btn.active {
+  background: var(--sage);
+  border-color: var(--sage);
+  color: white;
+}
+
+/* ── CHECKBOXES ── */
+.check-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-top: 0.5rem; }
+.check-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  cursor: pointer;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid var(--sage-pale);
+  border-radius: var(--radius);
+  transition: var(--transition);
+}
+.check-item:hover { border-color: var(--sage-light); background: var(--cream); }
+.check-item.checked { border-color: var(--sage); background: #f0f1ed; }
+.check-box {
+  width: 16px; height: 16px;
+  border: 1px solid var(--sage-pale);
+  border-radius: 3px;
+  background: white;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+.check-item.checked .check-box {
+  background: var(--sage);
+  border-color: var(--sage);
+}
+.check-box svg { display: none; }
+.check-item.checked .check-box svg { display: block; }
+.check-label { font-size: 0.75rem; color: var(--mid); line-height: 1.3; }
+
+/* ── PRICE PANEL ── */
+.price-panel {
+  background: var(--sage);
+  border-radius: var(--radius);
+  padding: 2rem;
+  color: white;
+  position: sticky;
+  top: 1.5rem;
+}
+.price-eyebrow {
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-bottom: 1rem;
+}
+.price-main {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-weight: 300;
+  line-height: 1;
+  margin-bottom: 0.3rem;
+  transition: all 0.3s ease;
+}
+.price-main.updating {
+  opacity: 0.5;
+  transform: scale(0.97);
+}
+.price-currency { font-size: 1.2rem; vertical-align: top; margin-top: 0.5rem; display: inline-block; opacity: 0.7; }
+.price-suffix   { font-size: 1rem; opacity: 0.6; margin-left: 0.2rem; }
+.price-note     { font-size: 0.72rem; opacity: 0.65; line-height: 1.5; margin-top: 0.6rem; }
+
+.price-divider  { border: none; border-top: 1px solid rgba(255,255,255,0.2); margin: 1.4rem 0; }
+
+.price-breakdown { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+.price-breakdown li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 0.78rem;
+}
+.pb-label { opacity: 0.7; }
+.pb-val   { font-family: 'Cormorant Garamond', serif; font-size: 1rem; }
+
+.sub-note {
+  margin-top: 1rem;
+  background: rgba(255,255,255,0.12);
+  border-radius: 4px;
+  padding: 0.8rem 1rem;
+  font-size: 0.7rem;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+.cta-panel {
+  margin-top: 1.6rem;
+  border: 1px solid rgba(255,255,255,0.4);
+  border-radius: var(--radius);
+  padding: 0.85rem 1.2rem;
+  text-align: center;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s;
+  color: white;
+  background: transparent;
+  font-family: 'Jost', sans-serif;
+  width: 100%;
+}
+.cta-panel:hover { background: rgba(255,255,255,0.15); }
+
+.disclaimer {
+  font-size: 0.62rem;
+  color: var(--muted);
+  text-align: center;
+  margin-top: 0.8rem;
+  line-height: 1.5;
+}
+
+/* ── PRODUCT INFO BOX ── */
+.info-box {
+  background: var(--cream-dark);
+  border: 1px solid var(--sage-bg);
+  border-radius: var(--radius);
+  padding: 1.2rem 1.4rem;
+  margin-bottom: 1.8rem;
+  display: none;
+}
+.info-box.visible { display: block; }
+.info-box p {
+  font-size: 0.78rem;
+  color: var(--muted);
+  line-height: 1.7;
+}
+.info-box strong { color: var(--mid); font-weight: 400; }
+
+/* ── RANGE FILL ── */
+.range-wrap { position: relative; flex: 1; }
+
+/* animate number */
+@keyframes pop { 0%{transform:scale(1.05)} 100%{transform:scale(1)} }
+.price-main.pop { animation: pop 0.2s ease; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span class="topbar-brand">ENVISION-IT</span>
+  <span class="topbar-sub">Vi bryr oss om bygg – fordi vi bryr oss om folk</span>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Prisindikasjon · 3D-Skanning</div>
+  <h1>Hva koster en<br><em>3D-scan</em> av ditt bygg?</h1>
+  <p class="hero-desc">Juster parameterne under for å se en estimert pris. Alle priser er veiledende og eks. mva.</p>
+</div>
+
+<div class="calc-wrap">
+
+  <!-- LEFT: INPUTS -->
+  <div>
+
+    <!-- Product type -->
+    <div class="card" style="margin-bottom:1.5rem">
+      <div class="card-title">Velg type skanningsproduskt</div>
+
+      <div class="form-group">
+        <div class="product-tabs" id="productTabs">
+          <button class="prod-tab active" data-product="visning" onclick="selectProduct('visning',this)">
+            <span class="tab-name">Skann til visning</span>
+            <span class="tab-note">Digital tvilling</span>
+          </button>
+          <button class="prod-tab" data-product="2d" onclick="selectProduct('2d',this)">
+            <span class="tab-name">Skann til tegning 2D</span>
+            <span class="tab-note">Plantegninger</span>
+          </button>
+          <button class="prod-tab" data-product="3d" onclick="selectProduct('3d',this)">
+            <span class="tab-name">Skann til tegning 3D</span>
+            <span class="tab-note">Full 3D-modell</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Product info -->
+      <div class="info-box visible" id="info-visning">
+        <p><strong>Skann til visning</strong> gir deg en interaktiv digital tvilling av bygget du kan dele og navigere digitalt. Perfekt for markedsføring, oversikt og dokumentasjon av tilstand. Ingen tegningsproduksjon inkludert.</p>
+      </div>
+      <div class="info-box" id="info-2d">
+        <p><strong>Skann til tegning 2D</strong> produserer nøyaktige plantegninger, fasadetegninger og snitt. Leveres i redigerbare filformater (DWG/PDF). Forutsetter minimum 500 m².</p>
+      </div>
+      <div class="info-box" id="info-3d">
+        <p><strong>Skann til tegning 3D</strong> gir deg en fullstendig BIM-modell av eksisterende bygg. Grunnlaget for prosjektering, renovering og «som bygget»-dokumentasjon. Inkluderer 2D-tegninger.</p>
+      </div>
+
+      <!-- Building type (only for 3D) -->
+      <div class="form-group" id="buildingTypeGroup">
+        <label class="form-label">Byggtype</label>
+        <div class="chips" id="buildingChips">
+          <button class="chip active" data-type="enebolig" onclick="selectType('enebolig',this)">Enebolig</button>
+          <button class="chip" data-type="leilighet" onclick="selectType('leilighet',this)">Leilighet</button>
+          <button class="chip" data-type="kontor" onclick="selectType('kontor',this)">Kontor</button>
+          <button class="chip" data-type="industri" onclick="selectType('industri',this)">Industri</button>
+          <button class="chip" data-type="rekkehus" onclick="selectType('rekkehus',this)">Rekkehus</button>
+          <button class="chip" data-type="hytte" onclick="selectType('hytte',this)">Hytte/fritid</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Area & floors -->
+    <div class="card" style="margin-bottom:1.5rem">
+      <div class="card-title">Areal og etasjer</div>
+
+      <div class="form-group">
+        <label class="form-label">Bruksareal per etasje (BRA)</label>
+        <div class="slider-row">
+          <div class="range-wrap">
+            <input type="range" id="kvm" min="30" max="2000" value="150" step="10" oninput="updateCalc()">
+            <div class="slider-labels"><span>30 m²</span><span>2 000 m²</span></div>
+          </div>
+          <div>
+            <div class="slider-val" id="kvmVal">150</div>
+            <div class="slider-unit">m² / etasje</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Antall etasjer</label>
+        <div class="floors-row" id="floors">
+          <button class="floor-btn active" data-floors="1" onclick="selectFloors(1,this)">1</button>
+          <button class="floor-btn" data-floors="2" onclick="selectFloors(2,this)">2</button>
+          <button class="floor-btn" data-floors="3" onclick="selectFloors(3,this)">3</button>
+          <button class="floor-btn" data-floors="4" onclick="selectFloors(4,this)">4</button>
+          <button class="floor-btn" data-floors="5" onclick="selectFloors(5,this)">5+</button>
+        </div>
+        <div style="font-size:0.68rem;color:var(--muted);margin-top:0.5rem">Inkl. kjeller og loft ved innemål</div>
+      </div>
+
+    </div>
+
+    <!-- Options -->
+    <div class="card">
+      <div class="card-title">Tilleggsinformasjon</div>
+      <div class="form-group">
+        <label class="form-label">Konstruksjon og tilgang</label>
+        <div class="check-grid">
+          <label class="check-item" id="chk-skrak" onclick="toggleCheck(this,'skrak')">
+            <div class="check-box"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <span class="check-label">Skråtak / kaldt loft</span>
+          </label>
+          <label class="check-item" id="chk-kjeller" onclick="toggleCheck(this,'kjeller')">
+            <div class="check-box"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <span class="check-label">Kjeller / underetasje</span>
+          </label>
+          <label class="check-item" id="chk-utvendig" onclick="toggleCheck(this,'utvendig')">
+            <div class="check-box"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <span class="check-label">Utvendig fasade inkl.</span>
+          </label>
+          <label class="check-item" id="chk-hastverk" onclick="toggleCheck(this,'hastverk')">
+            <div class="check-box"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <span class="check-label">Hastelevering (&lt;5 dager)</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- RIGHT: PRICE OUTPUT -->
+  <div class="price-panel">
+    <div class="price-eyebrow">Estimert pris</div>
+    <div class="price-main" id="priceMain">
+      <span class="price-currency">kr</span>
+      <span id="priceVal">6&nbsp;000</span>
+    </div>
+    <div class="price-note" id="priceNote">eks. mva · veiledende pris</div>
+
+    <hr class="price-divider">
+
+    <ul class="price-breakdown" id="breakdown">
+      <li><span class="pb-label">Totalt areal</span><span class="pb-val" id="brkArea">150 m²</span></li>
+      <li><span class="pb-label">Pris per m²</span><span class="pb-val" id="brkPerM2">30 kr/m²</span></li>
+      <li><span class="pb-label">Minstepris</span><span class="pb-val" id="brkMin">6 000 kr</span></li>
+      <li><span class="pb-label">Etasjer</span><span class="pb-val" id="brkFloors">1</span></li>
+    </ul>
+
+    <div class="sub-note" id="subNote" style="display:none"></div>
+
+    <button class="cta-panel" onclick="alert('Ta kontakt via kontaktskjemaet på envision-it.no for et uforpliktende tilbud.')">
+      Få uforpliktende tilbud →
+    </button>
+    <div class="disclaimer">Priser er eks. mva og kan variere basert på byggets kompleksitet, tilgjengelighet og geografisk lokasjon. Kontakt oss for nøyaktig tilbud.</div>
+  </div>
+
+</div>
+
+<script>
+// ── STATE ──
+let state = {
+  product: 'visning',
+  buildingType: 'enebolig',
+  kvm: 150,
+  floors: 1,
+  checks: { skrak: false, kjeller: false, utvendig: false, hastverk: false }
+};
+
+// ── PRICING CONFIG ──
+const PRICING = {
+  visning: {
+    minKost: 3000,
+    perM2: 20,
+    bigAreaThreshold: 1500,
+    bigAreaSub: 0.4,
+    minAreaReq: null
+  },
+  '2d': {
+    minKost: null,
+    perM2: 25,
+    minAreaReq: 500
+  },
+  '3d': {
+    enebolig:  { minKost: 6000, perM2: 30 },
+    leilighet: { minKost: 4000, perM2: 30 },
+    rekkehus:  { minKost: 4500, perM2: 30 },
+    hytte:     { minKost: 4000, perM2: 30 },
+    kontor:    { minKost: 4000, perM2: 30 },
+    industri:  { minKost: 4000, perM2: 30 }
+  }
+};
+
+// ── HANDLERS ──
+function selectProduct(p, btn) {
+  state.product = p;
+  document.querySelectorAll('.prod-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.info-box').forEach(b => b.classList.remove('visible'));
+  document.getElementById('info-' + p)?.classList.add('visible');
+  const btg = document.getElementById('buildingTypeGroup');
+  btg.style.display = p === '3d' ? 'block' : 'none';
+  updateCalc();
+}
+
+function selectType(t, btn) {
+  state.buildingType = t;
+  document.querySelectorAll('#buildingChips .chip').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  updateCalc();
+}
+
+function selectFloors(f, btn) {
+  state.floors = f;
+  document.querySelectorAll('#floors .floor-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  updateCalc();
+}
+
+function toggleCheck(el, key) {
+  el.classList.toggle('checked');
+  state.checks[key] = el.classList.contains('checked');
+  updateCalc();
+}
+
+// ── CALC ──
+function fmt(n) {
+  return Math.round(n).toLocaleString('no-NO');
+}
+
+function updateCalc() {
+  const kvm = parseInt(document.getElementById('kvm').value);
+  document.getElementById('kvmVal').textContent = kvm;
+  state.kvm = kvm;
+
+  const totalArea = kvm * state.floors;
+  let price = 0;
+  let perM2 = 0;
+  let minKost = 0;
+  let subText = '';
+
+  if (state.product === 'visning') {
+    const p = PRICING.visning;
+    perM2 = p.perM2;
+    minKost = p.minKost;
+    price = Math.max(minKost, totalArea * perM2);
+    if (totalArea > p.bigAreaThreshold) {
+      subText = `For bygg over ${p.bigAreaThreshold} m² tilbys abonnementsmodell fra ${p.bigAreaSub} kr/m²/mnd (ca. ${fmt(totalArea * p.bigAreaSub)} kr/mnd).`;
+    }
+    document.getElementById('brkMin').parentElement.style.display = 'flex';
+    document.getElementById('brkMin').textContent = fmt(minKost) + ' kr';
+
+  } else if (state.product === '2d') {
+    const p = PRICING['2d'];
+    perM2 = p.perM2;
+    minKost = 0;
+    const effArea = Math.max(totalArea, p.minAreaReq);
+    price = effArea * perM2;
+    if (totalArea < p.minAreaReq) {
+      subText = `Minsteareal for 2D-tegning er ${p.minAreaReq} m². Prisen er beregnet på minimum ${p.minAreaReq} m².`;
+    }
+    document.getElementById('brkMin').parentElement.style.display = 'none';
+
+  } else if (state.product === '3d') {
+    const cfg = PRICING['3d'][state.buildingType] || PRICING['3d'].enebolig;
+    perM2 = cfg.perM2;
+    minKost = cfg.minKost;
+    price = Math.max(minKost, totalArea * perM2);
+    document.getElementById('brkMin').parentElement.style.display = 'flex';
+    document.getElementById('brkMin').textContent = fmt(minKost) + ' kr';
+  }
+
+  // Tillegg
+  if (state.checks.skrak)    price += 1500;
+  if (state.checks.kjeller)  price += totalArea * 0.5 * perM2 * 0.5;
+  if (state.checks.utvendig) price += 2000;
+  if (state.checks.hastverk) price *= 1.25;
+
+  // Update DOM
+  const priceEl = document.getElementById('priceVal');
+  priceEl.textContent = fmt(price);
+
+  const mainEl = document.getElementById('priceMain');
+  mainEl.classList.remove('pop');
+  void mainEl.offsetWidth;
+  mainEl.classList.add('pop');
+
+  document.getElementById('brkArea').textContent = totalArea + ' m²';
+  document.getElementById('brkPerM2').textContent = perM2 + ' kr/m²';
+  document.getElementById('brkFloors').textContent = state.floors + (state.floors >= 5 ? '+' : '');
+
+  const subEl = document.getElementById('subNote');
+  if (subText) { subEl.textContent = subText; subEl.style.display = 'block'; }
+  else { subEl.style.display = 'none'; }
+}
+
+// Init
+document.getElementById('buildingTypeGroup').style.display = 'none';
+document.getElementById('kvm').addEventListener('input', updateCalc);
+updateCalc();
+</script>
+</body>
+</html>

@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kontakt oss — Envision-IT</title>
+  <meta name="description" content="Ta kontakt med Envision-IT. Vi lytter, og vi gir deg ærlige svar. Fyll ut skjemaet – vi tar kontakt innen én virkedag.">
+  <link rel="canonical" href="https://envision-it.no/kontakt">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://envision-it.no/kontakt">
+  <meta property="og:title" content="Kontakt oss — Envision-IT">
+  <meta property="og:description" content="Ta kontakt med Envision-IT. Vi lytter, og vi gir deg ærlige svar. Fyll ut skjemaet – vi tar kontakt innen én virkedag.">
+  <meta property="og:image" content="https://envision-it.no/assets/og-image.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="css/global.css">
+  <style>
+    body { padding-top: var(--nav-h); }
+
+    /* ── HERO ─────────────────────────────────────────────────── */
+    .kontakt-hero {
+      background: var(--cream-dark);
+      padding-top: var(--nav-h);
+      padding-bottom: 0;
+      text-align: center;
+      padding-inline: var(--gutter);
+    }
+
+    .kontakt-hero__inner {
+      max-width: 680px;
+      margin-inline: auto;
+      padding-top: 4rem;
+      padding-bottom: 3rem;
+    }
+
+    .kontakt-hero__intro {
+      margin-top: 1.25rem;
+      font-size: 1rem;
+      color: var(--mid);
+      line-height: 1.8;
+    }
+
+    /* ── MAIN CONTENT ─────────────────────────────────────────── */
+    .kontakt-main {
+      background: var(--cream);
+      padding: 4rem 0;
+    }
+
+    .kontakt-split {
+      display: grid;
+      grid-template-columns: 55fr 45fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .kontakt-split {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+    }
+
+    /* ── FORM CARD ─────────────────────────────────────────────── */
+    .kontakt-form-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 2.5rem;
+      box-shadow: 0 4px 24px rgba(30,31,26,0.06);
+    }
+
+    .kontakt-form-card h3 {
+      margin-bottom: 1.75rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    @media (max-width: 480px) {
+      .form-row { grid-template-columns: 1fr; }
+    }
+
+    .form-group { margin-bottom: 1.5rem; }
+    .form-group:last-of-type { margin-bottom: 0; }
+
+    .form-label {
+      display: block;
+      font-size: 0.68rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--sage-light);
+      margin-bottom: 0.6rem;
+    }
+
+    .form-control {
+      width: 100%;
+      background: var(--white);
+      border: 1px solid var(--sage-bg);
+      border-radius: var(--radius);
+      padding: 0.75rem 1rem;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: var(--dark);
+      transition: border-color var(--transition);
+      outline: none;
+    }
+
+    .form-control:focus { border-color: var(--sage); }
+    .form-control.error { border-color: #c0392b; }
+
+    textarea.form-control { resize: vertical; min-height: 120px; }
+
+    .radio-group {
+      display: flex;
+      flex-direction: row;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .radio-group--col {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .radio-label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 300;
+      color: var(--mid);
+      cursor: pointer;
+    }
+
+    .radio-label input[type="radio"] {
+      accent-color: var(--sage);
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .btn-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 2rem;
+      gap: 1rem;
+    }
+
+    /* Step visibility */
+    #step2 { display: none; }
+    #step-thankyou { display: none; }
+    #phone-group { display: none; }
+
+    /* Thank-you state */
+    .thankyou-inner {
+      text-align: center;
+      padding: 3rem 1rem;
+    }
+
+    .thankyou-inner svg {
+      margin: 0 auto 1.5rem;
+    }
+
+    .thankyou-inner h3 {
+      margin-bottom: 1rem;
+    }
+
+    .thankyou-inner p {
+      font-size: 0.95rem;
+      color: var(--mid);
+      margin-bottom: 2rem;
+    }
+
+    /* ── RIGHT COLUMN ─────────────────────────────────────────── */
+    .kontakt-right {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    /* Illustration */
+    .kontakt-illustration {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Timeline */
+    .kontakt-timeline h4 {
+      font-family: 'Jost', sans-serif;
+      font-weight: 400;
+      font-size: 0.68rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--sage-light);
+      margin-bottom: 1.5rem;
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 3px;
+      top: 8px;
+      bottom: 8px;
+      width: 1px;
+      background: var(--sage-pale);
+    }
+
+    .timeline__step {
+      position: relative;
+      margin-bottom: 1.75rem;
+    }
+
+    .timeline__step:last-child { margin-bottom: 0; }
+
+    .timeline__step::before {
+      content: '';
+      position: absolute;
+      left: -2rem;
+      top: 6px;
+      width: 8px;
+      height: 8px;
+      background: var(--sage);
+      border-radius: 50%;
+    }
+
+    .timeline__step-title {
+      font-family: 'Jost', sans-serif;
+      font-weight: 400;
+      font-size: 0.9rem;
+      color: var(--dark);
+      margin-bottom: 0.25rem;
+    }
+
+    .timeline__step-desc {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* ── CONTACT DETAILS ─────────────────────────────────────── */
+    .kontakt-details {
+      background: var(--cream-dark);
+      padding: 3rem 0;
+    }
+
+    .kontakt-details__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    @media (max-width: 720px) {
+      .kontakt-details__grid { grid-template-columns: 1fr; }
+    }
+
+    .kontakt-info-box {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .kontakt-info-box__icon {
+      width: 44px;
+      height: 44px;
+      background: var(--cream);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--sage);
+      flex-shrink: 0;
+    }
+
+    .kontakt-info-box__title {
+      font-family: 'Jost', sans-serif;
+      font-weight: 400;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--sage-light);
+    }
+
+    .kontakt-info-box__content {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .kontakt-info-box__content a {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 300;
+      color: var(--dark);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+
+    .kontakt-info-box__content a:hover { color: var(--sage); }
+
+    .kontakt-info-box__content p {
+      font-size: 0.85rem;
+      color: var(--mid);
+      margin: 0;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Hopp til innhold</a>
+
+  <!-- ═══ NAV ═══════════════════════════════════════════════════ -->
+  <nav class="site-nav" role="navigation" aria-label="Hovedmeny">
+    <div class="site-nav__inner">
+      <a href="/" class="site-nav__brand" aria-label="Envision-IT – hjem">
+        <span class="site-nav__brand-name">ENVISION-IT</span>
+        <span class="site-nav__brand-tagline">Vi bryr oss om bygg</span>
+      </a>
+      <div class="site-nav__links" role="list">
+        <div class="site-nav__dropdown" role="listitem">
+          <button class="site-nav__link site-nav__link--dropdown" aria-haspopup="true" aria-expanded="false">
+            Tjenester
+            <svg width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true">
+              <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div class="site-nav__dropdown-panel" role="menu">
+            <a href="/mitt-hjem.html" class="site-nav__dropdown-item" data-nav-link role="menuitem">
+              <span class="site-nav__dropdown-title">Mitt Hjem</span>
+              <span class="site-nav__dropdown-sub">Privatpersoner</span>
+            </a>
+            <a href="/mitt-boliglag.html" class="site-nav__dropdown-item" data-nav-link role="menuitem">
+              <span class="site-nav__dropdown-title">Mitt Boliglag</span>
+              <span class="site-nav__dropdown-sub">Borettslag og sameier</span>
+            </a>
+            <a href="/mitt-bygg.html" class="site-nav__dropdown-item" data-nav-link role="menuitem">
+              <span class="site-nav__dropdown-title">Mitt Bygg</span>
+              <span class="site-nav__dropdown-sub">Bedrifter og offentlig</span>
+            </a>
+            <hr class="site-nav__dropdown-divider">
+            <a href="/3d-scan.html" class="site-nav__dropdown-item" data-nav-link role="menuitem">
+              <span class="site-nav__dropdown-title">3D-Scan</span>
+              <span class="site-nav__dropdown-sub">NAVVIS VLX – digital tvilling</span>
+            </a>
+            <a href="/priser.html" class="site-nav__dropdown-item" data-nav-link role="menuitem">
+              <span class="site-nav__dropdown-title">Priser</span>
+              <span class="site-nav__dropdown-sub">Kalkulator og prisliste</span>
+            </a>
+          </div>
+        </div>
+        <a href="/om-oss.html" class="site-nav__link" data-nav-link role="listitem">Om oss</a>
+        <a href="/kontakt.html" class="site-nav__link site-nav__link--cta btn-outline nav-active" data-nav-link role="listitem">Kontakt oss</a>
+      </div>
+      <button class="site-nav__hamburger" id="nav-toggle" aria-label="Åpne meny" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile drawer -->
+  <div class="site-nav__drawer" id="nav-drawer" role="dialog" aria-modal="true" aria-label="Mobilmeny">
+    <div class="site-nav__drawer-inner">
+      <div class="site-nav__drawer-header">
+        <span class="site-nav__brand-name" style="color:var(--white)">ENVISION-IT</span>
+        <button class="site-nav__drawer-close" id="nav-drawer-close" aria-label="Lukk meny">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M4 4l12 12M16 4L4 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+      <nav class="site-nav__drawer-links">
+        <span class="site-nav__drawer-section">Tjenester</span>
+        <a href="/mitt-hjem.html" class="site-nav__drawer-link" data-nav-link>Mitt Hjem</a>
+        <a href="/mitt-boliglag.html" class="site-nav__drawer-link" data-nav-link>Mitt Boliglag</a>
+        <a href="/mitt-bygg.html" class="site-nav__drawer-link" data-nav-link>Mitt Bygg</a>
+        <a href="/3d-scan.html" class="site-nav__drawer-link" data-nav-link>3D-Scan</a>
+        <a href="/priser.html" class="site-nav__drawer-link" data-nav-link>Priser</a>
+        <span class="site-nav__drawer-section" style="margin-top:1rem">Selskapet</span>
+        <a href="/om-oss.html" class="site-nav__drawer-link" data-nav-link>Om oss</a>
+        <a href="/kontakt.html" class="site-nav__drawer-link site-nav__drawer-link--cta nav-active" data-nav-link>Kontakt oss</a>
+      </nav>
+      <div class="site-nav__drawer-contact">
+        <a href="tel:97107972">971 07 972</a>
+        <a href="mailto:hei@envision-it.no">hei@envision-it.no</a>
+      </div>
+    </div>
+  </div>
+
+  <style>
+  /* ── NAV STYLES ─────────────────────────────────────────────── */
+  .site-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; background: var(--sage); transition: box-shadow 0.3s ease; }
+  .site-nav.scrolled { box-shadow: 0 4px 24px rgba(30,31,26,0.18); }
+  .site-nav__inner { max-width: var(--max-w); margin-inline: auto; padding-inline: var(--gutter); height: var(--nav-h); display: flex; align-items: center; justify-content: space-between; }
+  .site-nav__brand { display: flex; flex-direction: column; gap: 0.1rem; text-decoration: none; }
+  .site-nav__brand-name { font-family: 'Jost', sans-serif; font-weight: 500; font-size: 0.82rem; letter-spacing: 0.2em; color: var(--white); }
+  .site-nav__brand-tagline { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.7rem; color: rgba(255,255,255,0.62); letter-spacing: 0.04em; }
+  .site-nav__links { display: flex; align-items: center; gap: 0.25rem; }
+  .site-nav__link { background: none; border: none; font-family: 'Jost', sans-serif; font-size: 0.78rem; font-weight: 300; letter-spacing: 0.08em; color: rgba(255,255,255,0.82); padding: 0.5rem 0.85rem; border-radius: var(--radius); transition: color var(--transition), background var(--transition); cursor: pointer; text-decoration: none; display: flex; align-items: center; gap: 0.35rem; }
+  .site-nav__link:hover { color: var(--white); background: rgba(255,255,255,0.1); }
+  .site-nav__link.nav-active { color: var(--white); }
+  .site-nav__link--cta { border-color: rgba(255,255,255,0.45) !important; color: var(--white) !important; margin-left: 0.5rem; }
+  .site-nav__link--cta:hover { background: rgba(255,255,255,0.15) !important; }
+  .site-nav__dropdown { position: relative; }
+  .site-nav__link--dropdown svg { transition: transform 0.2s ease; }
+  .site-nav__dropdown:hover .site-nav__link--dropdown svg,
+  .site-nav__dropdown:focus-within .site-nav__link--dropdown svg { transform: rotate(180deg); }
+  .site-nav__dropdown-panel { position: absolute; top: calc(100% + 0.75rem); left: 50%; transform: translateX(-50%); background: var(--white); border: 1px solid var(--sage-bg); border-radius: var(--radius-lg); padding: 0.75rem; min-width: 240px; box-shadow: 0 12px 40px rgba(30,31,26,0.12); opacity: 0; pointer-events: none; transform: translateX(-50%) translateY(8px); transition: opacity 0.2s ease, transform 0.2s ease; }
+  .site-nav__dropdown:hover .site-nav__dropdown-panel,
+  .site-nav__dropdown:focus-within .site-nav__dropdown-panel { opacity: 1; pointer-events: all; transform: translateX(-50%) translateY(0); }
+  .site-nav__dropdown-item { display: flex; flex-direction: column; gap: 0.15rem; padding: 0.7rem 0.9rem; border-radius: var(--radius); text-decoration: none; transition: background var(--transition); }
+  .site-nav__dropdown-item:hover { background: var(--cream); }
+  .site-nav__dropdown-item.nav-active { background: var(--cream-dark); }
+  .site-nav__dropdown-title { font-size: 0.82rem; font-weight: 400; color: var(--dark); }
+  .site-nav__dropdown-sub { font-size: 0.68rem; color: var(--muted); }
+  .site-nav__dropdown-divider { border: none; border-top: 1px solid var(--sage-bg); margin: 0.4rem 0; }
+  .site-nav__hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; padding: 0.5rem; cursor: pointer; }
+  .site-nav__hamburger span { display: block; width: 22px; height: 1.5px; background: var(--white); border-radius: 2px; transition: all 0.25s ease; }
+  .site-nav__drawer { position: fixed; inset: 0; z-index: 300; background: rgba(30,31,26,0.55); backdrop-filter: blur(4px); opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+  .site-nav__drawer.open { opacity: 1; pointer-events: all; }
+  .site-nav__drawer-inner { position: absolute; top: 0; right: 0; bottom: 0; width: min(320px, 90vw); background: var(--dark); padding: 0; display: flex; flex-direction: column; transform: translateX(100%); transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1); }
+  .site-nav__drawer.open .site-nav__drawer-inner { transform: translateX(0); }
+  .site-nav__drawer-header { display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .site-nav__drawer-close { background: none; border: none; color: rgba(255,255,255,0.6); cursor: pointer; padding: 0.25rem; transition: color var(--transition); }
+  .site-nav__drawer-close:hover { color: var(--white); }
+  .site-nav__drawer-links { flex: 1; overflow-y: auto; padding: 1.25rem 1.5rem; display: flex; flex-direction: column; gap: 0.15rem; }
+  .site-nav__drawer-section { font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 0.4rem; display: block; }
+  .site-nav__drawer-link { font-size: 0.95rem; color: rgba(255,255,255,0.78); text-decoration: none; padding: 0.65rem 0.75rem; border-radius: var(--radius); transition: background var(--transition), color var(--transition); }
+  .site-nav__drawer-link:hover,
+  .site-nav__drawer-link.nav-active { background: rgba(255,255,255,0.08); color: var(--white); }
+  .site-nav__drawer-link--cta { margin-top: 1rem; border: 1px solid rgba(255,255,255,0.3); text-align: center; }
+  .site-nav__drawer-contact { padding: 1.25rem 1.5rem; border-top: 1px solid rgba(255,255,255,0.08); display: flex; flex-direction: column; gap: 0.35rem; }
+  .site-nav__drawer-contact a { font-size: 0.78rem; color: rgba(255,255,255,0.5); text-decoration: none; transition: color var(--transition); }
+  .site-nav__drawer-contact a:hover { color: var(--white); }
+  @media (max-width: 860px) {
+    .site-nav__links { display: none; }
+    .site-nav__hamburger { display: flex; }
+  }
+  </style>
+
+  <!-- ═══ HERO ═══════════════════════════════════════════════════ -->
+  <section id="main-content" class="kontakt-hero">
+    <div class="kontakt-hero__inner reveal">
+      <span class="eyebrow">Kontakt</span>
+      <h1><em>La oss ta en prat</em></h1>
+      <p class="kontakt-hero__intro reveal reveal-delay-1">Vi lytter, og vi gir deg ærlige svar. Fyll ut skjemaet under – vi tar kontakt innen én virkedag.</p>
+    </div>
+  </section>
+
+  <!-- ═══ MAIN CONTENT ══════════════════════════════════════════ -->
+  <section class="kontakt-main">
+    <div class="container">
+      <div class="kontakt-split">
+
+        <!-- LEFT: Two-step form -->
+        <div class="kontakt-form-card reveal">
+          <form id="kontakt-form" novalidate>
+
+            <!-- Step 1 -->
+            <div id="step1">
+              <h3>Fortell oss om deg</h3>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="fornavn">Fornavn *</label>
+                  <input class="form-control" type="text" id="fornavn" name="fornavn" required autocomplete="given-name">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="etternavn">Etternavn *</label>
+                  <input class="form-control" type="text" id="etternavn" name="etternavn" required autocomplete="family-name">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Ønsker å bli kontaktet på *</label>
+                <div class="radio-group" role="radiogroup">
+                  <label class="radio-label">
+                    <input type="radio" name="contact-method" value="telefon"> Telefon
+                  </label>
+                  <label class="radio-label">
+                    <input type="radio" name="contact-method" value="epost"> E-post
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group" id="phone-group">
+                <label class="form-label" for="telefon">Telefonnummer</label>
+                <input class="form-control" type="tel" id="telefon" name="telefon" placeholder="+47" autocomplete="tel">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="epost">E-postadresse *</label>
+                <input class="form-control" type="email" id="epost" name="epost" required autocomplete="email">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Jeg henvender meg som *</label>
+                <div class="radio-group radio-group--col" role="radiogroup">
+                  <label class="radio-label">
+                    <input type="radio" name="customer-type" value="privat"> Privatperson
+                  </label>
+                  <label class="radio-label">
+                    <input type="radio" name="customer-type" value="bedrift"> Bedrift eller offentlig virksomhet
+                  </label>
+                  <label class="radio-label">
+                    <input type="radio" name="customer-type" value="boliglag"> Representant for borettslag, sameie eller aksjelag
+                  </label>
+                </div>
+              </div>
+
+              <button type="button" id="btn-next" class="btn-solid" style="width:100%; justify-content:center; margin-top:1rem;">Neste →</button>
+            </div>
+
+            <!-- Step 2 -->
+            <div id="step2">
+              <h3>Fortell oss hva du trenger</h3>
+
+              <div class="form-group">
+                <label class="form-label" for="henvendelse">Hva gjelder henvendelsen? *</label>
+                <textarea class="form-control" id="henvendelse" name="henvendelse" rows="5" required></textarea>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="tidspunkt">Hva er det beste tidspunktet å nå deg?</label>
+                <input class="form-control" type="text" id="tidspunkt" name="tidspunkt" placeholder="f.eks. hverdager mellom 09–15">
+              </div>
+
+              <div class="btn-row">
+                <button type="button" id="btn-back" class="btn-outline">← Tilbake</button>
+                <button type="submit" id="btn-send" class="btn-solid">Send →</button>
+              </div>
+            </div>
+
+            <!-- Thank-you state -->
+            <div id="step-thankyou">
+              <div class="thankyou-inner">
+                <!-- Checkmark SVG -->
+                <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <circle cx="32" cy="32" r="32" fill="#4caf50"/>
+                  <path d="M20 33l9 9 16-18" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <h3>Takk for din henvendelse!</h3>
+                <p>Vi har mottatt meldingen din og tar kontakt innen én virkedag – på den måten du ønsket.</p>
+                <a class="btn-outline" href="/">Tilbake til forsiden</a>
+              </div>
+            </div>
+
+          </form>
+        </div>
+
+        <!-- RIGHT: Illustration + Timeline -->
+        <div class="kontakt-right reveal reveal-delay-1">
+
+          <!-- Isometric cube SVG illustration -->
+          <div class="kontakt-illustration">
+            <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Isometrisk kube illustrasjon" role="img">
+              <!-- Top face (sage-pale #c8ccbf) -->
+              <polygon
+                points="100,30 160,65 100,100 40,65"
+                fill="#c8ccbf"
+                stroke="#b5baaf"
+                stroke-width="1"
+              />
+              <!-- Left face (sage #6b7562) -->
+              <polygon
+                points="40,65 100,100 100,160 40,125"
+                fill="#6b7562"
+                stroke="#5a6352"
+                stroke-width="1"
+              />
+              <!-- Right face (sage-light #8d9680) -->
+              <polygon
+                points="100,100 160,65 160,125 100,160"
+                fill="#8d9680"
+                stroke="#7b856e"
+                stroke-width="1"
+              />
+            </svg>
+          </div>
+
+          <!-- Timeline -->
+          <div class="kontakt-timeline">
+            <h4>Hva skjer videre?</h4>
+            <div class="timeline">
+              <div class="timeline__step">
+                <p class="timeline__step-title">Vi leser meldingen din</p>
+                <p class="timeline__step-desc">innen én virkedag fra du sender skjemaet</p>
+              </div>
+              <div class="timeline__step">
+                <p class="timeline__step-title">Vi tar kontakt</p>
+                <p class="timeline__step-desc">på den måten du ønsket – telefon eller e-post</p>
+              </div>
+              <div class="timeline__step">
+                <p class="timeline__step-title">Vi finner riktig løsning</p>
+                <p class="timeline__step-desc">sammen med deg, uten mas og uten forpliktelse</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CONTACT DETAILS ═══════════════════════════════════════ -->
+  <section class="kontakt-details">
+    <div class="container">
+      <div class="kontakt-details__grid reveal">
+
+        <!-- Telefon -->
+        <div class="kontakt-info-box">
+          <div class="kontakt-info-box__icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.01 2.18 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/>
+            </svg>
+          </div>
+          <span class="kontakt-info-box__title">Telefon</span>
+          <div class="kontakt-info-box__content">
+            <a href="tel:97107972">971 07 972</a>
+          </div>
+        </div>
+
+        <!-- E-post -->
+        <div class="kontakt-info-box reveal reveal-delay-1">
+          <div class="kontakt-info-box__icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+          </div>
+          <span class="kontakt-info-box__title">E-post</span>
+          <div class="kontakt-info-box__content">
+            <a href="mailto:hei@envision-it.no">hei@envision-it.no</a>
+          </div>
+        </div>
+
+        <!-- Adresser -->
+        <div class="kontakt-info-box reveal reveal-delay-2">
+          <div class="kontakt-info-box__icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+          </div>
+          <span class="kontakt-info-box__title">Adresser</span>
+          <div class="kontakt-info-box__content">
+            <p>Oslo: Gjerdrums vei 5, 0484 Oslo</p>
+            <p>Sogndal: Kvernhusbakken 7, 6854 Kaupanger</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ════════════════════════════════════════════════ -->
+  <footer class="site-footer">
+    <div class="site-footer__inner container">
+      <div class="site-footer__grid">
+        <div class="site-footer__col site-footer__col--brand">
+          <a href="/" class="site-footer__brand">
+            <span class="site-footer__brand-name">ENVISION-IT</span>
+            <span class="site-footer__brand-tagline">Vi bryr oss om bygg – fordi vi bryr oss om folk</span>
+          </a>
+          <nav class="site-footer__nav" aria-label="Sidefot navigasjon">
+            <a href="/mitt-hjem.html">Mitt Hjem</a>
+            <a href="/mitt-boliglag.html">Mitt Boliglag</a>
+            <a href="/mitt-bygg.html">Mitt Bygg</a>
+            <a href="/3d-scan.html">3D-Scan</a>
+            <a href="/priser.html">Priser</a>
+            <a href="/om-oss.html">Om oss</a>
+            <a href="/kontakt.html">Kontakt</a>
+          </nav>
+        </div>
+        <div class="site-footer__col">
+          <h4 class="site-footer__col-title">Selskapet</h4>
+          <ul class="site-footer__list">
+            <li>Envision-IT AS</li>
+            <li>Org.nr. 826 455 152</li>
+            <li><a href="tel:97107972">971 07 972</a></li>
+            <li><a href="mailto:hei@envision-it.no">hei@envision-it.no</a></li>
+          </ul>
+        </div>
+        <div class="site-footer__col">
+          <h4 class="site-footer__col-title">Oslo</h4>
+          <address class="site-footer__address">Gjerdrums vei 5<br>0484 Oslo</address>
+        </div>
+        <div class="site-footer__col">
+          <h4 class="site-footer__col-title">Sogndal</h4>
+          <address class="site-footer__address">Kvernhusbakken 7<br>6854 Kaupanger</address>
+        </div>
+      </div>
+      <div class="site-footer__bottom">
+        <span>© <span data-year></span> Envision-IT AS</span>
+        <span class="site-footer__bottom-tagline">Alle priser eks. mva.</span>
+      </div>
+    </div>
+  </footer>
+
+  <style>
+  /* ── FOOTER STYLES ──────────────────────────────────────────── */
+  .site-footer { background: var(--sage); color: rgba(255,255,255,0.82); padding-top: clamp(3rem, 6vw, 5rem); }
+  .site-footer__grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,0.12); }
+  .site-footer__brand { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.75rem; text-decoration: none; }
+  .site-footer__brand-name { font-family: 'Jost', sans-serif; font-weight: 500; font-size: 0.85rem; letter-spacing: 0.22em; color: var(--white); }
+  .site-footer__brand-tagline { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.88rem; color: rgba(255,255,255,0.55); line-height: 1.4; max-width: 240px; }
+  .site-footer__nav { display: flex; flex-direction: column; gap: 0.4rem; }
+  .site-footer__nav a { font-size: 0.8rem; color: rgba(255,255,255,0.6); text-decoration: none; transition: color var(--transition); }
+  .site-footer__nav a:hover { color: var(--white); }
+  .site-footer__col-title { font-family: 'Jost', sans-serif; font-weight: 400; font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 1rem; }
+  .site-footer__list { display: flex; flex-direction: column; gap: 0.45rem; }
+  .site-footer__list li { font-size: 0.82rem; color: rgba(255,255,255,0.7); }
+  .site-footer__list a { color: rgba(255,255,255,0.7); text-decoration: none; transition: color var(--transition); }
+  .site-footer__list a:hover { color: var(--white); }
+  .site-footer__address { font-style: normal; font-size: 0.82rem; color: rgba(255,255,255,0.7); line-height: 1.75; }
+  .site-footer__bottom { display: flex; align-items: center; justify-content: space-between; padding-block: 1.25rem; font-size: 0.72rem; color: rgba(255,255,255,0.38); }
+  .site-footer__bottom-tagline { font-style: italic; }
+  @media (max-width: 900px) {
+    .site-footer__grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .site-footer__col--brand { grid-column: 1 / -1; }
+  }
+  @media (max-width: 480px) {
+    .site-footer__grid { grid-template-columns: 1fr; }
+    .site-footer__bottom { flex-direction: column; gap: 0.4rem; text-align: center; }
+  }
+  </style>
+
+  <!-- ═══ FORM JAVASCRIPT ════════════════════════════════════════ -->
+  <script>
+    (function () {
+      var form      = document.getElementById('kontakt-form');
+      var step1     = document.getElementById('step1');
+      var step2     = document.getElementById('step2');
+      var thankyou  = document.getElementById('step-thankyou');
+      var btnNext   = document.getElementById('btn-next');
+      var btnBack   = document.getElementById('btn-back');
+      var phoneGroup = document.getElementById('phone-group');
+
+      // Show/hide phone field based on contact method selection
+      var contactRadios = document.querySelectorAll('input[name="contact-method"]');
+      contactRadios.forEach(function (radio) {
+        radio.addEventListener('change', function () {
+          if (this.value === 'telefon') {
+            phoneGroup.style.display = 'block';
+          } else {
+            phoneGroup.style.display = 'none';
+          }
+        });
+      });
+
+      // Step 1 validation helper
+      function validateStep1() {
+        var valid = true;
+
+        // Required text/email fields
+        var requiredFields = [
+          document.getElementById('fornavn'),
+          document.getElementById('etternavn'),
+          document.getElementById('epost')
+        ];
+        requiredFields.forEach(function (field) {
+          field.classList.remove('error');
+          if (!field.value.trim()) {
+            field.classList.add('error');
+            valid = false;
+          }
+        });
+
+        // Email format check
+        var epost = document.getElementById('epost');
+        if (epost.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(epost.value.trim())) {
+          epost.classList.add('error');
+          valid = false;
+        }
+
+        // Contact method radio
+        var contactMethod = document.querySelector('input[name="contact-method"]:checked');
+        if (!contactMethod) {
+          valid = false;
+          // Highlight the radio group label
+          var radios = document.querySelectorAll('input[name="contact-method"]');
+          radios.forEach(function (r) { r.style.outline = '2px solid #c0392b'; });
+        } else {
+          var radios = document.querySelectorAll('input[name="contact-method"]');
+          radios.forEach(function (r) { r.style.outline = ''; });
+        }
+
+        // Customer type radio
+        var customerType = document.querySelector('input[name="customer-type"]:checked');
+        if (!customerType) {
+          valid = false;
+          var typeRadios = document.querySelectorAll('input[name="customer-type"]');
+          typeRadios.forEach(function (r) { r.style.outline = '2px solid #c0392b'; });
+        } else {
+          var typeRadios = document.querySelectorAll('input[name="customer-type"]');
+          typeRadios.forEach(function (r) { r.style.outline = ''; });
+        }
+
+        return valid;
+      }
+
+      // Next button
+      btnNext.addEventListener('click', function () {
+        if (validateStep1()) {
+          step1.style.display = 'none';
+          step2.style.display = 'block';
+          form.parentElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+
+      // Back button
+      btnBack.addEventListener('click', function () {
+        step2.style.display = 'none';
+        step1.style.display = 'block';
+      });
+
+      // Form submit
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        // Validate step 2 required field
+        var henvendelse = document.getElementById('henvendelse');
+        henvendelse.classList.remove('error');
+        if (!henvendelse.value.trim()) {
+          henvendelse.classList.add('error');
+          return;
+        }
+
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(Object.fromEntries(new FormData(form)))
+        });
+        if (res.ok) {
+          step2.style.display = 'none';
+          thankyou.style.display = 'block';
+          form.parentElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+          alert('Noe gikk galt. Prøv igjen eller send e-post til hei@envision-it.no');
+        }
+      });
+
+      // Remove error on input
+      form.querySelectorAll('.form-control').forEach(function (el) {
+        el.addEventListener('input', function () {
+          this.classList.remove('error');
+        });
+      });
+    })();
+  </script>
+
+  <script src="js/global.js"></script>
+</body>
+</html>

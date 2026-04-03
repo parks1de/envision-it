@@ -222,14 +222,16 @@ body { padding-top: var(--nav-h); }
 .morph-img-cloud.active { animation: cloudGlow 3s ease infinite; }
 
 @media (max-width: 860px) {
+  .morph-section { height: 250vh; }
   .morph-sticky {
     grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr;
+    grid-template-rows: 240px 1fr;
+    height: 100dvh;
+    overflow: hidden;
   }
   .morph-image-side {
     display: flex;
-    height: 35vw;
-    max-height: 240px;
+    height: 240px;
     order: -1;
     flex-shrink: 0;
   }

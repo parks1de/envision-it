@@ -37,8 +37,10 @@ body { padding-top: var(--nav-h); }
 /* ── MORPH / SCROLL SECTION ──────────────────────────────────── */
 .morph-section {
   position: relative;
+  z-index: 0;
   height: 400vh;
   background: var(--cream-dark);
+  touch-action: pan-y;
 }
 
 .morph-sticky {

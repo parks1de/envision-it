@@ -70,7 +70,28 @@ body { padding-top: var(--nav-h); }
   display: flex;
   justify-content: center;
   margin-bottom: 3rem;
+  overflow: visible;
 }
+.mp-hero__cards svg { overflow: visible; }
+
+/* ── CONTACT STRIP ───────────────────────────────────────────── */
+.contact-strip {
+  background: var(--dark);
+  padding-block: clamp(3rem, 5vw, 4.5rem);
+  text-align: center;
+}
+.contact-strip h2 { color: var(--white); margin-bottom: 0.75rem; }
+.contact-strip p  { color: rgba(255,255,255,0.6); margin-bottom: 2rem; }
+.contact-strip__methods {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+.contact-strip__method { font-size: 0.82rem; color: rgba(255,255,255,0.5); }
+.contact-strip__method a { color: rgba(255,255,255,0.8); text-decoration: none; transition: color var(--transition); }
+.contact-strip__method a:hover { color: var(--white); }
 
 /* ── PILLARS ─────────────────────────────────────────────────── */
 .mp-pillars {

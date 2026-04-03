@@ -90,7 +90,10 @@ body {
   .calc-wrap > div:first-child {
     display: flex;
     flex-direction: column;
+    gap: 1.5rem;
   }
+  /* strip inline margin-bottom so gap is the single source of spacing */
+  .calc-wrap > div:first-child > .card { margin-bottom: 0 !important; }
   .calc-wrap > div:first-child > .card:nth-child(1) { order: 1; }
   .calc-wrap > div:first-child > .card:nth-child(2) { order: 3; }
   .calc-wrap > div:first-child > .card:nth-child(3) { order: 2; }

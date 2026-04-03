@@ -52,12 +52,14 @@ body { padding-top: var(--nav-h); }
   overflow: hidden;
   max-width: 1200px;
   margin-inline: auto;
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
 .morph-text {
   display: flex;
   align-items: center;
-  padding: 5rem 4rem 5rem 5rem;
+  padding: 5rem 2rem 5rem 3rem;
   position: relative;
   z-index: 2;
 }
@@ -433,8 +435,36 @@ body { padding-top: var(--nav-h); }
 .surcharge-item__value { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--dark); }
 
 @media (max-width: 640px) {
-  .pricing-table { font-size: 0.78rem; }
-  .pricing-table th, .pricing-table td { padding: 0.75rem 0.5rem; }
+  /* Discard table layout — stack each product as a card */
+  .pricing-table,
+  .pricing-table thead,
+  .pricing-table tbody,
+  .pricing-table tr,
+  .pricing-table td { display: block; width: 100%; }
+  .pricing-table thead { display: none; }
+  .pricing-table tr {
+    border: 1px solid var(--sage-bg);
+    border-radius: var(--radius);
+    padding: 1rem 1.25rem;
+    margin-bottom: 0.75rem;
+    background: var(--white);
+  }
+  .pricing-table tr:hover td { background: transparent; }
+  .pricing-table td {
+    border: none;
+    padding: 0.25rem 0;
+    white-space: normal !important;
+  }
+  .pricing-table td:first-child {
+    font-size: 1.05rem;
+    border-bottom: 1px solid var(--sage-bg);
+    padding-bottom: 0.6rem;
+    margin-bottom: 0.4rem;
+  }
+  .pricing-table td.price-cell {
+    text-align: left;
+    font-size: 1rem;
+  }
   .surcharges { grid-template-columns: 1fr; }
 }
 
@@ -479,7 +509,7 @@ body { padding-top: var(--nav-h); }
   margin-top: 0.3rem;
 }
 
-@media (max-width: 720px) { .tech-spec-grid { grid-template-columns: 1fr; } }
+@media (max-width: 720px) { .tech-spec-grid { grid-template-columns: repeat(2, 1fr); } }
 
 /* ── CTA ──────────────────────────────────────────────────────── */
 .scan-cta {

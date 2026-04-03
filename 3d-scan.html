@@ -228,23 +228,34 @@ body { padding-top: var(--nav-h); }
 @media (max-width: 860px) {
   .morph-section { height: 250vh; }
   .morph-sticky {
-    grid-template-columns: 1fr;
-    grid-template-rows: 240px 1fr;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    gap: 5vh;
     height: 100dvh;
     overflow: hidden;
+    padding: 2vh 0;
   }
   .morph-image-side {
     display: flex;
-    height: 240px;
-    order: -1;
+    height: 220px;
     flex-shrink: 0;
+    order: -1;
   }
   .morph-img-wrap {
-    width: 70%;
-    max-width: 320px;
+    width: 65%;
+    max-width: 300px;
   }
   .scan-progress { bottom: 0.5rem; }
-  .morph-text { padding: 2rem 1.5rem; }
+  .morph-text {
+    padding: 0 1.5rem;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+  .morph-panels { min-height: 0; }
+  .morph-title { font-size: clamp(1.5rem, 5vw, 2.2rem); margin-bottom: 0.75rem; }
+  .morph-body  { margin-bottom: 0.75rem; }
 }
 
 /* ── USE CASES ────────────────────────────────────────────────── */

@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mitt Prosjekt — Envision-IT</title>
+<meta name="description" content="Mitt Prosjekt er verktøykassen for alle — åpenhet, samarbeid og struktur satt i system for deg som byggeier.">
+<link rel="canonical" href="https://envision-it.no/mitt-prosjekt">
+<meta property="og:type"        content="website">
+<meta property="og:url"         content="https://envision-it.no/mitt-prosjekt">
+<meta property="og:title"       content="Mitt Prosjekt — Envision-IT">
+<meta property="og:description" content="Mitt Prosjekt er verktøykassen for alle — åpenhet, samarbeid og struktur satt i system.">
+<meta property="og:image"       content="https://envision-it.no/assets/og-image.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="css/global.css">
+<style>
+body { padding-top: var(--nav-h); }
+
+/* ── HERO ─────────────────────────────────────────────────────── */
+.mp-hero {
+  background: #1e1f1a;
+  color: var(--white);
+  padding: clamp(6rem, 12vw, 10rem) var(--gutter) clamp(5rem, 10vw, 8rem);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.mp-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(107,117,98,0.18) 0%, transparent 65%);
+  pointer-events: none;
+}
+.mp-hero__eyebrow {
+  font-size: 0.65rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--sage-light);
+  margin-bottom: 2rem;
+  display: block;
+}
+.mp-hero__display {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(4rem, 10vw, 9rem);
+  font-weight: 300;
+  letter-spacing: 0.25em;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 0.6rem;
+}
+.mp-hero__sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(1.1rem, 2.5vw, 1.7rem);
+  color: rgba(255,255,255,0.45);
+  margin-bottom: 2.5rem;
+}
+.mp-hero__intro {
+  max-width: 600px;
+  margin-inline: auto;
+  font-size: 1rem;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.8;
+}
+
+/* ── CARDS SVG ───────────────────────────────────────────────── */
+.mp-hero__cards {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+/* ── PILLARS ─────────────────────────────────────────────────── */
+.mp-pillars {
+  background: #1e1f1a;
+  padding-block: clamp(4rem, 8vw, 6rem);
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.mp-pillars__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 3rem;
+  margin-top: 2rem;
+}
+.mp-pillars__item {
+  padding: 0 2.5rem 0 0;
+  border-right: 1px solid rgba(255,255,255,0.1);
+}
+.mp-pillars__item:last-child { border-right: none; padding-right: 0; padding-left: 2.5rem; }
+.mp-pillars__item:not(:first-child):not(:last-child) { padding-left: 2.5rem; }
+.mp-pillars__num {
+  font-size: 0.58rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--sage-light);
+  margin-bottom: 0.75rem;
+  display: block;
+}
+.mp-pillars__item h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.4rem, 2.4vw, 2rem);
+  font-weight: 400;
+  color: var(--white);
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+.mp-pillars__item p {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.85;
+}
+@media (max-width: 720px) {
+  .mp-pillars__grid { grid-template-columns: 1fr; }
+  .mp-pillars__item,
+  .mp-pillars__item:not(:first-child):not(:last-child),
+  .mp-pillars__item:last-child {
+    padding: 2rem 0 0;
+    border-right: none;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .mp-pillars__item:first-child { padding-top: 0; border-top: none; }
+}
+
+/* ── QUOTE ────────────────────────────────────────────────────── */
+.mp-quote {
+  background: var(--sage);
+  padding: clamp(4rem, 8vw, 7rem) var(--gutter);
+  text-align: center;
+}
+.mp-quote blockquote {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(1.6rem, 3.5vw, 3rem);
+  font-weight: 300;
+  color: var(--white);
+  line-height: 1.3;
+  max-width: 820px;
+  margin: 0 auto 1.25rem;
+}
+.mp-quote figcaption {
+  font-size: 0.68rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+}
+
+/* ── HOW IT WORKS ────────────────────────────────────────────── */
+.mp-how {
+  background: var(--cream);
+  border-top: 1px solid var(--sage-bg);
+}
+.mp-how__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+.mp-how__lead {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 300;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+.mp-how__body {
+  font-size: 0.92rem;
+  color: var(--muted);
+  line-height: 1.85;
+  margin-bottom: 1.2rem;
+}
+.mp-how__steps {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.mp-how__step {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+.mp-how__step-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: var(--sage-pale);
+  line-height: 1;
+  flex-shrink: 0;
+  width: 2rem;
+  text-align: right;
+}
+.mp-how__step-content h4 {
+  font-size: 1rem;
+  font-weight: 400;
+  margin-bottom: 0.35rem;
+}
+.mp-how__step-content p {
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.7;
+}
+@media (max-width: 760px) {
+  .mp-how__grid { grid-template-columns: 1fr; gap: 3rem; }
+}
+
+/* ── TOOLBOX CONCEPT ─────────────────────────────────────────── */
+.mp-toolbox {
+  background: var(--cream-dark);
+  border-top: 1px solid var(--sage-bg);
+}
+.mp-toolbox__cols {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+.mp-toolbox__col {
+  background: var(--white);
+  border: 1px solid var(--sage-bg);
+  border-radius: var(--radius);
+  padding: 2rem;
+}
+.mp-toolbox__col h3 {
+  font-size: 1.15rem;
+  font-weight: 400;
+  margin-bottom: 0.75rem;
+}
+.mp-toolbox__col p {
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.75;
+}
+@media (max-width: 640px) {
+  .mp-toolbox__cols { grid-template-columns: 1fr; }
+}
+
+/* ── SEGMENT TILES ───────────────────────────────────────────── */
+.mp-segments {
+  background: var(--cream);
+  border-top: 1px solid var(--sage-bg);
+}
+.mp-segments__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-top: 2.5rem;
+}
+.mp-segment-tile {
+  display: block;
+  padding: 2rem 1.75rem;
+  border: 1px solid var(--sage-bg);
+  border-radius: var(--radius);
+  background: var(--white);
+  text-decoration: none;
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+.mp-segment-tile:hover {
+  box-shadow: 0 8px 32px rgba(30,31,26,0.08);
+  transform: translateY(-3px);
+}
+.mp-segment-tile__kicker {
+  font-size: 0.62rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--sage-light);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.mp-segment-tile h3 {
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--dark);
+  margin-bottom: 0.6rem;
+}
+.mp-segment-tile p {
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+.mp-segment-tile__arrow {
+  font-size: 0.78rem;
+  color: var(--sage);
+  letter-spacing: 0.05em;
+}
+@media (max-width: 760px) {
+  .mp-segments__grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="site-nav" role="navigation" aria-label="Hovedmeny">
+  <div class="site-nav__inner">
+    <a href="/" class="site-nav__brand" aria-label="Envision-IT – hjem">
+      <span class="site-nav__brand-name">ENVISION-IT</span>
+      <span class="site-nav__brand-tagline">Vi bryr oss om bygg</span>
+    </a>
+    <div class="site-nav__links" role="list">
+      <div class="site-nav__dropdown" role="listitem">
+        <button class="site-nav__link site-nav__link--dropdown" aria-haspopup="true">
+          Tjenester
+          <svg width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+        <div class="site-nav__dropdown-panel" role="menu">
+          <a href="/mitt-hjem.html"     class="site-nav__dropdown-item" data-nav-link role="menuitem"><span class="site-nav__dropdown-title">Mitt Hjem</span><span class="site-nav__dropdown-sub">Privatpersoner</span></a>
+          <a href="/mitt-boliglag.html" class="site-nav__dropdown-item" data-nav-link role="menuitem"><span class="site-nav__dropdown-title">Mitt Boliglag</span><span class="site-nav__dropdown-sub">Borettslag og sameier</span></a>
+          <a href="/mitt-bygg.html"     class="site-nav__dropdown-item" data-nav-link role="menuitem"><span class="site-nav__dropdown-title">Mitt Bygg</span><span class="site-nav__dropdown-sub">Bedrifter og offentlig</span></a>
+        </div>
+      </div>
+      <a href="/mitt-prosjekt.html" class="site-nav__link nav-active" data-nav-link>Mitt Prosjekt</a>
+      <a href="/3d-scan.html"       class="site-nav__link" data-nav-link>3D-Scan</a>
+      <a href="/om-oss.html"        class="site-nav__link" data-nav-link>Om oss</a>
+      <a href="/kontakt.html"       class="site-nav__link site-nav__link--cta btn-outline" data-nav-link>Kontakt oss</a>
+    </div>
+    <button class="site-nav__hamburger" id="nav-toggle" aria-label="Åpne meny"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="site-nav__drawer" id="nav-drawer" role="dialog" aria-modal="true" aria-label="Mobilmeny">
+  <div class="site-nav__drawer-inner">
+    <div class="site-nav__drawer-header">
+      <span class="site-nav__brand-name" style="color:var(--white)">ENVISION-IT</span>
+      <button class="site-nav__drawer-close" id="nav-drawer-close" aria-label="Lukk meny">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 4l12 12M16 4L4 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <nav class="site-nav__drawer-links">
+      <span class="site-nav__drawer-section">Tjenester</span>
+      <a href="/mitt-hjem.html"     class="site-nav__drawer-link" data-nav-link>Mitt Hjem</a>
+      <a href="/mitt-boliglag.html" class="site-nav__drawer-link" data-nav-link>Mitt Boliglag</a>
+      <a href="/mitt-bygg.html"     class="site-nav__drawer-link" data-nav-link>Mitt Bygg</a>
+      <a href="/mitt-prosjekt.html" class="site-nav__drawer-link nav-active" data-nav-link>Mitt Prosjekt</a>
+      <span class="site-nav__drawer-section" style="margin-top:1rem">Verktøy</span>
+      <a href="/3d-scan.html"  class="site-nav__drawer-link" data-nav-link>3D-Scan</a>
+      <span class="site-nav__drawer-section" style="margin-top:1rem">Selskapet</span>
+      <a href="/om-oss.html"  class="site-nav__drawer-link" data-nav-link>Om oss</a>
+      <a href="/kontakt.html" class="site-nav__drawer-link site-nav__drawer-link--cta" data-nav-link>Kontakt oss</a>
+    </nav>
+    <div class="site-nav__drawer-contact">
+      <a href="tel:97107972">971 07 972</a>
+      <a href="mailto:hei@envision-it.no">hei@envision-it.no</a>
+    </div>
+  </div>
+</div>
+
+<main id="main-content">
+
+  <!-- ── HERO ──────────────────────────────────────────────────── -->
+  <section class="mp-hero" aria-label="Mitt Prosjekt">
+
+    <div class="mp-hero__cards" aria-hidden="true">
+      <svg width="220" height="170" viewBox="0 0 220 170" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(10,20) rotate(-18,50,70)">
+          <rect width="80" height="115" rx="7" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.16)" stroke-width="1.5"/>
+          <text x="9" y="22" fill="rgba(255,255,255,0.6)" font-size="16" font-family="Georgia,serif" font-weight="bold">A</text>
+          <text x="40" y="74" fill="rgba(255,255,255,0.38)" font-size="32" font-family="Georgia,serif" text-anchor="middle">♣</text>
+        </g>
+        <g transform="translate(130,20) rotate(18,50,70)">
+          <rect width="80" height="115" rx="7" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.16)" stroke-width="1.5"/>
+          <text x="9" y="22" fill="rgba(255,255,255,0.6)" font-size="16" font-family="Georgia,serif" font-weight="bold">A</text>
+          <text x="40" y="74" fill="rgba(185,74,74,0.62)" font-size="32" font-family="Georgia,serif" text-anchor="middle">♦</text>
+        </g>
+        <g transform="translate(70,5)">
+          <rect width="80" height="115" rx="7" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.32)" stroke-width="1.5"/>
+          <text x="9" y="22" fill="rgba(255,255,255,0.88)" font-size="16" font-family="Georgia,serif" font-weight="bold">A</text>
+          <text x="40" y="74" fill="rgba(185,74,74,0.82)" font-size="34" font-family="Georgia,serif" text-anchor="middle">♥</text>
+        </g>
+      </svg>
+    </div>
+
+    <span class="mp-hero__eyebrow reveal">Vår arbeidsmetode</span>
+    <p class="mp-hero__display reveal">MITT PROSJEKT</p>
+    <p class="mp-hero__sub reveal reveal-delay-1">— verktøykassen for alle</p>
+    <p class="mp-hero__intro reveal reveal-delay-2">
+      Vi tror på at de beste prosjektene bygger på åpenhet, ærlighet og samarbeid.
+      Mitt Prosjekt er ikke et produkt — det er en måte å jobbe på. En filosofi
+      som gjennomsyrer alt vi gjør, uavhengig av hvem du er eller hva du eier.
+    </p>
+
+  </section>
+
+  <!-- ── THREE PILLARS ─────────────────────────────────────────── -->
+  <section class="mp-pillars" aria-label="Tre pilarer">
+    <div class="container">
+
+      <div class="text-center reveal">
+        <span class="eyebrow" style="color:rgba(255,255,255,0.4)">Filosofien bak</span>
+        <h2 style="color:var(--white)">Tre prinsipper.<br><em style="color:var(--sage-light)">Én arbeidsmetode.</em></h2>
+      </div>
+
+      <div class="mp-pillars__grid">
+
+        <div class="mp-pillars__item reveal reveal-delay-1">
+          <span class="mp-pillars__num">01</span>
+          <h3>Åpne kort</h3>
+          <p>
+            Vi holder ingenting tilbake. Du vet alltid hva som skjer, hva det koster,
+            og hva vi mener — også når det er ubehagelig å si det høyt.
+            Full transparens er ikke et løfte vi gir, det er standarden vi alltid
+            holder oss til.
+          </p>
+          <p style="margin-top:1rem">
+            Det betyr konkret: du ser alle tilbud vi henter inn, du får våre
+            vurderinger skriftlig, og du involveres i alle beslutninger som påvirker
+            deg eller ditt bygg.
+          </p>
+        </div>
+
+        <div class="mp-pillars__item reveal reveal-delay-2">
+          <span class="mp-pillars__num">02</span>
+          <h3>2 + 2 = 5</h3>
+          <p>
+            Godt samarbeid er den mest lønnsomme investeringen i et byggeprosjekt.
+            Når byggeier, leverandør og rådgiver jobber mot samme mål med samme
+            informasjon, blir summen alltid større enn delene.
+          </p>
+          <p style="margin-top:1rem">
+            Vi er ikke en mellommann som tar margin — vi er den som sørger for at
+            alle parter har det de trenger for å gjøre jobben sin godt. Det er her
+            prosjektet vinner eller taper.
+          </p>
+        </div>
+
+        <div class="mp-pillars__item reveal reveal-delay-3">
+          <span class="mp-pillars__num">03</span>
+          <h3>Satt i system</h3>
+          <p>
+            Gode intensjoner er ikke nok. De beste intensjonene i bransjen har gått
+            tapt fordi ingen satte dem i system. Vi dokumenterer, strukturerer og
+            følger opp — slik at ingenting faller mellom to stoler.
+          </p>
+          <p style="margin-top:1rem">
+            Du får en klar plan, jevnlig statusoppdatering og sporbar historikk
+            på alt som gjøres. Prosjektet ditt er ikke avhengig av hvem som tilfeldigvis
+            husket hva.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── QUOTE ─────────────────────────────────────────────────── -->
+  <section class="mp-quote">
+    <div class="container" style="max-width:900px">
+      <figure class="reveal">
+        <blockquote>"Det blir ikke dyrere av å vite at det blir dyrt."</blockquote>
+        <figcaption>Envision-IT — filosofi</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ── HOW IT WORKS ──────────────────────────────────────────── -->
+  <section class="mp-how section" aria-label="Slik fungerer det">
+    <div class="container">
+      <div class="mp-how__grid">
+
+        <div class="reveal">
+          <span class="eyebrow">Slik fungerer det i praksis</span>
+          <h2 class="mp-how__lead">Fra uoversiktlig<br>til <em>fullt i kontroll</em></h2>
+          <p class="mp-how__body">
+            Det starter alltid med å forstå der du er nå. Vi kartlegger tilstanden,
+            snakker med deg om hva som er viktigst, og setter sammen en plan som
+            faktisk gir mening — ikke en generisk sjekkliste.
+          </p>
+          <p class="mp-how__body">
+            Underveis holder vi deg informert. Ikke med teknisk sjargong, men med
+            klare svar på de spørsmålene du faktisk har: hva koster det, hva er
+            kritisk, og hva kan vente?
+          </p>
+        </div>
+
+        <ol class="mp-how__steps reveal reveal-delay-2">
+          <li class="mp-how__step">
+            <span class="mp-how__step-num">1</span>
+            <div class="mp-how__step-content">
+              <h4>Kartlegging og tilstandsvurdering</h4>
+              <p>Vi starter med å forstå bygget ditt slik det faktisk er — ikke slik tegningene sier det skal være. 3D-scan og befaring gir oss det objektive grunnlaget.</p>
+            </div>
+          </li>
+          <li class="mp-how__step">
+            <span class="mp-how__step-num">2</span>
+            <div class="mp-how__step-content">
+              <h4>Plan med prioriteringer</h4>
+              <p>Du får en klar vedlikeholdsplan med kostnadsestimater, tidshorisont og tydelig prioritering. Ingen overraskelser — du bestemmer hva som skjer og når.</p>
+            </div>
+          </li>
+          <li class="mp-how__step">
+            <span class="mp-how__step-num">3</span>
+            <div class="mp-how__step-content">
+              <h4>Innhenting og kvalitetssikring</h4>
+              <p>Vi henter inn tilbud, vurderer dem faglig og presenterer deg for alternativene med anbefaling. Du ser alt — og du bestemmer.</p>
+            </div>
+          </li>
+          <li class="mp-how__step">
+            <span class="mp-how__step-num">4</span>
+            <div class="mp-how__step-content">
+              <h4>Oppfølging og dokumentasjon</h4>
+              <p>Vi følger opp utførelsen, dokumenterer det som er gjort og oppdaterer planen. Neste gang du trenger oversikten, er den allerede der.</p>
+            </div>
+          </li>
+        </ol>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TOOLBOX CONCEPT ───────────────────────────────────────── -->
+  <section class="mp-toolbox section" aria-label="Verktøykassen">
+    <div class="container">
+
+      <div class="text-center mb-md reveal">
+        <span class="eyebrow">Hva er egentlig verktøykassen?</span>
+        <h2>Alt du trenger —<br><em>ingenting du ikke trenger</em></h2>
+        <p style="max-width:560px;margin-inline:auto;margin-top:0.75rem;font-size:0.92rem;color:var(--muted)">
+          Vi kaller det en verktøykasse fordi det ikke er ett fast produkt.
+          Det er de rette verktøyene, brukt på rett tidspunkt, tilpasset
+          nettopp ditt bygg og dine behov.
+        </p>
+      </div>
+
+      <div class="mp-toolbox__cols">
+        <div class="mp-toolbox__col reveal reveal-delay-1">
+          <h3>Transparens som standard</h3>
+          <p>
+            Alle tilbud vi henter inn vises deg. Alle marginer er synlige. Vi tar
+            ikke provisjon fra leverandørene — inntekten vår er honoraret ditt,
+            ingenting annet. Det er slik vi kan stå inne for hvert råd vi gir.
+          </p>
+        </div>
+        <div class="mp-toolbox__col reveal reveal-delay-2">
+          <h3>Strukturert dokumentasjon</h3>
+          <p>
+            Alt som gjøres på bygget ditt dokumenteres. Vedlikeholdslogg, tilstandsrapporter,
+            tegninger og historikk samles på ett sted — tilgjengelig for deg når du
+            trenger det, ikke bare når vi valgte å sende det.
+          </p>
+        </div>
+        <div class="mp-toolbox__col reveal reveal-delay-3">
+          <h3>Faglig ryggrad</h3>
+          <p>
+            Bak rådene ligger faglig kompetanse, ikke Google. Vi kjenner bransjen,
+            vet hva ting koster, og vet hva som er godt arbeid og hva som ikke er det.
+            Du betaler for den kompetansen — og du merker den.
+          </p>
+        </div>
+        <div class="mp-toolbox__col reveal reveal-delay-1">
+          <h3>Langsiktig perspektiv</h3>
+          <p>
+            Billigst nå er sjelden billigst over tid. Vi hjelper deg å se helhetsbilde —
+            hva er riktig å gjøre i år, hva kan vente, og hva koster det egentlig
+            å utsette det som burde gjøres nå?
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── SEGMENT TILES ─────────────────────────────────────────── -->
+  <section class="mp-segments section" aria-label="Hvem er dette for?">
+    <div class="container">
+
+      <div class="text-center mb-md reveal">
+        <span class="eyebrow">Hvem er dette for?</span>
+        <h2>Finn din kategori</h2>
+      </div>
+
+      <div class="mp-segments__grid">
+
+        <a href="/mitt-hjem.html#mitt-prosjekt" class="mp-segment-tile reveal reveal-delay-1">
+          <span class="mp-segment-tile__kicker">Privatpersoner</span>
+          <h3>Mitt Hjem</h3>
+          <p>Leilighet, hus eller hytte — full oversikt og trygg forvaltning av din private bolig.</p>
+          <span class="mp-segment-tile__arrow">Se tjenester →</span>
+        </a>
+
+        <a href="/mitt-boliglag.html#mitt-prosjekt" class="mp-segment-tile reveal reveal-delay-2">
+          <span class="mp-segment-tile__kicker">Borettslag og sameier</span>
+          <h3>Mitt Boliglag</h3>
+          <p>Styret trenger en partner som kan ta det faglige ansvaret og gi beboerne trygghet.</p>
+          <span class="mp-segment-tile__arrow">Se tjenester →</span>
+        </a>
+
+        <a href="/mitt-bygg.html#mitt-prosjekt" class="mp-segment-tile reveal reveal-delay-3">
+          <span class="mp-segment-tile__kicker">Bedrifter og offentlig</span>
+          <h3>Mitt Bygg</h3>
+          <p>Næringseiendom, kontorbygg eller offentlig bygningsmasse — systematisert forvaltning.</p>
+          <span class="mp-segment-tile__arrow">Se tjenester →</span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTACT CTA ────────────────────────────────────────────── -->
+  <section class="contact-strip" aria-label="Kontakt oss">
+    <div class="container">
+      <span class="eyebrow" style="color:rgba(255,255,255,0.4)">Ta det første steget</span>
+      <h2 class="reveal">Klar for å komme i gang?</h2>
+      <p class="reveal reveal-delay-1">Vi tar gjerne en uforpliktende prat om hva Mitt Prosjekt kan bety for deg.</p>
+      <div class="flex flex-center gap-sm flex-wrap reveal reveal-delay-2">
+        <a href="/kontakt.html" class="btn-solid">Send oss en melding</a>
+        <a href="tel:97107972"  class="btn-light">Ring 971 07 972</a>
+      </div>
+      <div class="contact-strip__methods">
+        <span class="contact-strip__method">E-post: <a href="mailto:hei@envision-it.no">hei@envision-it.no</a></span>
+        <span class="contact-strip__method">Tlf: <a href="tel:97107972">971 07 972</a></span>
+        <span class="contact-strip__method">Oslo · Sogndal</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="site-footer__inner container">
+    <div class="site-footer__grid">
+      <div class="site-footer__col site-footer__col--brand">
+        <a href="/" class="site-footer__brand"><span class="site-footer__brand-name">ENVISION-IT</span><span class="site-footer__brand-tagline">Vi bryr oss om bygg – fordi vi bryr oss om folk</span></a>
+        <nav class="site-footer__nav">
+          <a href="/mitt-hjem.html">Mitt Hjem</a><a href="/mitt-boliglag.html">Mitt Boliglag</a><a href="/mitt-bygg.html">Mitt Bygg</a><a href="/mitt-prosjekt.html">Mitt Prosjekt</a>
+        </nav>
+      </div>
+      <div class="site-footer__col">
+        <h4 class="site-footer__col-title">Selskapet</h4>
+        <ul class="site-footer__list">
+          <li>Envision-IT AS</li><li>Org.nr. 826 455 152</li>
+          <li><a href="tel:97107972">971 07 972</a></li>
+          <li><a href="mailto:hei@envision-it.no">hei@envision-it.no</a></li>
+        </ul>
+      </div>
+      <div class="site-footer__col">
+        <h4 class="site-footer__col-title">Oslo</h4>
+        <address class="site-footer__address">Gjerdrums vei 5<br>0484 Oslo</address>
+      </div>
+      <div class="site-footer__col">
+        <h4 class="site-footer__col-title">Sogndal</h4>
+        <address class="site-footer__address">Kvernhushaugen 7<br>6854 Kaupanger</address>
+      </div>
+    </div>
+    <div class="site-footer__bottom">
+      <span>© <span data-year></span> Envision-IT AS</span>
+      <span class="site-footer__bottom-tagline">Alle priser eks. mva.</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+.site-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:var(--sage);transition:box-shadow .3s ease}.site-nav.scrolled{box-shadow:0 4px 24px rgba(30,31,26,.18)}.site-nav__inner{max-width:var(--max-w);margin-inline:auto;padding-inline:var(--gutter);height:var(--nav-h);display:flex;align-items:center;justify-content:space-between}.site-nav__brand{display:flex;flex-direction:column;gap:.1rem;text-decoration:none}.site-nav__brand-name{font-family:'Jost',sans-serif;font-weight:500;font-size:.82rem;letter-spacing:.2em;color:var(--white)}.site-nav__brand-tagline{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.7rem;color:rgba(255,255,255,.62);letter-spacing:.04em}.site-nav__links{display:flex;align-items:center;gap:.25rem}.site-nav__link{background:none;border:none;font-family:'Jost',sans-serif;font-size:.78rem;font-weight:300;letter-spacing:.08em;color:rgba(255,255,255,.82);padding:.5rem .85rem;border-radius:var(--radius);transition:color var(--transition),background var(--transition);cursor:pointer;text-decoration:none;display:flex;align-items:center;gap:.35rem}.site-nav__link:hover{color:var(--white);background:rgba(255,255,255,.1)}.site-nav__link.nav-active{color:var(--white)}.site-nav__link--cta{border:1px solid rgba(255,255,255,.45)!important;color:var(--white)!important;margin-left:.5rem}.site-nav__link--cta:hover{background:rgba(255,255,255,.15)!important}.site-nav__dropdown{position:relative}.site-nav__link--dropdown svg{transition:transform .2s ease}.site-nav__dropdown:hover .site-nav__link--dropdown svg,.site-nav__dropdown:focus-within .site-nav__link--dropdown svg{transform:rotate(180deg)}.site-nav__dropdown-panel{position:absolute;top:calc(100% + 2px);left:50%;background:var(--white);border:1px solid var(--sage-bg);border-radius:var(--radius-lg);padding:.75rem;min-width:240px;box-shadow:0 12px 40px rgba(30,31,26,.12);opacity:0;pointer-events:none;transform:translateX(-50%) translateY(8px);transition:opacity .2s ease,transform .2s ease}.site-nav__dropdown:hover .site-nav__dropdown-panel,.site-nav__dropdown:focus-within .site-nav__dropdown-panel{opacity:1;pointer-events:all;transform:translateX(-50%) translateY(0)}.site-nav__dropdown-item{display:flex;flex-direction:column;gap:.15rem;padding:.7rem .9rem;border-radius:var(--radius);text-decoration:none;transition:background var(--transition)}.site-nav__dropdown-item:hover{background:var(--cream)}.site-nav__dropdown-item.nav-active{background:var(--cream-dark)}.site-nav__dropdown-title{font-size:.82rem;font-weight:400;color:var(--dark)}.site-nav__dropdown-sub{font-size:.68rem;color:var(--muted)}.site-nav__dropdown-divider{border:none;border-top:1px solid var(--sage-bg);margin:.4rem 0}.site-nav__hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:.5rem;cursor:pointer}.site-nav__hamburger span{display:block;width:22px;height:1.5px;background:var(--white);border-radius:2px;transition:all .25s ease}.site-nav__drawer{position:fixed;inset:0;z-index:300;background:rgba(30,31,26,.55);backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity .3s ease}.site-nav__drawer.open{opacity:1;pointer-events:all}.site-nav__drawer-inner{position:absolute;top:0;right:0;bottom:0;width:min(320px,90vw);background:var(--dark);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1)}.site-nav__drawer.open .site-nav__drawer-inner{transform:translateX(0)}.site-nav__drawer-header{display:flex;align-items:center;justify-content:space-between;padding:1.25rem 1.5rem;border-bottom:1px solid rgba(255,255,255,.08)}.site-nav__drawer-close{background:none;border:none;color:rgba(255,255,255,.6);cursor:pointer;padding:.25rem;transition:color var(--transition)}.site-nav__drawer-close:hover{color:var(--white)}.site-nav__drawer-links{flex:1;overflow-y:auto;padding:1.25rem 1.5rem;display:flex;flex-direction:column;gap:.15rem}.site-nav__drawer-section{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:.4rem;display:block}.site-nav__drawer-link{font-size:.95rem;color:rgba(255,255,255,.78);text-decoration:none;padding:.65rem .75rem;border-radius:var(--radius);transition:background var(--transition),color var(--transition)}.site-nav__drawer-link:hover,.site-nav__drawer-link.nav-active{background:rgba(255,255,255,.08);color:var(--white)}.site-nav__drawer-link--cta{margin-top:1rem;border:1px solid rgba(255,255,255,.3);text-align:center}.site-nav__drawer-contact{padding:1.25rem 1.5rem;border-top:1px solid rgba(255,255,255,.08);display:flex;flex-direction:column;gap:.35rem}.site-nav__drawer-contact a{font-size:.78rem;color:rgba(255,255,255,.5);text-decoration:none;transition:color var(--transition)}.site-nav__drawer-contact a:hover{color:var(--white)}.site-footer{background:var(--sage);color:rgba(255,255,255,.82);padding-top:clamp(3rem,6vw,5rem)}.site-footer__grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.12)}.site-footer__brand{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1.75rem;text-decoration:none}.site-footer__brand-name{font-family:'Jost',sans-serif;font-weight:500;font-size:.85rem;letter-spacing:.22em;color:var(--white)}.site-footer__brand-tagline{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.88rem;color:rgba(255,255,255,.55);line-height:1.4;max-width:240px}.site-footer__nav{display:flex;flex-direction:column;gap:.4rem}.site-footer__nav a{font-size:.8rem;color:rgba(255,255,255,.6);text-decoration:none;transition:color var(--transition)}.site-footer__nav a:hover{color:var(--white)}.site-footer__col-title{font-family:'Jost',sans-serif;font-weight:400;font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:1rem}.site-footer__list{display:flex;flex-direction:column;gap:.45rem}.site-footer__list li{font-size:.82rem;color:rgba(255,255,255,.7)}.site-footer__list a{color:rgba(255,255,255,.7);text-decoration:none;transition:color var(--transition)}.site-footer__list a:hover{color:var(--white)}.site-footer__address{font-style:normal;font-size:.82rem;color:rgba(255,255,255,.7);line-height:1.75}.site-footer__bottom{display:flex;align-items:center;justify-content:space-between;padding-block:1.25rem;font-size:.72rem;color:rgba(255,255,255,.38)}.site-footer__bottom-tagline{font-style:italic}@media(max-width:900px){.site-nav__links{display:none}.site-nav__hamburger{display:flex}.site-footer__grid{grid-template-columns:1fr 1fr;gap:2rem}.site-footer__col--brand{grid-column:1/-1}}@media(max-width:480px){.site-footer__grid{grid-template-columns:1fr}.site-footer__bottom{flex-direction:column;gap:.4rem;text-align:center}}
+</style>
+
+<script src="js/global.js"></script>
+</body>
+</html>

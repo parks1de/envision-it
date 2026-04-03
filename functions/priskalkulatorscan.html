@@ -141,6 +141,9 @@ body {
   grid-template-columns: repeat(3, 1fr);
   gap: 0.5rem;
 }
+@media(max-width:480px){
+  .product-tabs { grid-template-columns: 1fr; gap: 0.5rem; }
+}
 .prod-tab {
   border: 1px solid var(--sage-pale);
   background: transparent;

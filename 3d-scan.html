@@ -151,6 +151,33 @@ body { padding-top: var(--nav-h); }
 .morph-img-solid { opacity: 1; transition: opacity 0.05s linear; }
 .morph-img-cloud { opacity: 0; transition: opacity 0.05s linear; }
 
+#scanLine {
+  position: absolute;
+  left: 0; right: 0;
+  height: 6px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(100,180,255,0.3) 15%,
+    rgba(100,180,255,1) 50%,
+    rgba(100,180,255,0.3) 85%,
+    transparent 100%);
+  box-shadow:
+    0 0 8px 2px rgba(100,180,255,0.9),
+    0 0 40px 8px rgba(100,180,255,0.5),
+    0 0 80px 20px rgba(100,180,255,0.2);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+#scanLine::after {
+  content: '';
+  position: absolute;
+  top: 6px; left: 0; right: 0;
+  height: 80px;
+  background: linear-gradient(180deg, rgba(100,180,255,0.2), transparent);
+  pointer-events: none;
+}
+
 @media (max-width: 860px) {
   .morph-sticky { grid-template-columns: 1fr; }
   .morph-image-side { display: none; }
@@ -524,6 +551,7 @@ body { padding-top: var(--nav-h); }
           <img class="morph-img-solid" src="./assets/ENVISION-IT_HUS.png" alt="Bygg solid" />
           <img class="morph-img-cloud" src="./assets/pointcloud001.png" alt="Bygg punktsky" />
         </div>
+        <div id="scanLine"></div>
       </div>
 
     </div>
@@ -938,11 +966,25 @@ body { padding-top: var(--nav-h); }
     const panelIndex = clamp(Math.floor(scrolled * PANELS), 0, PANELS - 1);
     panels.forEach((p, i) => p.classList.toggle('active', i === panelIndex));
 
-    // Image morph
+    // Image morph + scan line
     if (imgSolid && imgCloud) {
       const morphT = clamp((scrolled - MORPH_START) / (MORPH_END - MORPH_START), 0, 1);
       imgSolid.style.opacity = 1 - morphT;
       imgCloud.style.opacity = morphT;
+
+      const scanning = morphT > 0 && morphT < 1;
+      const line = document.getElementById('scanLine');
+      if (scanning) {
+        line.style.top = (morphT * 100) + '%';
+        if (Math.floor(Date.now() / 200) % 2 === 0) line.style.opacity = 0.75;
+        else line.style.opacity = 1;
+      } else if (morphT >= 0.98) {
+        line.style.opacity = 0;
+        imgCloud.style.opacity = 0.5;
+        setTimeout(() => imgCloud.style.opacity = 1, 300);
+      } else {
+        line.style.opacity = 0;
+      }
     }
   }, { passive: true });
 })();

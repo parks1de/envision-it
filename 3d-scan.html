@@ -52,8 +52,6 @@ body { padding-top: var(--nav-h); }
   overflow: hidden;
   max-width: 1200px;
   margin-inline: auto;
-  will-change: transform;
-  backface-visibility: hidden;
 }
 
 .morph-text {
@@ -573,6 +571,7 @@ body { padding-top: var(--nav-h); }
       <a href="/mitt-hjem.html"     class="site-nav__drawer-link" data-nav-link>Mitt Hjem</a>
       <a href="/mitt-boliglag.html" class="site-nav__drawer-link" data-nav-link>Mitt Boliglag</a>
       <a href="/mitt-bygg.html"     class="site-nav__drawer-link" data-nav-link>Mitt Bygg</a>
+      <span class="site-nav__drawer-section" style="margin-top:1rem">Mitt Prosjekt</span>
       <a href="/mitt-prosjekt.html" class="site-nav__drawer-link" data-nav-link>Mitt Prosjekt</a>
       <span class="site-nav__drawer-section" style="margin-top:1rem">Verktøy</span>
       <a href="/3d-scan.html"  class="site-nav__drawer-link nav-active" data-nav-link>3D-Scan</a>
@@ -1035,7 +1034,12 @@ body { padding-top: var(--nav-h); }
       if (h && h > 400) frame.style.height = h + 'px';
     } catch(e) {}
   }
-  frame.addEventListener('load', () => { resize(); setInterval(resize, 500); });
+  frame.addEventListener('load', () => {
+    resize();
+    // Check a few times after load, then stop — avoids constant layout thrash
+    let checks = 0;
+    const iv = setInterval(() => { resize(); if (++checks >= 6) clearInterval(iv); }, 800);
+  });
 })();
 </script>
 <script>
@@ -1051,10 +1055,16 @@ body { padding-top: var(--nav-h); }
   const MORPH_START = 0.25;
   const MORPH_END   = 0.75;
   let   sectionActive = false;
+  let   rafPending    = false;
+
+  // Cache DOM refs once — avoids getElementById on every scroll event
+  const line          = document.getElementById('scanLine');
+  const scanProgress  = document.getElementById('scanProgress');
+  const progressFill  = document.getElementById('progressFill');
+  const progressLabel = document.getElementById('progressLabel');
 
   function clamp(v, lo, hi) { return Math.min(Math.max(v, lo), hi); }
 
-  // Only run the animation once the section is scrolled into view
   const observer = new IntersectionObserver(
     (entries) => { sectionActive = entries[0].isIntersecting; },
     { threshold: 0.1 }
@@ -1062,7 +1072,10 @@ body { padding-top: var(--nav-h); }
   observer.observe(section);
 
   window.addEventListener('scroll', () => {
-    if (!sectionActive) return;
+    if (!sectionActive || rafPending) return;
+    rafPending = true;
+    requestAnimationFrame(() => {
+      rafPending = false;
     const rect     = section.getBoundingClientRect();
     const sectionH = section.offsetHeight - window.innerHeight;
     const scrolled = clamp(-rect.top / sectionH, 0, 1);
@@ -1078,10 +1091,6 @@ body { padding-top: var(--nav-h); }
       imgCloud.style.opacity = morphT;
 
       const scanning = morphT > 0 && morphT < 1;
-      const line = document.getElementById('scanLine');
-      const scanProgress  = document.getElementById('scanProgress');
-      const progressFill  = document.getElementById('progressFill');
-      const progressLabel = document.getElementById('progressLabel');
 
       if (scanning) {
         line.style.top = (morphT * 100) + '%';
@@ -1103,6 +1112,7 @@ body { padding-top: var(--nav-h); }
         imgCloud.classList.remove('active');
       }
     }
+    }); // end rAF
   }, { passive: true });
 })();
 </script>

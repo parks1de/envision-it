@@ -64,6 +64,78 @@ body { padding-top: var(--nav-h); }
   .hero__cards { grid-template-columns: 1fr; max-width: 500px; }
 }
 
+/* ── SCROLL HINT ────────────────────────────────────────────── */
+.hero { position: relative; }
+
+.scroll-hint {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  opacity: 1;
+  transition: opacity 0.6s ease;
+  z-index: 10;
+}
+
+.scroll-hint.hidden { opacity: 0; pointer-events: none; }
+
+.scroll-hint__label {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(30,31,26,0.38);
+}
+
+.scroll-hint__track {
+  width: 1.5px;
+  height: 28px;
+  background: rgba(30,31,26,0.12);
+  border-radius: 1px;
+  overflow: hidden;
+  position: relative;
+}
+
+.scroll-hint__fill {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(30,31,26,0.45);
+  border-radius: 1px;
+  animation: scrollFill 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.scroll-hint__chevron {
+  color: rgba(30,31,26,0.38);
+  animation: chevronBob 1.8s ease-in-out infinite;
+  transition: color 0.2s;
+}
+
+.scroll-hint:hover .scroll-hint__label,
+.scroll-hint:hover .scroll-hint__chevron { color: rgba(30,31,26,0.72); }
+
+@keyframes scrollFill {
+  0%   { top: -100%; }
+  60%  { top: 0%; }
+  100% { top: 100%; }
+}
+
+@keyframes chevronBob {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(4px); }
+}
+
 /* ── MITT PROSJEKT FEATURE ──────────────────────────────────── */
 .mp-feature {
   background: #1e1f1a;
@@ -474,12 +546,24 @@ body { padding-top: var(--nav-h); }
       </a>
 
     </div>
+
+    <!-- Scroll indicator -->
+    <button class="scroll-hint" id="scrollHint" aria-label="Scroll ned for mer" onclick="document.getElementById('why').scrollIntoView({behavior:'smooth'})">
+      <span class="scroll-hint__label">Scroll</span>
+      <span class="scroll-hint__track">
+        <span class="scroll-hint__fill"></span>
+      </span>
+      <svg class="scroll-hint__chevron" width="14" height="9" viewBox="0 0 14 9" fill="none" aria-hidden="true">
+        <path d="M1 1l6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
   </section>
 
   <hr class="divider">
 
   <!-- ── WHY ENVISION-IT ──────────────────────────────────────── -->
-  <section class="why-section section" aria-label="Hvorfor Envision-IT">
+  <section class="why-section section" id="why" aria-label="Hvorfor Envision-IT">
     <div class="container">
       <div class="text-center mb-md reveal">
         <span class="eyebrow">Hvorfor Envision-IT</span>
@@ -789,5 +873,14 @@ body { padding-top: var(--nav-h); }
 </style>
 
 <script src="js/global.js"></script>
+<script>
+  (function () {
+    var hint = document.getElementById('scrollHint');
+    if (!hint) return;
+    window.addEventListener('scroll', function () {
+      hint.classList.toggle('hidden', window.scrollY > 80);
+    }, { passive: true });
+  })();
+</script>
 </body>
 </html>

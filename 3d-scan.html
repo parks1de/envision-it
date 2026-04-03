@@ -222,9 +222,22 @@ body { padding-top: var(--nav-h); }
 .morph-img-cloud.active { animation: cloudGlow 3s ease infinite; }
 
 @media (max-width: 860px) {
-  .morph-sticky { grid-template-columns: 1fr; }
-  .morph-image-side { display: none; }
-  .morph-text { padding: 4rem 2rem; }
+  .morph-sticky {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+  .morph-image-side {
+    display: flex;
+    height: 45vw;
+    max-height: 280px;
+    order: -1;
+  }
+  .morph-img-wrap {
+    width: 70%;
+    max-width: 320px;
+  }
+  .scan-progress { bottom: 0.5rem; }
+  .morph-text { padding: 2rem 1.5rem; }
 }
 
 /* ── USE CASES ────────────────────────────────────────────────── */

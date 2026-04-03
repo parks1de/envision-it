@@ -87,6 +87,13 @@ body {
 }
 @media(max-width:720px){
   .calc-wrap { grid-template-columns: 1fr; }
+  .calc-wrap > div:first-child {
+    display: flex;
+    flex-direction: column;
+  }
+  .calc-wrap > div:first-child > .card:nth-child(1) { order: 1; }
+  .calc-wrap > div:first-child > .card:nth-child(2) { order: 3; }
+  .calc-wrap > div:first-child > .card:nth-child(3) { order: 2; }
 }
 
 /* ── CARD ── */
